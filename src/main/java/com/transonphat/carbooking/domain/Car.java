@@ -1,20 +1,12 @@
 package com.transonphat.carbooking.domain;
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
-import java.time.ZonedDateTime;
-import java.util.Objects;
 
 @Entity
 @Table(name = "Cars")
 @EntityListeners(AuditingEntityListener.class)
-public class Car {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Car extends Model {
     @Column
     private String identificationNumber;
 
@@ -39,19 +31,7 @@ public class Car {
     @Column
     private Double rate;
 
-    @CreatedDate
-    @Column
-    private ZonedDateTime createdDate;
-
     public Car() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getIdentificationNumber() {
@@ -116,28 +96,5 @@ public class Car {
 
     public void setRate(Double rate) {
         this.rate = rate;
-    }
-
-    public void setCreatedDate(ZonedDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public ZonedDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Car car = (Car) o;
-
-        return Objects.equals(id, car.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
     }
 }
