@@ -4,6 +4,8 @@ import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.exceptions.CarNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.repositories.CarRepository;
+import com.transonphat.carbooking.search.SearchCriterion;
+import com.transonphat.carbooking.search.SearchSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
 @Component
-public class MySQLCarDAO implements CarDAO {
+public class MySQLCarDAO implements SearchableDAO<Car> {
     private final CarRepository carRepository;
 
     public MySQLCarDAO(CarRepository carRepository) {
@@ -53,5 +55,27 @@ public class MySQLCarDAO implements CarDAO {
     @Override
     public Car getOne(long id) {
         return this.carRepository.findById(id).orElseThrow(CarNotFoundException::new);
+    }
+
+    @Override
+    public PaginationResult<Car> search(SearchCriterion<Car> criteria, int currentPage, int pageSize) {
+        //Create page request
+        Pageable pageable = PageRequest.of(currentPage, pageSize);
+
+        //Get result
+        Page<Car> carPage = this.carRepository.findAll(
+                new SearchSpecification<>(criteria),
+                pageable
+        );
+
+        //Map page to pagination result
+        PaginationResult<Car> carPaginationResult = new PaginationResult<>(
+                carPage.getTotalElements(),
+                carPage.get().collect(Collectors.toList()),
+                carPage.getNumber(),
+                carPage.getTotalPages()
+        );
+
+        return carPaginationResult;
     }
 }
