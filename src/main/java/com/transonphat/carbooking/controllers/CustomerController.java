@@ -28,4 +28,9 @@ public class CustomerController {
     public Customer createNewCustomer(@RequestBody Customer customer) {
         return customerService.createCustomer(customer);
     }
+
+    @DeleteMapping("/customers/{customerId}")
+    public Customer deleteCustomerById(@PathVariable long customerId) {
+        return customerService.deleteCustomer(customerId);
+    }
 }

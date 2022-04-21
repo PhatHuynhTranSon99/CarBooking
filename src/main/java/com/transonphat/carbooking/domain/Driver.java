@@ -1,6 +1,7 @@
 package com.transonphat.carbooking.domain;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -8,6 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Drivers")
+@EntityListeners(AuditingEntityListener.class)
 public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +22,7 @@ public class Driver {
     private String phoneNumber;
 
     @Column
-    private Float ratings;
+    private Double ratings;
 
     @CreatedDate
     @Column
@@ -29,7 +31,15 @@ public class Driver {
     public Driver() {
     }
 
-    public Driver(String licenseNumber, String phoneNumber, Float ratings) {
+    public Driver(Long id, String licenseNumber, String phoneNumber, Double ratings, ZonedDateTime createdDate) {
+        this.id = id;
+        this.licenseNumber = licenseNumber;
+        this.phoneNumber = phoneNumber;
+        this.ratings = ratings;
+        this.createdDate = createdDate;
+    }
+
+    public Driver(String licenseNumber, String phoneNumber, Double ratings) {
         this.licenseNumber = licenseNumber;
         this.phoneNumber = phoneNumber;
         this.ratings = ratings;
@@ -59,11 +69,11 @@ public class Driver {
         this.phoneNumber = phoneNumber;
     }
 
-    public Float getRatings() {
+    public Double getRatings() {
         return ratings;
     }
 
-    public void setRatings(Float ratings) {
+    public void setRatings(Double ratings) {
         this.ratings = ratings;
     }
 
