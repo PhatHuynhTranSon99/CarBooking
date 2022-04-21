@@ -21,14 +21,18 @@ public class Customer extends Model {
     @Column
     private String address;
 
+    @Column
+    private String phoneNumber;
+
     public Customer() {
     }
 
-    public Customer(Long id, String firstName, String lastName, String address, ZonedDateTime createdDate) {
+    public Customer(Long id, String firstName, String lastName, String address, String phoneNumber, ZonedDateTime createdDate) {
         super(id, createdDate);
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
+        this.phoneNumber = phoneNumber;
     }
 
     public Customer(String firstName, String lastName, String address) {
@@ -59,5 +63,13 @@ public class Customer extends Model {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
