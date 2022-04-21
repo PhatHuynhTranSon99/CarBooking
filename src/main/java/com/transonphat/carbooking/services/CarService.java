@@ -1,6 +1,5 @@
 package com.transonphat.carbooking.services;
 
-import com.transonphat.carbooking.dao.CarDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.pagination.PaginationResult;
