@@ -25,7 +25,7 @@ public class DriverController {
     }
 
     @PostMapping("/drivers")
-    public Driver createNewCustomer(@RequestBody Driver driver) {
+    public Driver createNewDriver(@RequestBody Driver driver) {
         return this.driverService.createDriver(driver);
     }
 

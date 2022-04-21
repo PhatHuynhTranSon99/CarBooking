@@ -1,6 +1,7 @@
 package com.transonphat.carbooking.domain;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -8,6 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Cars")
+@EntityListeners(AuditingEntityListener.class)
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -114,6 +116,10 @@ public class Car {
 
     public void setRate(Double rate) {
         this.rate = rate;
+    }
+
+    public void setCreatedDate(ZonedDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
     public ZonedDateTime getCreatedDate() {

@@ -1,9 +1,7 @@
 package com.transonphat.carbooking.domain;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import java.time.ZonedDateTime;
 
 public class CarBuilder {
     private Long id;
@@ -16,40 +14,49 @@ public class CarBuilder {
     private String licensePlate;
     private Double rate;
 
-    public void setId(Long id) {
+    public CarBuilder setId(Long id) {
         this.id = id;
+        return this;
     }
 
-    public void setIdentificationNumber(String identificationNumber) {
+    public CarBuilder setIdentificationNumber(String identificationNumber) {
         this.identificationNumber = identificationNumber;
+        return this;
     }
 
-    public void setMake(String make) {
+    public CarBuilder setMake(String make) {
         this.make = make;
+        return this;
     }
 
-    public void setModel(String model) {
+    public CarBuilder setModel(String model) {
         this.model = model;
+        return this;
     }
 
-    public void setColor(String color) {
+    public CarBuilder setColor(String color) {
         this.color = color;
+        return this;
     }
 
-    public void setConvertible(Boolean convertible) {
+    public CarBuilder setConvertible(Boolean convertible) {
         isConvertible = convertible;
+        return this;
     }
 
-    public void setRating(Double rating) {
+    public CarBuilder setRating(Double rating) {
         this.rating = rating;
+        return this;
     }
 
-    public void setLicensePlate(String licensePlate) {
+    public CarBuilder setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
+        return this;
     }
 
-    public void setRate(Double rate) {
+    public CarBuilder setRate(Double rate) {
         this.rate = rate;
+        return this;
     }
 
     public Car build() {
@@ -64,6 +71,7 @@ public class CarBuilder {
         car.setRating(rating);
         car.setLicensePlate(licensePlate);
         car.setRate(rate);
+        car.setCreatedDate(ZonedDateTime.now());
 
         return car;
     }
