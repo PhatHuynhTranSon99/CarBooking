@@ -1,11 +1,9 @@
 package com.transonphat.carbooking.domain;
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
-import java.util.Objects;
 
 @Entity
 @Table(name = "Drivers")
@@ -21,6 +19,9 @@ public class Driver extends Model {
 
     @Column
     private Double ratings;
+
+    @OneToOne(mappedBy = "driver", fetch = FetchType.LAZY)
+    private Car car;
 
     public Driver() {
     }

@@ -1,5 +1,6 @@
-package com.transonphat.carbooking.dao;
+package com.transonphat.carbooking.dao.car;
 
+import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.exceptions.CarNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;

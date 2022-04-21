@@ -31,6 +31,10 @@ public class Car extends Model {
     @Column
     private Double rate;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "driver_id")
+    private Driver driver;
+
     public Car() {
     }
 
@@ -96,5 +100,21 @@ public class Car extends Model {
 
     public void setRate(Double rate) {
         this.rate = rate;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void removeDriver() {
+        this.driver = null;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public boolean isAllocated() {
+        return this.driver != null;
     }
 }
