@@ -38,9 +38,12 @@ public class DataSeed implements CommandLineRunner {
 
         //Create some drivers
         Driver[] drivers = {
-                new Driver(1L, "H12-189", "0909111909", 4.9, ZonedDateTime.now()),
-                new Driver(2L, "H17-789", "0978101929", 4.5, ZonedDateTime.now()),
-                new Driver(3L, "H15-503", "0192181921", 5.0, ZonedDateTime.now()),
+                new Driver(1L, "Adam", "Levine",
+                        "0909111909", 4.9, ZonedDateTime.now()),
+                new Driver(2L, "Mark", "Rubber",
+                        "0978101929", 4.5, ZonedDateTime.now()),
+                new Driver(3L, "Jay", "Langdon",
+                        "0192181921", 5.0, ZonedDateTime.now()),
         };
 
         //Create some cars

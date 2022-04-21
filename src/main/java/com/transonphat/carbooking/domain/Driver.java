@@ -12,7 +12,9 @@ import java.util.Objects;
 @EntityListeners(AuditingEntityListener.class)
 public class Driver extends Model {
     @Column
-    private String licenseNumber;
+    private String firstName;
+
+    @Column String lastName;
 
     @Column
     private String phoneNumber;
@@ -23,25 +25,20 @@ public class Driver extends Model {
     public Driver() {
     }
 
-    public Driver(Long id, String licenseNumber, String phoneNumber, Double ratings, ZonedDateTime createdDate) {
+    public Driver(Long id, String firstName, String lastName,
+                  String phoneNumber, Double ratings, ZonedDateTime createdDate) {
         super(id, createdDate);
-        this.licenseNumber = licenseNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.ratings = ratings;
     }
 
-    public Driver(String licenseNumber, String phoneNumber, Double ratings) {
-        this.licenseNumber = licenseNumber;
+    public Driver(String firstName, String lastName, String phoneNumber, Double ratings) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.ratings = ratings;
-    }
-
-    public String getLicenseNumber() {
-        return licenseNumber;
-    }
-
-    public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = licenseNumber;
     }
 
     public String getPhoneNumber() {
@@ -58,5 +55,21 @@ public class Driver extends Model {
 
     public void setRatings(Double ratings) {
         this.ratings = ratings;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
