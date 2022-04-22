@@ -4,6 +4,7 @@ import com.transonphat.carbooking.domain.Driver;
 import com.transonphat.carbooking.search.SearchCriterion;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -15,7 +16,7 @@ public class DriverPhoneCriterion implements SearchCriterion<Driver> {
     }
 
     @Override
-    public Predicate toPredicate(Root<Driver> root, CriteriaBuilder criteriaBuilder) {
+    public Predicate toPredicate(Root<Driver> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         Predicate phoneLike = criteriaBuilder.like(
                 root.<String> get("phoneNumber"),
                 "%" + phoneNumber + "%"

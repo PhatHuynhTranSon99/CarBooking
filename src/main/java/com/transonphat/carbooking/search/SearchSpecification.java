@@ -17,6 +17,6 @@ public class SearchSpecification<T extends Model> implements Specification<T> {
 
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        return this.searchCriterion.toPredicate(root, criteriaBuilder);
+        return this.searchCriterion.toPredicate(root, query, criteriaBuilder);
     }
 }
