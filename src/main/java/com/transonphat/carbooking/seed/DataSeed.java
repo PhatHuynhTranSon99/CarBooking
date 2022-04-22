@@ -1,15 +1,11 @@
 package com.transonphat.carbooking.seed;
 
-import com.transonphat.carbooking.domain.Car;
-import com.transonphat.carbooking.domain.CarBuilder;
-import com.transonphat.carbooking.domain.Customer;
-import com.transonphat.carbooking.domain.Driver;
-import com.transonphat.carbooking.repositories.CarRepository;
-import com.transonphat.carbooking.repositories.CustomerRepository;
-import com.transonphat.carbooking.repositories.DriverRepository;
+import com.transonphat.carbooking.domain.*;
+import com.transonphat.carbooking.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -18,13 +14,17 @@ public class DataSeed implements CommandLineRunner {
     private final CustomerRepository customerRepository;
     private final DriverRepository driverRepository;
     private final CarRepository carRepository;
+    private final BookingRepository bookingRepository;
+    private final InvoiceRepository invoiceRepository;
 
     public DataSeed(CustomerRepository customerRepository,
                     DriverRepository driverRepository,
-                    CarRepository carRepository) {
+                    CarRepository carRepository, BookingRepository bookingRepository, InvoiceRepository invoiceRepository) {
         this.customerRepository = customerRepository;
         this.driverRepository = driverRepository;
         this.carRepository = carRepository;
+        this.bookingRepository = bookingRepository;
+        this.invoiceRepository = invoiceRepository;
     }
 
     @Override
@@ -83,9 +83,88 @@ public class DataSeed implements CommandLineRunner {
                 .setRate(15.4)
                 .build();
 
+        //Create some invoices and bookings
+        Invoice invoiceOne = new Invoice();
+        invoiceOne.setId(1L);
+        invoiceOne.setDriver(drivers[0]);
+        invoiceOne.setCustomer(customers[0]);
+        invoiceOne.setTotalCharges(100.0);
+        invoiceOne.setCreatedDate(ZonedDateTime.now());
+
+        Booking bookingOne = new Booking();
+        bookingOne.setId(1L);
+        bookingOne.setDistance(100.0);
+        bookingOne.setStartLocation("House");
+        bookingOne.setEndLocation("School");
+        bookingOne.setStartTime(ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh")));
+        bookingOne.setEndTime(ZonedDateTime.of(2020, 1, 5, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh")));
+        bookingOne.setInvoice(invoiceOne);
+        bookingOne.setCreatedDate(ZonedDateTime.now());
+
+        Invoice invoiceTwo = new Invoice();
+        invoiceTwo.setId(2L);
+        invoiceTwo.setDriver(drivers[0]);
+        invoiceTwo.setCustomer(customers[0]);
+        invoiceTwo.setTotalCharges(100.0);
+        invoiceTwo.setCreatedDate(ZonedDateTime.now());
+
+        Booking bookingTwo = new Booking();
+        bookingTwo.setId(2L);
+        bookingTwo.setDistance(100.0);
+        bookingTwo.setStartLocation("House");
+        bookingTwo.setEndLocation("School");
+        bookingTwo.setStartTime(ZonedDateTime.of(2020, 2, 1, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh")));
+        bookingTwo.setEndTime(ZonedDateTime.of(2020, 2, 10, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh")));
+        bookingTwo.setInvoice(invoiceTwo);
+        bookingTwo.setCreatedDate(ZonedDateTime.now());
+
+        Invoice invoiceThree = new Invoice();
+        invoiceThree.setId(3L);
+        invoiceThree.setDriver(drivers[1]);
+        invoiceThree.setCustomer(customers[1]);
+        invoiceThree.setTotalCharges(100.0);
+        invoiceThree.setCreatedDate(ZonedDateTime.now());
+
+        Booking bookingThree = new Booking();
+        bookingThree.setId(3L);
+        bookingThree.setDistance(100.0);
+        bookingThree.setStartLocation("House");
+        bookingThree.setEndLocation("School");
+        bookingThree.setStartTime(ZonedDateTime.of(2020, 1, 3, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh")));
+        bookingThree.setEndTime(ZonedDateTime.of(2020, 2, 2, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh")));
+        bookingThree.setInvoice(invoiceThree);
+        bookingThree.setCreatedDate(ZonedDateTime.now());
+
+        Invoice invoiceFour = new Invoice();
+        invoiceFour.setId(4L);
+        invoiceFour.setDriver(drivers[2]);
+        invoiceFour.setCustomer(customers[2]);
+        invoiceFour.setTotalCharges(100.1);
+        invoiceFour.setCreatedDate(ZonedDateTime.now());
+
+        Booking bookingFour = new Booking();
+        bookingFour.setId(4L);
+        bookingFour.setDistance(100.0);
+        bookingFour.setStartLocation("House");
+        bookingFour.setEndLocation("School");
+        bookingFour.setStartTime(ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh")));
+        bookingFour.setEndTime(ZonedDateTime.of(2020, 1, 7, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh")));
+        bookingFour.setInvoice(invoiceFour);
+        bookingFour.setCreatedDate(ZonedDateTime.now());
+
         //Save
         customerRepository.saveAll(List.of(customers));
         driverRepository.saveAll(List.of(drivers));
         carRepository.saveAll(List.of(carOne, carTwo, carThree));
+        invoiceRepository.saveAll(List.of(invoiceOne, invoiceTwo, invoiceThree, invoiceFour));
+        bookingRepository.saveAll(List.of(bookingOne, bookingTwo, bookingThree, bookingFour));
     }
 }
