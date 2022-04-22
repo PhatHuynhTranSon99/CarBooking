@@ -1,5 +1,7 @@
 package com.transonphat.carbooking.dao.booking;
 
+import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Booking;
 import com.transonphat.carbooking.exceptions.BookingNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
 @Component
-public class MySQLBookingDAO implements BookingDAO {
+public class MySQLBookingDAO implements DAO<Booking>, SearchableDAO<Booking> {
     private BookingRepository bookingRepository;
 
     public MySQLBookingDAO(BookingRepository bookingRepository) {

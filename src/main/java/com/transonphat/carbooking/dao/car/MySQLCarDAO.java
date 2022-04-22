@@ -1,5 +1,8 @@
 package com.transonphat.carbooking.dao.car;
 
+import com.transonphat.carbooking.dao.CustomSelectDAO;
+import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.query.Query;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.exceptions.CarNotFoundException;
@@ -12,11 +15,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class MySQLCarDAO implements SearchableDAO<Car> {
+public class MySQLCarDAO implements DAO<Car>, SearchableDAO<Car>, CustomSelectDAO<Car> {
     private final CarRepository carRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public MySQLCarDAO(CarRepository carRepository) {
         this.carRepository = carRepository;
@@ -78,5 +88,18 @@ public class MySQLCarDAO implements SearchableDAO<Car> {
         );
 
         return carPaginationResult;
+    }
+
+    @Override
+    public List<Car> select(Query query) {
+        //Create query
+        TypedQuery<Car> carQuery = this.entityManager.createQuery(query.getQuery(), Car.class);
+
+        //Add parameters
+        for (String parameterName : query.getParameters().keySet()) {
+            carQuery.setParameter(parameterName, query.getParameters().get(parameterName));
+        }
+
+        return carQuery.getResultList();
     }
 }

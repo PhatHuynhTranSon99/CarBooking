@@ -1,5 +1,6 @@
 package com.transonphat.carbooking.services;
 
+import com.transonphat.carbooking.dao.DAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Driver;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -8,11 +9,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DriverService {
-    private final SearchableDAO<Driver> driverDAO;
+    private final SearchableDAO<Driver> driverSearchableDAO;
+    private final DAO<Driver> driverDAO;
 
-    public DriverService(SearchableDAO<Driver> driverDAO) {
+    public DriverService(SearchableDAO<Driver> driverSearchableDAO, DAO<Driver> driverDAO) {
+        this.driverSearchableDAO = driverSearchableDAO;
         this.driverDAO = driverDAO;
     }
+
 
     public Driver createDriver(Driver driver) {
         return this.driverDAO.add(driver);
@@ -33,6 +37,6 @@ public class DriverService {
     public PaginationResult<Driver> searchDriver(SearchCriterion<Driver> searchCriterion,
                                                  int currentPage,
                                                  int pageSize) {
-        return this.driverDAO.search(searchCriterion, currentPage, pageSize);
+        return this.driverSearchableDAO.search(searchCriterion, currentPage, pageSize);
     }
 }

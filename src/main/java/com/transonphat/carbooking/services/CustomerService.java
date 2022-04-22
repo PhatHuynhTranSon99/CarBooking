@@ -1,5 +1,6 @@
 package com.transonphat.carbooking.services;
 
+import com.transonphat.carbooking.dao.DAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -8,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerService {
-    private final SearchableDAO<Customer> customerDAO;
+    private final SearchableDAO<Customer> customerSearchableDAO;
+    private final DAO<Customer> customerDAO;
 
-    public CustomerService(SearchableDAO<Customer> customerDAO) {
+    public CustomerService(SearchableDAO<Customer> customerSearchableDAO, DAO<Customer> customerDAO) {
+        this.customerSearchableDAO = customerSearchableDAO;
         this.customerDAO = customerDAO;
     }
 
@@ -33,7 +36,7 @@ public class CustomerService {
     public PaginationResult<Customer> searchCustomer(SearchCriterion<Customer> customerSearchCriterion,
                                                      int currentPage,
                                                      int pageSize) {
-        return customerDAO.search(customerSearchCriterion, currentPage, pageSize);
+        return customerSearchableDAO.search(customerSearchCriterion, currentPage, pageSize);
     }
 
 }

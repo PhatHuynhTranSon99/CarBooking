@@ -1,5 +1,6 @@
 package com.transonphat.carbooking.dao.customer;
 
+import com.transonphat.carbooking.dao.DAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.exceptions.CustomerNotFoundException;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
 @Component
-public class MySQLCustomerDao implements SearchableDAO<Customer> {
+public class MySQLCustomerDao implements DAO<Customer>, SearchableDAO<Customer> {
     private final CustomerRepository customerRepository;
 
     public MySQLCustomerDao(CustomerRepository customerRepository) {

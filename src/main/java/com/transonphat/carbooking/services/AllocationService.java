@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.services;
 
-import com.transonphat.carbooking.dao.SearchableDAO;
+import com.transonphat.carbooking.dao.DAO;
 import com.transonphat.carbooking.dao.allocation.AllocationDAO;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.Driver;
@@ -9,13 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AllocationService {
-    private final SearchableDAO<Car> carDao;
-    private final SearchableDAO<Driver> driver;
+    private final DAO<Car> carDao;
+    private final DAO<Driver> driver;
     private final AllocationDAO allocationDao;
 
-    public AllocationService(SearchableDAO<Car> carDao,
-                             SearchableDAO<Driver> driver,
-                             AllocationDAO allocationDao) {
+    public AllocationService(DAO<Car> carDao, DAO<Driver> driver, AllocationDAO allocationDao) {
         this.carDao = carDao;
         this.driver = driver;
         this.allocationDao = allocationDao;
