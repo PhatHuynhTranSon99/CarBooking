@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Customers")
@@ -23,6 +24,9 @@ public class Customer extends Model {
 
     @Column
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Invoice> invoices;
 
     public Customer() {
     }

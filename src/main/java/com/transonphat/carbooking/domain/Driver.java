@@ -4,6 +4,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "Drivers")
@@ -22,6 +23,9 @@ public class Driver extends Model {
 
     @OneToOne(mappedBy = "driver", fetch = FetchType.LAZY)
     private Car car;
+
+    @OneToMany(mappedBy = "driver")
+    private Set<Invoice> invoices;
 
     public Driver() {
     }
