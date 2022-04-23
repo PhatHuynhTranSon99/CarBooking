@@ -7,7 +7,8 @@ import javax.persistence.criteria.*;
 import java.time.ZonedDateTime;
 
 public class CarFreeCriterion implements SearchCriterion<Car> {
-    private ZonedDateTime startTime, endTime;
+    private final ZonedDateTime startTime;
+    private final ZonedDateTime endTime;
 
     public CarFreeCriterion(ZonedDateTime startTime, ZonedDateTime endTime) {
         this.startTime = startTime;

@@ -43,14 +43,13 @@ public class MySQLCustomerDao implements DAO<Customer>, SearchableDAO<Customer> 
         Page<Customer> customerPage = this.customerRepository.findAll(pageable);
 
         //Parse to pagination
-        PaginationResult<Customer> result = new PaginationResult<Customer>(
+
+        return new PaginationResult<>(
                 customerPage.getTotalElements(),
                 customerPage.get().collect(Collectors.toList()),
                 customerPage.getNumber(),
                 customerPage.getTotalPages()
         );
-
-        return result;
     }
 
     @Override
@@ -69,13 +68,11 @@ public class MySQLCustomerDao implements DAO<Customer>, SearchableDAO<Customer> 
                 pageable
         );
 
-        PaginationResult<Customer> result = new PaginationResult<Customer>(
+        return new PaginationResult<>(
                 customerPage.getTotalElements(),
                 customerPage.get().collect(Collectors.toList()),
                 customerPage.getNumber(),
                 customerPage.getTotalPages()
         );
-
-        return result;
     }
 }

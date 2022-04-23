@@ -13,18 +13,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class MySQLCarDAO implements DAO<Car>, SearchableDAO<Car> {
     private final CarRepository carRepository;
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     public MySQLCarDAO(CarRepository carRepository) {
         this.carRepository = carRepository;
@@ -51,14 +44,13 @@ public class MySQLCarDAO implements DAO<Car>, SearchableDAO<Car> {
         Page<Car> carPage = this.carRepository.findAll(pageable);
 
         //Map page to pagination result
-        PaginationResult<Car> carPaginationResult = new PaginationResult<>(
+
+        return new PaginationResult<>(
                 carPage.getTotalElements(),
                 carPage.get().collect(Collectors.toList()),
                 carPage.getNumber(),
                 carPage.getTotalPages()
         );
-
-        return carPaginationResult;
     }
 
     @Override
@@ -78,13 +70,12 @@ public class MySQLCarDAO implements DAO<Car>, SearchableDAO<Car> {
         );
 
         //Map page to pagination result
-        PaginationResult<Car> carPaginationResult = new PaginationResult<>(
+
+        return new PaginationResult<>(
                 carPage.getTotalElements(),
                 carPage.get().collect(Collectors.toList()),
                 carPage.getNumber(),
                 carPage.getTotalPages()
         );
-
-        return carPaginationResult;
     }
 }

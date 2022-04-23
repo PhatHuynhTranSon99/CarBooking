@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class MySQLBookingDAO implements DAO<Booking>, SearchableDAO<Booking> {
-    private BookingRepository bookingRepository;
+    private final BookingRepository bookingRepository;
 
     public MySQLBookingDAO(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
@@ -44,14 +44,13 @@ public class MySQLBookingDAO implements DAO<Booking>, SearchableDAO<Booking> {
         Page<Booking> bookingPage = this.bookingRepository.findAll(pageable);
 
         //Map to PaginationResult
-        PaginationResult<Booking> bookingPaginationResult = new PaginationResult<>(
+
+        return new PaginationResult<>(
                 bookingPage.getTotalElements(),
                 bookingPage.get().collect(Collectors.toList()),
                 bookingPage.getNumber(),
                 bookingPage.getTotalPages()
         );
-
-        return bookingPaginationResult;
     }
 
     @Override
@@ -71,13 +70,12 @@ public class MySQLBookingDAO implements DAO<Booking>, SearchableDAO<Booking> {
         );
 
         //Map to PaginationResult
-        PaginationResult<Booking> bookingPaginationResult = new PaginationResult<>(
+
+        return new PaginationResult<>(
                 bookingPage.getTotalElements(),
                 bookingPage.get().collect(Collectors.toList()),
                 bookingPage.getNumber(),
                 bookingPage.getTotalPages()
         );
-
-        return bookingPaginationResult;
     }
 }
