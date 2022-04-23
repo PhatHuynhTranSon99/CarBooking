@@ -73,7 +73,7 @@ public class MySQLDriverDAO implements DAO<Driver>,
 
         //Map to driver pagination
 
-        return new PaginationResult<Driver>(
+        return new PaginationResult<>(
                 driverPage.getTotalElements(),
                 driverPage.get().collect(Collectors.toList()),
                 driverPage.getNumber(),
