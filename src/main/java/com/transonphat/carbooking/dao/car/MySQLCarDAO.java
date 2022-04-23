@@ -1,6 +1,7 @@
 package com.transonphat.carbooking.dao.car;
 
 import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.ExistenceDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.exceptions.CarNotFoundException;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
 @Component
-public class MySQLCarDAO implements DAO<Car>, SearchableDAO<Car> {
+public class MySQLCarDAO implements DAO<Car>, SearchableDAO<Car>, ExistenceDAO<Car> {
     private final CarRepository carRepository;
 
     public MySQLCarDAO(CarRepository carRepository) {
@@ -77,5 +78,11 @@ public class MySQLCarDAO implements DAO<Car>, SearchableDAO<Car> {
                 carPage.getNumber(),
                 carPage.getTotalPages()
         );
+    }
+
+    @Override
+    public boolean exists(SearchCriterion<Car> criterion) {
+        long count = this.carRepository.count(new SearchSpecification<>(criterion));
+        return count > 0;
     }
 }

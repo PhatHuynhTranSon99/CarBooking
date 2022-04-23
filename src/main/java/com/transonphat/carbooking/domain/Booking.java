@@ -24,7 +24,7 @@ public class Booking extends Model {
     @Column
     private Double distance;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
 

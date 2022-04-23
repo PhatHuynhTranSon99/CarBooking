@@ -1,7 +1,6 @@
 package com.transonphat.carbooking.dao.driver;
 
 import com.transonphat.carbooking.dao.DAO;
-import com.transonphat.carbooking.dao.ExistenceDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Driver;
 import com.transonphat.carbooking.exceptions.DriverNotFoundException;
@@ -17,8 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
 @Component
-public class MySQLDriverDAO implements DAO<Driver>,
-        SearchableDAO<Driver>, ExistenceDAO<Driver> {
+public class MySQLDriverDAO implements DAO<Driver>, SearchableDAO<Driver> {
     private final DriverRepository driverRepository;
 
     public MySQLDriverDAO(DriverRepository driverRepository) {
@@ -79,11 +77,5 @@ public class MySQLDriverDAO implements DAO<Driver>,
                 driverPage.getNumber(),
                 driverPage.getTotalPages()
         );
-    }
-
-    @Override
-    public boolean exists(SearchCriterion<Driver> criterion) {
-        long count = this.driverRepository.count(new SearchSpecification<>(criterion));
-        return count > 0;
     }
 }
