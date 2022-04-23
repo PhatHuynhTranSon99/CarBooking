@@ -36,16 +36,6 @@ public class DataSeed implements CommandLineRunner {
                 new Customer(3L, "Osborn", "Norman", "Street", "2817283385", ZonedDateTime.now()),
         };
 
-        //Create some drivers
-        Driver[] drivers = {
-                new Driver(1L, "Adam", "Levine",
-                        "0909111909", 4.9, ZonedDateTime.now()),
-                new Driver(2L, "Mark", "Rubber",
-                        "0978101929", 4.5, ZonedDateTime.now()),
-                new Driver(3L, "Jay", "Langdon",
-                        "0192181921", 5.0, ZonedDateTime.now()),
-        };
-
         //Create some cars
         Car carOne = new CarBuilder()
                 .setId(1L)
@@ -83,10 +73,26 @@ public class DataSeed implements CommandLineRunner {
                 .setRate(15.4)
                 .build();
 
+        carRepository.saveAll(List.of(carOne, carTwo, carThree));
+
+        //Create some drivers
+        Driver driverOne = new Driver(1L, "Adam", "Levine",
+                "0909111909", 4.9, ZonedDateTime.now());
+        Driver driverTwo = new Driver(2L, "Mark", "Rubber",
+                "0978101929", 4.5, ZonedDateTime.now());
+        Driver driverThree = new Driver(3L, "Jay", "Langdon",
+                "0192181921", 5.0, ZonedDateTime.now());
+
+        driverOne.setCar(carOne);
+        driverTwo.setCar(carTwo);
+        driverThree.setCar(carThree);
+
+        driverRepository.saveAll(List.of(driverOne, driverTwo, driverThree));
+
         //Create some invoices and bookings
         Invoice invoiceOne = new Invoice();
         invoiceOne.setId(1L);
-        invoiceOne.setDriver(drivers[0]);
+        invoiceOne.setDriver(driverOne);
         invoiceOne.setCustomer(customers[0]);
         invoiceOne.setTotalCharges(100.0);
         invoiceOne.setCreatedDate(ZonedDateTime.now());
@@ -105,7 +111,7 @@ public class DataSeed implements CommandLineRunner {
 
         Invoice invoiceTwo = new Invoice();
         invoiceTwo.setId(2L);
-        invoiceTwo.setDriver(drivers[0]);
+        invoiceTwo.setDriver(driverOne);
         invoiceTwo.setCustomer(customers[0]);
         invoiceTwo.setTotalCharges(100.0);
         invoiceTwo.setCreatedDate(ZonedDateTime.now());
@@ -115,16 +121,16 @@ public class DataSeed implements CommandLineRunner {
         bookingTwo.setDistance(100.0);
         bookingTwo.setStartLocation("House");
         bookingTwo.setEndLocation("School");
-        bookingTwo.setStartTime(ZonedDateTime.of(2020, 2, 1, 0, 0, 0, 0,
+        bookingTwo.setStartTime(ZonedDateTime.of(2020, 1, 9, 0, 0, 0, 0,
                 ZoneId.of("Asia/Ho_Chi_Minh")));
-        bookingTwo.setEndTime(ZonedDateTime.of(2020, 2, 10, 0, 0, 0, 0,
+        bookingTwo.setEndTime(ZonedDateTime.of(2020, 1, 20, 0, 0, 0, 0,
                 ZoneId.of("Asia/Ho_Chi_Minh")));
         bookingTwo.setInvoice(invoiceTwo);
         bookingTwo.setCreatedDate(ZonedDateTime.now());
 
         Invoice invoiceThree = new Invoice();
         invoiceThree.setId(3L);
-        invoiceThree.setDriver(drivers[1]);
+        invoiceThree.setDriver(driverTwo);
         invoiceThree.setCustomer(customers[1]);
         invoiceThree.setTotalCharges(100.0);
         invoiceThree.setCreatedDate(ZonedDateTime.now());
@@ -134,16 +140,16 @@ public class DataSeed implements CommandLineRunner {
         bookingThree.setDistance(100.0);
         bookingThree.setStartLocation("House");
         bookingThree.setEndLocation("School");
-        bookingThree.setStartTime(ZonedDateTime.of(2020, 1, 3, 0, 0, 0, 0,
+        bookingThree.setStartTime(ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0,
                 ZoneId.of("Asia/Ho_Chi_Minh")));
-        bookingThree.setEndTime(ZonedDateTime.of(2020, 2, 2, 0, 0, 0, 0,
+        bookingThree.setEndTime(ZonedDateTime.of(2020, 1, 5, 0, 0, 0, 0,
                 ZoneId.of("Asia/Ho_Chi_Minh")));
         bookingThree.setInvoice(invoiceThree);
         bookingThree.setCreatedDate(ZonedDateTime.now());
 
         Invoice invoiceFour = new Invoice();
         invoiceFour.setId(4L);
-        invoiceFour.setDriver(drivers[2]);
+        invoiceFour.setDriver(driverThree);
         invoiceFour.setCustomer(customers[2]);
         invoiceFour.setTotalCharges(100.1);
         invoiceFour.setCreatedDate(ZonedDateTime.now());
@@ -155,15 +161,13 @@ public class DataSeed implements CommandLineRunner {
         bookingFour.setEndLocation("School");
         bookingFour.setStartTime(ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0,
                 ZoneId.of("Asia/Ho_Chi_Minh")));
-        bookingFour.setEndTime(ZonedDateTime.of(2020, 1, 7, 0, 0, 0, 0,
+        bookingFour.setEndTime(ZonedDateTime.of(2020, 1, 5, 0, 0, 0, 0,
                 ZoneId.of("Asia/Ho_Chi_Minh")));
         bookingFour.setInvoice(invoiceFour);
         bookingFour.setCreatedDate(ZonedDateTime.now());
 
         //Save
         customerRepository.saveAll(List.of(customers));
-        driverRepository.saveAll(List.of(drivers));
-        carRepository.saveAll(List.of(carOne, carTwo, carThree));
         invoiceRepository.saveAll(List.of(invoiceOne, invoiceTwo, invoiceThree, invoiceFour));
         bookingRepository.saveAll(List.of(bookingOne, bookingTwo, bookingThree, bookingFour));
     }

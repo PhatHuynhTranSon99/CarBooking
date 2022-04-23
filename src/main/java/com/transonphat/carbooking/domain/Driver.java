@@ -21,7 +21,8 @@ public class Driver extends Model {
     @Column
     private Double ratings;
 
-    @OneToOne(mappedBy = "driver", fetch = FetchType.LAZY)
+    @OneToOne
+    @JoinColumn(name = "car_id")
     private Car car;
 
     @OneToMany(mappedBy = "driver")
@@ -76,5 +77,13 @@ public class Driver extends Model {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 }

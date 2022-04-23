@@ -1,5 +1,6 @@
 package com.transonphat.carbooking.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 
@@ -31,8 +32,8 @@ public class Car extends Model {
     @Column
     private Double rate;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "driver_id")
+    @OneToOne(mappedBy = "car", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Driver driver;
 
     public Car() {
