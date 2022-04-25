@@ -3,6 +3,7 @@ package com.transonphat.carbooking.aggregation.car;
 import com.transonphat.carbooking.aggregation.AggregationQuery;
 import com.transonphat.carbooking.dao.aggregation.Usage;
 import com.transonphat.carbooking.domain.*;
+import com.transonphat.carbooking.pagination.PaginationResult;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Tuple;
@@ -12,17 +13,37 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CarUsageQuery implements AggregationQuery<List<Usage>> {
+public class PaginatedCarUsageQuery implements AggregationQuery<PaginationResult<Usage>> {
     private final int month;
     private final int year;
+    private final int currentPage;
+    private final int pageSize;
 
-    public CarUsageQuery(int month, int year) {
+    public PaginatedCarUsageQuery(int month, int year, int currentPage, int pageSize) {
         this.month = month;
         this.year = year;
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
+    }
+
+    private Long getTotalCars(EntityManager entityManager, CriteriaBuilder criteriaBuilder) {
+        CriteriaQuery<Long> carCount = criteriaBuilder.createQuery(Long.class);
+        Root<Booking> bookingRoot = carCount.from(Booking.class);
+
+        carCount.select(
+                criteriaBuilder.countDistinct(
+                        bookingRoot.get(Booking_.invoice)
+                            .get(Invoice_.driver)
+                            .get(Driver_.car)
+                            .get(Car_.id)
+                )
+        );
+
+        return entityManager.createQuery(carCount).getSingleResult();
     }
 
     @Override
-    public List<Usage> execute(EntityManager entityManager, CriteriaBuilder criteriaBuilder) {
+    public PaginationResult<Usage> execute(EntityManager entityManager, CriteriaBuilder criteriaBuilder) {
         //Create booking root
         CriteriaQuery<Tuple> dateSumQuery = criteriaBuilder.createQuery(Tuple.class);
         Root<Booking> bookingRoot = dateSumQuery.from(Booking.class);
@@ -154,12 +175,28 @@ public class CarUsageQuery implements AggregationQuery<List<Usage>> {
         //Map result
         TypedQuery<Tuple> typedQuery = entityManager.createQuery(dateSumQuery);
 
-        return typedQuery
+        //Set first result and max result for pagination
+        typedQuery.setFirstResult(currentPage * pageSize);
+        typedQuery.setMaxResults(pageSize);
+
+        //Get total number of records and total pages
+        int totalNumber = getTotalCars(entityManager, criteriaBuilder).intValue();
+        int totalPages = (int) Math.round(Math.ceil(((double) totalNumber) / pageSize));
+
+        //Get usage list
+        List<Usage> usageList =  typedQuery
                 .getResultList()
                 .stream()
                 .map(
                     tuple -> new Usage((Long) tuple.get(0), (Long) tuple.get(1))
                 )
                 .collect(Collectors.toList());
+
+        return new PaginationResult<>(
+                totalNumber,
+                usageList,
+                currentPage,
+                totalPages
+        );
     }
 }
