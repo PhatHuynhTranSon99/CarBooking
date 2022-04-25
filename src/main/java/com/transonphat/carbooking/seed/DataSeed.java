@@ -112,8 +112,8 @@ public class DataSeed implements CommandLineRunner {
         Invoice invoiceTwo = new Invoice();
         invoiceTwo.setId(2L);
         invoiceTwo.setDriver(driverOne);
-        invoiceTwo.setCustomer(customers[0]);
-        invoiceTwo.setTotalCharges(100.0);
+        invoiceTwo.setCustomer(customers[1]);
+        invoiceTwo.setTotalCharges(150.0);
         invoiceTwo.setCreatedDate(ZonedDateTime.now());
 
         Booking bookingTwo = new Booking();

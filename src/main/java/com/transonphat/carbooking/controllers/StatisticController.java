@@ -2,6 +2,7 @@ package com.transonphat.carbooking.controllers;
 
 import com.transonphat.carbooking.aggregation.AggregationExecutor;
 import com.transonphat.carbooking.aggregation.customer.RevenueByCustomerQuery;
+import com.transonphat.carbooking.aggregation.driver.RevenueByDriverQuery;
 import com.transonphat.carbooking.dao.aggregation.Revenue;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,22 @@ public class StatisticController {
         Double revenue = aggregationExecutor.execute(
                 new RevenueByCustomerQuery(
                         customerId,
+                        from,
+                        to
+                )
+        );
+
+        return Revenue.from(revenue);
+    }
+
+    @GetMapping("statistics/revenue/driver")
+    public Revenue getRevenueByDriver(@RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime from,
+                                      @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime to,
+                                      @RequestParam(value = "driver", required = false) Long driverId) {
+        //Get the revenue
+        Double revenue = aggregationExecutor.execute(
+                new RevenueByDriverQuery(
+                        driverId,
                         from,
                         to
                 )
