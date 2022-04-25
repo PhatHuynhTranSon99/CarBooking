@@ -1,15 +1,18 @@
 package com.transonphat.carbooking.controllers;
 
 import com.transonphat.carbooking.aggregation.AggregationExecutor;
+import com.transonphat.carbooking.aggregation.car.CarUsageQuery;
 import com.transonphat.carbooking.aggregation.customer.RevenueByCustomerQuery;
 import com.transonphat.carbooking.aggregation.driver.RevenueByDriverQuery;
 import com.transonphat.carbooking.dao.aggregation.Revenue;
+import com.transonphat.carbooking.dao.aggregation.Usage;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @RestController
 public class StatisticController {
@@ -49,5 +52,14 @@ public class StatisticController {
         );
 
         return Revenue.from(revenue);
+    }
+
+    @GetMapping("statistics/usage")
+    public List<Usage> getCarUsage(@RequestParam Integer month,
+                               @RequestParam Integer year) {
+        //Get the usage
+        return aggregationExecutor.execute(
+                new CarUsageQuery(month, year)
+        );
     }
 }
