@@ -7,6 +7,7 @@ import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.exceptions.CarDoesNotHaveDriverException;
 import com.transonphat.carbooking.exceptions.CarNotAvailableException;
 import com.transonphat.carbooking.pagination.PaginationResult;
+import com.transonphat.carbooking.search.booking.BookingDateCriterion;
 import com.transonphat.carbooking.services.BookingService;
 import com.transonphat.carbooking.services.CarService;
 import com.transonphat.carbooking.services.CustomerService;
@@ -39,6 +40,18 @@ public class BookingController {
                                                    @RequestParam(defaultValue = "0") int page,
                                                    @RequestParam(defaultValue = "3") int size) {
         return bookingService.findAvailableCars(start, end, page, size);
+    }
+
+    @GetMapping("/bookings")
+    public PaginationResult<Booking> filterBookingsByDate(@RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime from,
+                                                          @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime to,
+                                                          @RequestParam(defaultValue = "0") int page,
+                                                          @RequestParam(defaultValue = "3") int size) {
+        return this.bookingService.searchBookings(
+                new BookingDateCriterion(from, to),
+                page,
+                size
+        );
     }
 
     @PostMapping("/customers/{customerId}/bookings")

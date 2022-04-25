@@ -18,11 +18,10 @@ public class CarMakeCriterion implements SearchCriterion<Car> {
 
     @Override
     public Predicate toPredicate(Root<Car> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        Predicate predicate = criteriaBuilder.like(
+
+        return criteriaBuilder.like(
                 criteriaBuilder.lower(root.<String> get("make")),
                 "%" + make.toLowerCase(Locale.ROOT) + "%"
         );
-
-        return predicate;
     }
 }

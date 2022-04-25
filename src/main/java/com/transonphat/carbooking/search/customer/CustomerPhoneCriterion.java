@@ -17,11 +17,10 @@ public class CustomerPhoneCriterion implements SearchCriterion<Customer> {
 
     @Override
     public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        Predicate phoneLike = criteriaBuilder.like(
+
+        return criteriaBuilder.like(
                 root.<String> get("phoneNumber"),
                 "%" + phoneNumber + "%"
         );
-
-        return phoneLike;
     }
 }

@@ -17,11 +17,9 @@ public class CarConvertibleCriterion implements SearchCriterion<Car> {
 
     @Override
     public Predicate toPredicate(Root<Car> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        Predicate predicate = criteriaBuilder.equal(
+        return criteriaBuilder.equal(
                 root.<Boolean> get("isConvertible"),
                 isConvertible
         );
-
-        return predicate;
     }
 }

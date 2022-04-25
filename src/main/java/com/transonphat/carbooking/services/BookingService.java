@@ -7,6 +7,7 @@ import com.transonphat.carbooking.domain.Booking;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.pagination.PaginationResult;
+import com.transonphat.carbooking.search.SearchCriterion;
 import com.transonphat.carbooking.search.car.CarBookingExistCriterion;
 import com.transonphat.carbooking.search.car.CarFreeCriterion;
 import org.springframework.stereotype.Service;
@@ -17,15 +18,20 @@ import java.time.ZonedDateTime;
 public class BookingService {
     private final DAO<Invoice> invoiceDao;
     private final DAO<Booking> bookingDao;
+    private final SearchableDAO<Booking> bookingSearchableDAO;
     private final SearchableDAO<Car> carSearchableDAO;
     private final ExistenceDAO<Car> carExistenceDAO;
     private final SearchableDAO<Invoice> invoiceSearchableDAO;
 
     public BookingService(DAO<Invoice> invoiceDao,
-                          DAO<Booking> bookingDao, SearchableDAO<Car> carSearchableDAO,
-                          ExistenceDAO<Car> carExistenceDAO, SearchableDAO<Invoice> invoiceSearchableDAO) {
+                          DAO<Booking> bookingDao,
+                          SearchableDAO<Booking> bookingSearchableDAO,
+                          SearchableDAO<Car> carSearchableDAO,
+                          ExistenceDAO<Car> carExistenceDAO,
+                          SearchableDAO<Invoice> invoiceSearchableDAO) {
         this.invoiceDao = invoiceDao;
         this.bookingDao = bookingDao;
+        this.bookingSearchableDAO = bookingSearchableDAO;
         this.carSearchableDAO = carSearchableDAO;
         this.carExistenceDAO = carExistenceDAO;
         this.invoiceSearchableDAO = invoiceSearchableDAO;
@@ -62,5 +68,9 @@ public class BookingService {
         booking.setInvoice(invoice);
 
         return this.bookingDao.add(booking);
+    }
+
+    public PaginationResult<Booking> searchBookings(SearchCriterion<Booking> criterion, int currentPage, int pageSize) {
+        return this.bookingSearchableDAO.search(criterion, currentPage, pageSize);
     }
 }

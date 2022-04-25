@@ -18,11 +18,10 @@ public class CarColorCriterion implements SearchCriterion<Car> {
 
     @Override
     public Predicate toPredicate(Root<Car> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        Predicate predicate = criteriaBuilder.like(
+
+        return criteriaBuilder.like(
                 criteriaBuilder.lower(root.<String> get("color")),
                 "%" + color.toLowerCase(Locale.ROOT) + "%"
         );
-
-        return predicate;
     }
 }

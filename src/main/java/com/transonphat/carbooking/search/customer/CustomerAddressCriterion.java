@@ -18,11 +18,10 @@ public class CustomerAddressCriterion implements SearchCriterion<Customer> {
 
     @Override
     public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        Predicate addressLike = criteriaBuilder.like(
+
+        return criteriaBuilder.like(
                 criteriaBuilder.lower(root.<String> get("address")),
                 "%" + address.toLowerCase(Locale.ROOT) + "%"
         );
-
-        return addressLike;
     }
 }

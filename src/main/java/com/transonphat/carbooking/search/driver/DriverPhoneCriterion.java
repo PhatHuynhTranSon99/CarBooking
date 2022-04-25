@@ -17,11 +17,10 @@ public class DriverPhoneCriterion implements SearchCriterion<Driver> {
 
     @Override
     public Predicate toPredicate(Root<Driver> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        Predicate phoneLike = criteriaBuilder.like(
+
+        return criteriaBuilder.like(
                 root.<String> get("phoneNumber"),
                 "%" + phoneNumber + "%"
         );
-
-        return phoneLike;
     }
 }
