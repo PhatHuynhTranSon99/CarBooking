@@ -1,5 +1,6 @@
 package com.transonphat.carbooking.dao.invoice;
 
+import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.exceptions.InvoiceNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
 @Component
-public class MySQLInvoiceDAO implements InvoiceDAO {
+public class MySQLInvoiceDAO implements InvoiceDAO, SearchableDAO<Invoice> {
     private InvoiceRepository invoiceRepository;
 
     public MySQLInvoiceDAO(InvoiceRepository invoiceRepository) {
@@ -63,13 +64,11 @@ public class MySQLInvoiceDAO implements InvoiceDAO {
                 pageable
         );
 
-        PaginationResult<Invoice> invoicePaginationResult = new PaginationResult<>(
+        return new PaginationResult<>(
                 invoicePage.getTotalElements(),
                 invoicePage.get().collect(Collectors.toList()),
                 invoicePage.getNumber(),
                 invoicePage.getTotalPages()
         );
-
-        return invoicePaginationResult;
     }
 }
