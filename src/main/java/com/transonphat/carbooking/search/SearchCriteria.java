@@ -11,13 +11,10 @@ import java.util.List;
 
 public class SearchCriteria {
     public static <T extends Model> SearchCriterion<T> and(List<SearchCriterion<T>> criteria) {
-        return new SearchCriterion<T>() {
-            @Override
-            public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-                Predicate[] predicates = criteria.stream().map(item -> item.toPredicate(root, query, criteriaBuilder))
-                                                                .toArray(Predicate[]::new);
-                return criteriaBuilder.and(predicates);
-            }
+        return (root, query, criteriaBuilder) -> {
+            Predicate[] predicates = criteria.stream().map(item -> item.toPredicate(root, query, criteriaBuilder))
+                                                            .toArray(Predicate[]::new);
+            return criteriaBuilder.and(predicates);
         };
     }
 }
