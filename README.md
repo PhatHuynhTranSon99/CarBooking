@@ -14,7 +14,7 @@ This project is a simple REST api which simulates a car booking agency and has t
 - Statistics: Find revenue from a driver in a period
 - Statistics: Find usage of all cars (number of days used) in a month
 
-## Endpoints 
+## Endpoints
 
 ### Cars
 
