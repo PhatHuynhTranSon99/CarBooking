@@ -46,8 +46,8 @@ public class CustomerController {
     public PaginationResult<Customer> searchCustomer(@RequestParam(required = false) String name,
                                                      @RequestParam(required = false) String phone,
                                                      @RequestParam(required = false) String address,
-                                                     @RequestParam(defaultValue = "0") int currentPage,
-                                                     @RequestParam(defaultValue = "3") int pageSize) {
+                                                     @RequestParam(defaultValue = "0") int page,
+                                                     @RequestParam(defaultValue = "3") int size) {
         //Set list of criterion
         List<SearchCriterion<Customer>> searchCriterionList = new ArrayList<>();
 
@@ -62,12 +62,10 @@ public class CustomerController {
         }
 
         //Combine into one criterion
-        PaginationResult<Customer> customerPaginationResult = this.customerService.searchCustomer(
+        return this.customerService.searchCustomer(
                 SearchCriteria.<Customer> and(searchCriterionList),
-                currentPage,
-                pageSize
+                page,
+                size
         );
-
-        return customerPaginationResult;
     }
 }
