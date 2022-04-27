@@ -15,8 +15,10 @@ This project is a simple REST api which simulates a car booking agency and has t
 - Statistics: Find usage of all cars (number of days used) in a month
 
 ## Endpoints 
+
 ### Cars
-####View car list
+
+#### View car list
 ```
 GET /cars
 ```
@@ -24,14 +26,14 @@ Parameters:
 - size: The number of cars per page
 - page: Current page to display
 
-####View a car
+#### View a car
 ```
 GET /cars/{carId}
 ```
 Path variables:
 - carId: Integer, the id of the car
 
-####Delete a car
+#### Delete a car
 ```
 DELETE /cars/{carId}
 ```
@@ -58,7 +60,7 @@ Request body
 #### Update car
 **To be implemented**
 
-####Search a car
+#### Search a car
 ```
 GET /cars/search
 ```
@@ -71,7 +73,8 @@ Parameters:
 - page: Integer, current page
 - size: Integer, the number of cars per page
 
-###Driver
+### Driver
+
 #### View all drivers
 ```
 GET /drivers
