@@ -58,7 +58,7 @@ Request body
 }
 ```
 #### Update car
-**To be implemented**
+*To be implemented*
 
 #### Search a car
 ```
@@ -115,7 +115,7 @@ Request body
 ```
 
 #### Update a driver
-**To be implemented**
+*To be implemented*
 
 #### Delete a driver
 ```
@@ -174,6 +174,6 @@ Path variable:
 - customerId: Integer, the id of the customer
 
 #### Update a customer
-**To be implemented**
+*To be implemented*
 
 ## Technologies
