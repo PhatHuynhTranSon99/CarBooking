@@ -67,7 +67,21 @@ Request body
 }
 ```
 #### Update car
-*To be implemented*
+```
+PUT /cars/{carId}
+```
+Path variables:
+- carId: Integer, the id of the car
+
+Parameters:
+- identification: String
+- make: String
+- model: String
+- color: String
+- convertible: boolean
+- rating: Double
+- licensePlate: String
+- rate: Double (Per kilometer)
 
 ### Driver
 
@@ -105,7 +119,18 @@ Request body
 ```
 
 #### Update a driver
-*To be implemented*
+```
+PUT /drivers/{driverId}
+```
+Path variables:
+- driverId: Integer, the name of the driver
+
+Parameters:
+- firstName: String
+- lastName: String
+- phone: String
+- address: String
+- ratings: Double
 
 #### Delete a driver
 ```
@@ -120,7 +145,7 @@ Path variables:
 ```
 GET /customers
 ```
-Path variables: 
+Parameters: 
 - name: String
 - phone: String
 - address: String
@@ -158,7 +183,17 @@ Path variable:
 - customerId: Integer, the id of the customer
 
 #### Update a customer
-*To be implemented*
+```
+PUT /customers/{customerId}
+```
+Path variable:
+- customerId: Integer, the id of the customer
+
+Parameters:
+- firstName: String
+- lastName: String
+- phone: String
+- address: String
 
 ### Car allocation
 
