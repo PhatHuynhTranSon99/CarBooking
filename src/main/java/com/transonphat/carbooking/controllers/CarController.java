@@ -35,7 +35,10 @@ public class CarController {
                          @RequestParam(required = false) String color,
                          @RequestParam(required = false) String make,
                          @RequestParam(required = false) String model,
-                         @RequestParam(required = false) Boolean convertible) {
+                         @RequestParam(required = false) Boolean convertible,
+                         @RequestParam(required = false) Double rating,
+                         @RequestParam(required = false) String licensePlate,
+                         @RequestParam(required = false) Double rate) {
         //Find matching car
         Car car = this.carService.getCarById(carId);
 
@@ -58,6 +61,18 @@ public class CarController {
 
         if (convertible != null) {
             car.setConvertible(convertible);
+        }
+
+        if (rating != null) {
+            car.setRating(rating);
+        }
+
+        if (licensePlate != null) {
+            car.setLicensePlate(licensePlate);
+        }
+
+        if (rate != null) {
+            car.setRate(rate);
         }
 
         //Save and return
