@@ -283,4 +283,23 @@ Parameters:
 - page: Integer, the current page
 - size: Integer, the number of items per page
 
-## Technologies
+## How to run the local version
+
+### Step 1: Install and run MySQL service on your machine
+### Step 2: Create database 
+Firstly, you need to connect to MySQL Server on your machine and run this following script
+```sql
+DROP DATABASE IF EXISTS cardb;
+DROP USER IF EXISTS `caradmin`@`%`;
+DROP USER IF EXISTS `caruser`@`%`;
+CREATE DATABASE IF NOT EXISTS cardb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER IF NOT EXISTS `caradmin`@`%` IDENTIFIED WITH mysql_native_password BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, EXECUTE, CREATE VIEW, SHOW VIEW,
+CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER ON `cardb`.* TO `caradmin`@`%`;
+CREATE USER IF NOT EXISTS `caruser`@`%` IDENTIFIED WITH mysql_native_password BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, SHOW VIEW ON `cardb`.* TO `caruser`@`%`;
+FLUSH PRIVILEGES;
+```
+This will create the database and also two users, caradmin, caruser with special privileges.
+### Step 3: Open the repository using IntelliJ
+### Step 4: Run the project
