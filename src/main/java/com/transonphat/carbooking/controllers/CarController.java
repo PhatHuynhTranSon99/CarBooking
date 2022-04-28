@@ -90,8 +90,8 @@ public class CarController {
                                             @RequestParam(required = false) String make,
                                             @RequestParam(required = false) String model,
                                             @RequestParam(required = false) Boolean convertible,
-                                            @RequestParam(defaultValue = "0") int currentPage,
-                                            @RequestParam(defaultValue = "3") int pageSize) {
+                                            @RequestParam(defaultValue = "0") int page,
+                                            @RequestParam(defaultValue = "3") int size) {
         //List of criteria
         List<SearchCriterion<Car>> searchCriterionList = new ArrayList<>();
 
@@ -114,8 +114,8 @@ public class CarController {
         //Perform search
         return this.carService.searchCar(
                 SearchCriteria.and(searchCriterionList),
-                currentPage,
-                pageSize
+                page,
+                size
         );
     }
 
