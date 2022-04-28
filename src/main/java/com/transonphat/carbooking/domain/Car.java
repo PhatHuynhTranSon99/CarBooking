@@ -107,10 +107,6 @@ public class Car extends Model {
         return driver;
     }
 
-    public void removeDriver() {
-        this.driver = null;
-    }
-
     public void setDriver(Driver driver) {
         this.driver = driver;
     }

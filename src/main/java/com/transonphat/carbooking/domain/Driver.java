@@ -87,4 +87,6 @@ public class Driver extends Model {
     public void setCar(Car car) {
         this.car = car;
     }
+
+    public void removeCar() { this.car = null; }
 }

@@ -4,6 +4,6 @@ import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.Driver;
 
 public interface AllocationDAO {
-    Car addDriverToCar(Car car, Driver driver);
-    Car removeDriverFromCar(Car car);
+    Driver addCarToDriver(Car car, Driver driver);
+    Driver removeCarFromDriver(Driver driver);
 }

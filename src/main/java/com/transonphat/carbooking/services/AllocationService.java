@@ -24,7 +24,7 @@ public class AllocationService {
         return car.isAllocated();
     }
 
-    public Car allocateDriverToCar(long carId, long driverId) {
+    public Driver allocateDriverToCar(long carId, long driverId) {
         if (isCarAllocated(carId)) {
             throw new CarAllocationException("Car is already allocated.");
         }
@@ -34,10 +34,10 @@ public class AllocationService {
         Driver driver = this.driver.getOne(driverId);
 
         //Return updated car information
-        return allocationDao.addDriverToCar(car, driver);
+        return allocationDao.addCarToDriver(car, driver);
     }
 
-    public Car removeDriverFromCar(long carId) {
+    public Driver removeDriverFromCar(long carId) {
         if (!isCarAllocated(carId)) {
             throw new CarAllocationException("Car is not allocated yet");
         }
@@ -45,6 +45,6 @@ public class AllocationService {
         //Get car
         Car car = this.carDao.getOne(carId);
 
-        return this.allocationDao.removeDriverFromCar(car);
+        return this.allocationDao.removeCarFromDriver(car.getDriver());
     }
 }

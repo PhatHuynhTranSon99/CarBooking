@@ -3,27 +3,30 @@ package com.transonphat.carbooking.dao.allocation;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.Driver;
 import com.transonphat.carbooking.repositories.CarRepository;
+import com.transonphat.carbooking.repositories.DriverRepository;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MySQLAllocationDAO implements AllocationDAO {
     private final CarRepository carRepository;
+    private final DriverRepository driverRepository;
 
-    public MySQLAllocationDAO(CarRepository carRepository) {
+    public MySQLAllocationDAO(CarRepository carRepository, DriverRepository driverRepository) {
         this.carRepository = carRepository;
+        this.driverRepository = driverRepository;
     }
 
     @Override
-    public Car addDriverToCar(Car car, Driver driver) {
-        car.setDriver(driver);
-        this.carRepository.save(car);
-        return car;
+    public Driver addCarToDriver(Car car, Driver driver) {
+        driver.setCar(car);
+        driver = this.driverRepository.save(driver);
+        return driver;
     }
 
     @Override
-    public Car removeDriverFromCar(Car car) {
-        car.removeDriver();
-        this.carRepository.save(car);
-        return car;
+    public Driver removeCarFromDriver(Driver driver) {
+        driver.removeCar();
+        this.driverRepository.save(driver);
+        return driver;
     }
 }
