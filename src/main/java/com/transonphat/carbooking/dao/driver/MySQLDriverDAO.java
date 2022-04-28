@@ -55,7 +55,7 @@ public class MySQLDriverDAO implements DAO<Driver>, SearchableDAO<Driver> {
 
     @Override
     public Driver getOne(long id) {
-        return this.driverRepository.findById(id).orElseThrow(DriverNotFoundException::new);
+        return this.driverRepository.findById(id).orElseThrow(() -> new DriverNotFoundException("Driver does not exist"));
     }
 
     @Override

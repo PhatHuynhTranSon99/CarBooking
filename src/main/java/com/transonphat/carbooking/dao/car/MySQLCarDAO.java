@@ -56,7 +56,7 @@ public class MySQLCarDAO implements DAO<Car>, SearchableDAO<Car>, ExistenceDAO<C
 
     @Override
     public Car getOne(long id) {
-        return this.carRepository.findById(id).orElseThrow(CarNotFoundException::new);
+        return this.carRepository.findById(id).orElseThrow(() -> new CarNotFoundException("Car does not exist"));
     }
 
     @Override

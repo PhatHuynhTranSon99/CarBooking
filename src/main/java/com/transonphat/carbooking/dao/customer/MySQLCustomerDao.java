@@ -55,7 +55,7 @@ public class MySQLCustomerDao implements DAO<Customer>, SearchableDAO<Customer> 
     @Override
     public Customer getOne(long id) {
         return this.customerRepository.findById(id)
-                .orElseThrow(CustomerNotFoundException::new);
+                .orElseThrow(() -> new CustomerNotFoundException("Customer does not exist"));
     }
 
     @Override
