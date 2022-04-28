@@ -6,6 +6,7 @@ import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.exceptions.CarDoesNotHaveDriverException;
 import com.transonphat.carbooking.exceptions.CarNotAvailableException;
+import com.transonphat.carbooking.exceptions.InvalidTimePeriodException;
 import com.transonphat.carbooking.exceptions.MissingPeriodException;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriteria;
@@ -90,6 +91,10 @@ public class BookingController {
         //Check if car is available for booking
         if (!this.bookingService.checkIfCarIsAvailable(carId, startTime, endTime))
             throw new CarNotAvailableException("Car is not available during the trip.");
+
+        //Check if start time is less than end time
+        if (startTime.isAfter(endTime))
+            throw new InvalidTimePeriodException("Starting time must come before ending time");
 
         //Create new invoice
         Invoice invoice = this.invoiceService.createInvoice(customer, car, distance);
