@@ -2,11 +2,11 @@
 
 ## Overview
 This project is a simple REST api which simulates a car booking agency and has the following functionalities:
-- Create, read, *update* and delete cars.
+- Create, read, update and delete cars.
 - Find cars by color, is convertible or not, identification plate, make and model.
-- Create, read, *update* and delete customers.
+- Create, read, update and delete customers.
 - Find customers by address, phone and name
-- Create, read, *update* and delete drivers.
+- Create, read, update and delete drivers.
 - Find drivers by name and phone.
 - Create and remove bookings.
 - Find bookings and invoices by date.
