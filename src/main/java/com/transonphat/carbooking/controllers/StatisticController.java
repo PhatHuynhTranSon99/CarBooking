@@ -38,7 +38,7 @@ public class StatisticController {
         return Revenue.from(revenue);
     }
 
-    @GetMapping("statistics/revenue/driver")
+    @GetMapping("/statistics/revenue/driver")
     public Revenue getRevenueByDriver(@RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime from,
                                       @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime to,
                                       @RequestParam(value = "driver", required = false) Long driverId) {
@@ -54,11 +54,11 @@ public class StatisticController {
         return Revenue.from(revenue);
     }
 
-    @GetMapping("statistics/usage")
+    @GetMapping("/statistics/usage")
     public PaginationResult<Usage> getCarUsage(@RequestParam Integer month,
                                                @RequestParam Integer year,
                                                @RequestParam(defaultValue = "0") int page,
-                                               @RequestParam(defaultValue = "2") int size) {
+                                               @RequestParam(defaultValue = "3") int size) {
         //Get the usage
         return aggregationExecutor.execute(
                 new PaginatedCarUsageQuery(month, year, page, size)
