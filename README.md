@@ -114,7 +114,7 @@ Request body
     "firstName": String,
     "lastName": String,
     "phoneNumber": String,
-    "rating": Double
+    "ratings": Double
 }
 ```
 
@@ -129,7 +129,6 @@ Parameters:
 - firstName: String
 - lastName: String
 - phone: String
-- address: String
 - ratings: Double
 
 #### Delete a driver
