@@ -18,13 +18,22 @@ This project is a simple REST api which simulates a car booking agency and has t
 
 ### Cars
 
-#### View car list
+#### Find all cars
 ```
 GET /cars
 ```
 Parameters:
 - size: The number of cars per page
 - page: Current page to display
+- identification: String
+- color: String
+- make: String
+- model: String
+- convertible: Boolean
+- page: Integer, current page
+- size: Integer, the number of cars per page
+
+Note: if search parameters are missing, the endpoint will retrieve all cars.
 
 #### View a car
 ```
@@ -60,19 +69,6 @@ Request body
 #### Update car
 *To be implemented*
 
-#### Search a car
-```
-GET /cars/search
-```
-Parameters:
-- identification: String
-- color: String
-- make: String
-- model: String
-- convertible: Boolean
-- page: Integer, current page
-- size: Integer, the number of cars per page
-
 ### Driver
 
 #### View all drivers
@@ -80,8 +76,12 @@ Parameters:
 GET /drivers
 ```
 Parameters:
+- name: String, The name of the driver
+- phone: String, The phone of the customer
 - size: Integer, The number of drivers per page
 - page: Integer, Current page
+
+Note: if search parameters are missing, the endpoint will retrieve all drivers.
 
 #### View a driver by id
 ```
@@ -89,16 +89,6 @@ GET /drivers/{driverId}
 ```
 Path variables:
 - driverId: Integer, The id of the driver
-
-#### Search a driver
-```
-GET /drivers/search
-```
-Parameters:
-- name: String, The name of the driver
-- phone: String, The phone of the customer
-- page: Integer, current page
-- size: Integer, the number of cars per page
 
 #### Create a driver
 ```
@@ -131,8 +121,13 @@ Path variables:
 GET /customers
 ```
 Path variables: 
+- name: String
+- phone: String
+- address: String
 - size: Integer, number of element per page
 - page: Integer, current page
+
+Note: if search parameters are missing, the endpoint will retrieve all customers.
 
 #### View a customer by id
 ```
@@ -140,17 +135,6 @@ GET /customers/{customerId}
 ```
 Path variable: 
 -  customerId: Integer, the id of the customer
-
-#### Search a customer
-```
-GET /customers/search
-```
-Parameters:
-- name: String
-- phone: String
-- address: String
-- page: Integer, current page
-- size: Integer, number of customers per page
 
 #### Create a customer
 ```
