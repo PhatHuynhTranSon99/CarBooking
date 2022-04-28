@@ -13,7 +13,8 @@ public class Driver extends Model {
     @Column
     private String firstName;
 
-    @Column String lastName;
+    @Column
+    private String lastName;
 
     @Column
     private String phoneNumber;

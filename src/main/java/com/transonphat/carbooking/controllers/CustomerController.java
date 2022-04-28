@@ -28,7 +28,37 @@ public class CustomerController {
 
     @PostMapping("/customers")
     public Customer createNewCustomer(@RequestBody Customer customer) {
-        return customerService.createCustomer(customer);
+        return customerService.saveCustomer(customer);
+    }
+
+    @PutMapping("/customers/{customerId}")
+    public Customer updateCustomer(@PathVariable long customerId,
+                                   @RequestParam(required = false) String firstName,
+                                   @RequestParam(required = false) String lastName,
+                                   @RequestParam(required = false) String phone,
+                                   @RequestParam(required = false) String address) {
+        //Find customer with id
+        Customer customer = this.customerService.getCustomerById(customerId);
+
+        //Update attributes
+        if (firstName != null) {
+            customer.setFirstName(firstName);
+        }
+
+        if (lastName != null) {
+            customer.setLastName(lastName);
+        }
+
+        if (phone != null) {
+            customer.setPhoneNumber(phone);
+        }
+
+        if (address != null) {
+            customer.setAddress(address);
+        }
+
+        //Update entity and returns
+        return this.customerService.saveCustomer(customer);
     }
 
     @DeleteMapping("/customers/{customerId}")

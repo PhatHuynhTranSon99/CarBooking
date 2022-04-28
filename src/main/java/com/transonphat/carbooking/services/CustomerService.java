@@ -17,7 +17,7 @@ public class CustomerService {
         this.customerDAO = customerDAO;
     }
 
-    public Customer createCustomer(Customer customer) {
+    public Customer saveCustomer(Customer customer) {
         return customerDAO.save(customer);
     }
 

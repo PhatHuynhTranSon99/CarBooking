@@ -17,7 +17,7 @@ public class CarService {
         this.carDao = carDao;
     }
 
-    public Car createCar(Car car) {
+    public Car saveCar(Car car) {
         return this.carDao.save(car);
     }
 

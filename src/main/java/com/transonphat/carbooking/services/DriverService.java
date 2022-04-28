@@ -18,7 +18,7 @@ public class DriverService {
     }
 
 
-    public Driver createDriver(Driver driver) {
+    public Driver saveDriver(Driver driver) {
         return this.driverDAO.save(driver);
     }
 

@@ -1,6 +1,5 @@
 package com.transonphat.carbooking.controllers;
 
-import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.domain.Driver;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriteria;
@@ -28,7 +27,37 @@ public class DriverController {
 
     @PostMapping("/drivers")
     public Driver createNewDriver(@RequestBody Driver driver) {
-        return this.driverService.createDriver(driver);
+        return this.driverService.saveDriver(driver);
+    }
+
+    @PutMapping("/drivers/{driverId}")
+    public Driver updateDriver(@PathVariable long driverId,
+                               @RequestParam(required = false) String firstName,
+                               @RequestParam(required = false) String lastName,
+                               @RequestParam(required = false) String phone,
+                               @RequestParam(required = false) Double ratings) {
+        //Find the driver
+        Driver driver = this.driverService.getDriverById(driverId);
+
+        //Update parameters
+        if (firstName != null) {
+            driver.setFirstName(firstName);
+        }
+
+        if (lastName != null) {
+            driver.setLastName(lastName);
+        }
+
+        if (phone != null) {
+            driver.setPhoneNumber(phone);
+        }
+
+        if (ratings != null) {
+            driver.setRatings(ratings);
+        }
+
+        //Update entity and returns
+        return this.driverService.saveDriver(driver);
     }
 
     @DeleteMapping("/drivers/{driverId}")
@@ -38,9 +67,9 @@ public class DriverController {
 
     @GetMapping("/drivers")
     public PaginationResult<Driver> getAllDrivers(@RequestParam(required = false) String name,
-                                                 @RequestParam(required = false) String phone,
-                                                 @RequestParam(defaultValue = "0") int currentPage,
-                                                 @RequestParam(defaultValue = "5") int pageSize) {
+                                                  @RequestParam(required = false) String phone,
+                                                  @RequestParam(defaultValue = "0") int currentPage,
+                                                  @RequestParam(defaultValue = "5") int pageSize) {
         List<SearchCriterion<Driver>> driverCriterionList = new ArrayList<>();
 
         if (name != null) {
