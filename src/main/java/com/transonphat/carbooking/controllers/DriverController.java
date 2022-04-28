@@ -68,8 +68,8 @@ public class DriverController {
     @GetMapping("/drivers")
     public PaginationResult<Driver> getAllDrivers(@RequestParam(required = false) String name,
                                                   @RequestParam(required = false) String phone,
-                                                  @RequestParam(defaultValue = "0") int currentPage,
-                                                  @RequestParam(defaultValue = "5") int pageSize) {
+                                                  @RequestParam(defaultValue = "0") int page,
+                                                  @RequestParam(defaultValue = "5") int size) {
         List<SearchCriterion<Driver>> driverCriterionList = new ArrayList<>();
 
         if (name != null) {
@@ -84,8 +84,8 @@ public class DriverController {
 
         return this.driverService.searchDriver(
                 SearchCriteria.<Driver> and(driverCriterionList),
-                currentPage,
-                pageSize
+                page,
+                size
         );
     }
 }
