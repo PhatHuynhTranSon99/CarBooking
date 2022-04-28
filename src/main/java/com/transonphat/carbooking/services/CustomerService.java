@@ -18,7 +18,7 @@ public class CustomerService {
     }
 
     public Customer createCustomer(Customer customer) {
-        return customerDAO.add(customer);
+        return customerDAO.save(customer);
     }
 
     public Customer deleteCustomer(long id) {
@@ -27,10 +27,6 @@ public class CustomerService {
 
     public Customer getCustomerById(long id) {
         return customerDAO.getOne(id);
-    }
-
-    public PaginationResult<Customer> getAllCustomers(int currentPage, int pageSize) {
-        return customerDAO.getAll(currentPage, pageSize);
     }
 
     public PaginationResult<Customer> searchCustomer(SearchCriterion<Customer> customerSearchCriterion,

@@ -25,7 +25,7 @@ public class MySQLCarDAO implements DAO<Car>, SearchableDAO<Car>, ExistenceDAO<C
     }
 
     @Override
-    public Car add(Car car) {
+    public Car save(Car car) {
         return this.carRepository.save(car);
     }
 

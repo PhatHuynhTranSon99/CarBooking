@@ -19,7 +19,7 @@ public class DriverService {
 
 
     public Driver createDriver(Driver driver) {
-        return this.driverDAO.add(driver);
+        return this.driverDAO.save(driver);
     }
 
     public Driver deleteDriver(long id) {
@@ -28,10 +28,6 @@ public class DriverService {
 
     public Driver getDriverById(long id) {
         return this.driverDAO.getOne(id);
-    }
-
-    public PaginationResult<Driver> getAllDrivers(int currentPage, int pageSize) {
-        return this.driverDAO.getAll(currentPage, pageSize);
     }
 
     public PaginationResult<Driver> searchDriver(SearchCriterion<Driver> searchCriterion,

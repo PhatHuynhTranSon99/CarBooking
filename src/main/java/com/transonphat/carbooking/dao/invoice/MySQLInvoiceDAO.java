@@ -23,7 +23,7 @@ public class MySQLInvoiceDAO implements InvoiceDAO, SearchableDAO<Invoice> {
     }
 
     @Override
-    public Invoice add(Invoice invoice) {
+    public Invoice save(Invoice invoice) {
         return this.invoiceRepository.save(invoice);
     }
 

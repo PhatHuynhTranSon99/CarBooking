@@ -31,7 +31,7 @@ public class InvoiceService {
         invoice.setDriver(car.getDriver());
         invoice.setTotalCharges(chargeCalculator.calculateTotalCharge(distance, car.getRate()));
 
-        return this.invoiceDAO.add(invoice);
+        return this.invoiceDAO.save(invoice);
     }
 
     public PaginationResult<Invoice> searchInvoice(SearchCriterion<Invoice> invoiceSearchCriterion,

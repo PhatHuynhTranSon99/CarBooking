@@ -18,7 +18,7 @@ public class CarService {
     }
 
     public Car createCar(Car car) {
-        return this.carDao.add(car);
+        return this.carDao.save(car);
     }
 
     public Car deleteCar(long id) {
@@ -27,10 +27,6 @@ public class CarService {
 
     public Car getCarById(long id) {
         return this.carDao.getOne(id);
-    }
-
-    public PaginationResult<Car> getAllCars(int currentPage, int pageSize) {
-        return this.carDao.getAll(currentPage, pageSize);
     }
 
     public PaginationResult<Car> searchCar(SearchCriterion<Car> carSearchCriterion, int currentPage, int pageSize) {

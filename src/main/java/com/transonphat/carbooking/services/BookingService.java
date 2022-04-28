@@ -16,25 +16,19 @@ import java.time.ZonedDateTime;
 
 @Service
 public class BookingService {
-    private final DAO<Invoice> invoiceDao;
     private final DAO<Booking> bookingDao;
     private final SearchableDAO<Booking> bookingSearchableDAO;
     private final SearchableDAO<Car> carSearchableDAO;
     private final ExistenceDAO<Car> carExistenceDAO;
-    private final SearchableDAO<Invoice> invoiceSearchableDAO;
 
-    public BookingService(DAO<Invoice> invoiceDao,
-                          DAO<Booking> bookingDao,
+    public BookingService(DAO<Booking> bookingDao,
                           SearchableDAO<Booking> bookingSearchableDAO,
                           SearchableDAO<Car> carSearchableDAO,
-                          ExistenceDAO<Car> carExistenceDAO,
-                          SearchableDAO<Invoice> invoiceSearchableDAO) {
-        this.invoiceDao = invoiceDao;
+                          ExistenceDAO<Car> carExistenceDAO) {
         this.bookingDao = bookingDao;
         this.bookingSearchableDAO = bookingSearchableDAO;
         this.carSearchableDAO = carSearchableDAO;
         this.carExistenceDAO = carExistenceDAO;
-        this.invoiceSearchableDAO = invoiceSearchableDAO;
     }
 
     public PaginationResult<Car> findAvailableCars(ZonedDateTime startTime,
@@ -67,7 +61,7 @@ public class BookingService {
         booking.setDistance(distance);
         booking.setInvoice(invoice);
 
-        return this.bookingDao.add(booking);
+        return this.bookingDao.save(booking);
     }
 
     public PaginationResult<Booking> searchBookings(SearchCriterion<Booking> criterion, int currentPage, int pageSize) {

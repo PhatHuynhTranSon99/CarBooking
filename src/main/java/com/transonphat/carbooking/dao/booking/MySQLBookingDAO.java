@@ -24,7 +24,7 @@ public class MySQLBookingDAO implements DAO<Booking>, SearchableDAO<Booking> {
     }
 
     @Override
-    public Booking add(Booking booking) {
+    public Booking save(Booking booking) {
         return this.bookingRepository.save(booking);
     }
 

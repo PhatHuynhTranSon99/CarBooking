@@ -24,7 +24,7 @@ public class MySQLDriverDAO implements DAO<Driver>, SearchableDAO<Driver> {
     }
 
     @Override
-    public Driver add(Driver driver) {
+    public Driver save(Driver driver) {
         return this.driverRepository.save(driver);
     }
 

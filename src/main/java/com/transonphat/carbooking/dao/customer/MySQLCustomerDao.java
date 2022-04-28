@@ -23,7 +23,7 @@ public class MySQLCustomerDao implements DAO<Customer>, SearchableDAO<Customer> 
     }
 
     @Override
-    public Customer add(Customer customer) {
+    public Customer save(Customer customer) {
         return this.customerRepository.save(customer);
     }
 
