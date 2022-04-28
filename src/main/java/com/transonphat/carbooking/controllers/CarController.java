@@ -26,12 +26,6 @@ public class CarController {
         return this.carService.getCarById(carId);
     }
 
-    @GetMapping("/cars")
-    public PaginationResult<Car> getAllDriver(@RequestParam(defaultValue = "0") int page,
-                                                 @RequestParam(defaultValue = "5") int size) {
-        return this.carService.getAllCars(page, size);
-    }
-
     @PostMapping("/cars")
     public Car createNewCar(@RequestBody Car car) {
         return this.carService.createCar(car);
@@ -42,8 +36,8 @@ public class CarController {
         return this.carService.deleteCar(carId);
     }
 
-    @GetMapping("/cars/search")
-    public PaginationResult<Car> searchCar(@RequestParam(required = false) String identification,
+    @GetMapping("/cars")
+    public PaginationResult<Car> getAllCars(@RequestParam(required = false) String identification,
                                            @RequestParam(required = false) String color,
                                            @RequestParam(required = false) String make,
                                            @RequestParam(required = false) String model,

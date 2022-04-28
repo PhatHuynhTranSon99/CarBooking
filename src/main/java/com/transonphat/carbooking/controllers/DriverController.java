@@ -26,12 +26,6 @@ public class DriverController {
         return this.driverService.getDriverById(driverId);
     }
 
-    @GetMapping("/drivers")
-    public PaginationResult<Driver> getAllDriver(@RequestParam(defaultValue = "0") int page,
-                                                      @RequestParam(defaultValue = "5") int size) {
-        return this.driverService.getAllDrivers(page, size);
-    }
-
     @PostMapping("/drivers")
     public Driver createNewDriver(@RequestBody Driver driver) {
         return this.driverService.createDriver(driver);
@@ -42,8 +36,8 @@ public class DriverController {
         return this.driverService.deleteDriver(driverId);
     }
 
-    @GetMapping("/drivers/search")
-    public PaginationResult<Driver> searchDriver(@RequestParam(required = false) String name,
+    @GetMapping("/drivers")
+    public PaginationResult<Driver> getAllDrivers(@RequestParam(required = false) String name,
                                                  @RequestParam(required = false) String phone,
                                                  @RequestParam(defaultValue = "0") int currentPage,
                                                  @RequestParam(defaultValue = "5") int pageSize) {
@@ -58,12 +52,11 @@ public class DriverController {
         }
 
         //Combine into one criterion
-        PaginationResult<Driver> customerPaginationResult = this.driverService.searchDriver(
+
+        return this.driverService.searchDriver(
                 SearchCriteria.<Driver> and(driverCriterionList),
                 currentPage,
                 pageSize
         );
-
-        return customerPaginationResult;
     }
 }

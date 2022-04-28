@@ -26,12 +26,6 @@ public class CustomerController {
         return customerService.getCustomerById(customerId);
     }
 
-    @GetMapping("/customers")
-    public PaginationResult<Customer> getAllCustomers(@RequestParam(defaultValue = "0") int page,
-                                                      @RequestParam(defaultValue = "5") int size) {
-        return customerService.getAllCustomers(page, size);
-    }
-
     @PostMapping("/customers")
     public Customer createNewCustomer(@RequestBody Customer customer) {
         return customerService.createCustomer(customer);
@@ -42,12 +36,12 @@ public class CustomerController {
         return customerService.deleteCustomer(customerId);
     }
 
-    @GetMapping("/customers/search")
-    public PaginationResult<Customer> searchCustomer(@RequestParam(required = false) String name,
-                                                     @RequestParam(required = false) String phone,
-                                                     @RequestParam(required = false) String address,
-                                                     @RequestParam(defaultValue = "0") int page,
-                                                     @RequestParam(defaultValue = "3") int size) {
+    @GetMapping("/customers")
+    public PaginationResult<Customer> getAllCustomers(@RequestParam(required = false) String name,
+                                                      @RequestParam(required = false) String phone,
+                                                      @RequestParam(required = false) String address,
+                                                      @RequestParam(defaultValue = "0") int page,
+                                                      @RequestParam(defaultValue = "3") int size) {
         //Set list of criterion
         List<SearchCriterion<Customer>> searchCriterionList = new ArrayList<>();
 

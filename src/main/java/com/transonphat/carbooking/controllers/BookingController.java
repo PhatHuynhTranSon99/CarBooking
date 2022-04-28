@@ -6,7 +6,10 @@ import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.exceptions.CarDoesNotHaveDriverException;
 import com.transonphat.carbooking.exceptions.CarNotAvailableException;
+import com.transonphat.carbooking.exceptions.MissingPeriodException;
 import com.transonphat.carbooking.pagination.PaginationResult;
+import com.transonphat.carbooking.search.SearchCriteria;
+import com.transonphat.carbooking.search.SearchCriterion;
 import com.transonphat.carbooking.search.booking.BookingDateCriterion;
 import com.transonphat.carbooking.services.BookingService;
 import com.transonphat.carbooking.services.CarService;
@@ -16,6 +19,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class BookingController {
@@ -34,7 +39,7 @@ public class BookingController {
         this.invoiceService = invoiceService;
     }
 
-    @GetMapping("/booking/cars")
+    @GetMapping("/bookings/cars")
     public PaginationResult<Car> findAvailableCars(@RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime start,
                                                    @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime end,
                                                    @RequestParam(defaultValue = "0") int page,
@@ -43,12 +48,24 @@ public class BookingController {
     }
 
     @GetMapping("/bookings")
-    public PaginationResult<Booking> filterBookingsByDate(@RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime from,
-                                                          @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime to,
+    public PaginationResult<Booking> getAllBookings(@RequestParam(value = "from", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime from,
+                                                          @RequestParam(value = "to", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime to,
                                                           @RequestParam(defaultValue = "0") int page,
                                                           @RequestParam(defaultValue = "3") int size) {
+        //Create criteria list
+        List<SearchCriterion<Booking>> searchCriterionList = new ArrayList<>();
+
+        //Add criteria if present
+        if ((from != null && to == null) || (from == null && to != null)) {
+            throw new MissingPeriodException("From and to must both be visible");
+        }
+
+        if (from != null) {
+            searchCriterionList.add(new BookingDateCriterion(from, to));
+        }
+
         return this.bookingService.searchBookings(
-                new BookingDateCriterion(from, to),
+                SearchCriteria.and(searchCriterionList),
                 page,
                 size
         );
