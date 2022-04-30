@@ -10,6 +10,8 @@ import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriterion;
 import com.transonphat.carbooking.search.booking.BookingWithCarCriterion;
+import com.transonphat.carbooking.search.booking.BookingWithCustomerCriterion;
+import com.transonphat.carbooking.search.booking.BookingWithDriverCriterion;
 import com.transonphat.carbooking.search.car.CarBookingExistCriterion;
 import com.transonphat.carbooking.search.car.CarFreeCriterion;
 import org.springframework.stereotype.Service;
@@ -81,6 +83,30 @@ public class BookingService {
         //Retrieve and delete all bookings that are related to a car
         Iterable<Booking> relevantBookings = this.exhaustiveSearchableDAO.search(
                 new BookingWithCarCriterion(carId)
+        );
+
+        //Remove all
+        for (Booking booking : relevantBookings) {
+            this.bookingDao.delete(booking.getId());
+        }
+    }
+
+    public void deleteRelatedBookingsWithDriver(long driverId) {
+        //Retrieve and delete all bookings that are related to a driver
+        Iterable<Booking> relevantBookings = this.exhaustiveSearchableDAO.search(
+                new BookingWithDriverCriterion(driverId)
+        );
+
+        //Remove all
+        for (Booking booking : relevantBookings) {
+            this.bookingDao.delete(booking.getId());
+        }
+    }
+
+    public void deleteRelatedBookingsWithCustomer(long customerId) {
+        //Retrieve and delete all bookings that are related to a driver
+        Iterable<Booking> relevantBookings = this.exhaustiveSearchableDAO.search(
+                new BookingWithCustomerCriterion(customerId)
         );
 
         //Remove all
