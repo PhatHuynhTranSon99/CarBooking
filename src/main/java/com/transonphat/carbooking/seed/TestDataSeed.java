@@ -37,9 +37,9 @@ public class TestDataSeed implements CommandLineRunner {
     public void run(String... args) throws Exception {
         //Create some customers
         Customer[] customers = {
-                new Customer(1L, "Adam", "Cole", "Street", "0182019222", ZonedDateTime.now()),
-                new Customer(2L, "Kyle", "O'Reily", "Street", "0172172812", ZonedDateTime.now()),
-                new Customer(3L, "Osborn", "Norman", "Street", "2817283385", ZonedDateTime.now()),
+                new Customer(1L, "Adam", "Cole", "11 Street", "0182019222", ZonedDateTime.now()),
+                new Customer(2L, "Kyle", "O'Reily", "15 Street", "0172172812", ZonedDateTime.now()),
+                new Customer(3L, "Osborn", "Norman", "17 Street", "2817283385", ZonedDateTime.now()),
         };
 
         //Create some cars

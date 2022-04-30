@@ -1,7 +1,6 @@
 package com.transonphat.carbooking.dao.customer;
 
 import com.transonphat.carbooking.dao.DAO;
-import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.exceptions.CustomerNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -19,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 @Transactional
-class CustomerDaoTest {
+class CustomerDAOTest {
     @Autowired
     private DAO<Customer> customerDAO;
 
@@ -45,7 +44,7 @@ class CustomerDaoTest {
 
     @Test
     @Rollback
-    public void deleteCarSuccessfully() {
+    public void deleteCustomerSuccessfully() {
         Customer customer = customerDAO.delete(1L);
 
         assertEquals(1L, customer.getId());
@@ -56,7 +55,7 @@ class CustomerDaoTest {
     }
 
     @Test
-    public void deleteCarNotFound() {
+    public void deleteCustomerNotFound() {
         CustomerNotFoundException exception = assertThrows(CustomerNotFoundException.class, () -> {
            customerDAO.delete(100L);
         });
@@ -65,7 +64,7 @@ class CustomerDaoTest {
     }
 
     @Test
-    public void findAllCarsReturnCorrectResult() {
+    public void findAllCCustomersReturnCorrectResult() {
         PaginationResult<Customer> customerPaginationResult = customerDAO.getAll(0, 10);
         assertEquals(3, customerPaginationResult.getTotalItems());
 
@@ -81,7 +80,7 @@ class CustomerDaoTest {
 
     @Test
     @Rollback
-    public void addCarSuccessfully() {
+    public void addCustomerSuccessfully() {
         Customer customer = new Customer();
         customer.setFirstName("Man");
         customer.setLastName("Kind");
