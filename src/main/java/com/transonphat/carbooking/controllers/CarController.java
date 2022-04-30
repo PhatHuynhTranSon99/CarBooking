@@ -5,6 +5,7 @@ import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriteria;
 import com.transonphat.carbooking.search.SearchCriterion;
 import com.transonphat.carbooking.search.car.*;
+import com.transonphat.carbooking.services.BookingService;
 import com.transonphat.carbooking.services.CarService;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,11 @@ import java.util.List;
 @RestController
 public class CarController {
     private final CarService carService;
+    private final BookingService bookingService;
 
-    public CarController(CarService carService) {
+    public CarController(CarService carService, BookingService bookingService) {
         this.carService = carService;
+        this.bookingService = bookingService;
     }
 
     @GetMapping("/cars/{carId}")
@@ -81,10 +84,7 @@ public class CarController {
 
     @DeleteMapping("/cars/{carId}")
     public Car deleteCarById(@PathVariable long carId) {
-        //TODO: On delete cars -> Delete related bookings
-
-        //TODO: On delete cars -> Driver set car to null
-
+        this.bookingService.deleteRelatedBookingsWithCar(carId);
         return this.carService.deleteCar(carId);
     }
 

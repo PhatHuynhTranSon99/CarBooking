@@ -1,6 +1,7 @@
 package com.transonphat.carbooking.services;
 
 import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.ExhaustiveSearchableDAO;
 import com.transonphat.carbooking.dao.ExistenceDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Booking;
@@ -8,6 +9,7 @@ import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriterion;
+import com.transonphat.carbooking.search.booking.BookingWithCarCriterion;
 import com.transonphat.carbooking.search.car.CarBookingExistCriterion;
 import com.transonphat.carbooking.search.car.CarFreeCriterion;
 import org.springframework.stereotype.Service;
@@ -18,15 +20,18 @@ import java.time.ZonedDateTime;
 public class BookingService {
     private final DAO<Booking> bookingDao;
     private final SearchableDAO<Booking> bookingSearchableDAO;
+    private final ExhaustiveSearchableDAO<Booking> exhaustiveSearchableDAO;
     private final SearchableDAO<Car> carSearchableDAO;
     private final ExistenceDAO<Car> carExistenceDAO;
 
     public BookingService(DAO<Booking> bookingDao,
                           SearchableDAO<Booking> bookingSearchableDAO,
+                          ExhaustiveSearchableDAO<Booking> exhaustiveSearchableDAO,
                           SearchableDAO<Car> carSearchableDAO,
                           ExistenceDAO<Car> carExistenceDAO) {
         this.bookingDao = bookingDao;
         this.bookingSearchableDAO = bookingSearchableDAO;
+        this.exhaustiveSearchableDAO = exhaustiveSearchableDAO;
         this.carSearchableDAO = carSearchableDAO;
         this.carExistenceDAO = carExistenceDAO;
     }
@@ -72,8 +77,15 @@ public class BookingService {
         return this.bookingDao.delete(bookingId);
     }
 
-    public void deleteRelatedBookingWithCar(long carId) {
+    public void deleteRelatedBookingsWithCar(long carId) {
         //Retrieve and delete all bookings that are related to a car
+        Iterable<Booking> relevantBookings = this.exhaustiveSearchableDAO.search(
+                new BookingWithCarCriterion(carId)
+        );
 
+        //Remove all
+        for (Booking booking : relevantBookings) {
+            this.bookingDao.delete(booking.getId());
+        }
     }
 }
