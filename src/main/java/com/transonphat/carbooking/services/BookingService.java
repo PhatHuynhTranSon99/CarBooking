@@ -71,4 +71,9 @@ public class BookingService {
     public Booking deleteBooking(long bookingId) {
         return this.bookingDao.delete(bookingId);
     }
+
+    public void deleteRelatedBookingWithCar(long carId) {
+        //Retrieve and delete all bookings that are related to a car
+
+    }
 }

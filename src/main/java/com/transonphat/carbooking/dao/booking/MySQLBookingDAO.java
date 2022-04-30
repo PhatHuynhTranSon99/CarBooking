@@ -1,6 +1,7 @@
 package com.transonphat.carbooking.dao.booking;
 
 import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.ExhaustiveSearchableDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Booking;
 import com.transonphat.carbooking.exceptions.BookingNotFoundException;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
 @Component
-public class MySQLBookingDAO implements DAO<Booking>, SearchableDAO<Booking> {
+public class MySQLBookingDAO implements DAO<Booking>, SearchableDAO<Booking>, ExhaustiveSearchableDAO<Booking> {
     private final BookingRepository bookingRepository;
 
     public MySQLBookingDAO(BookingRepository bookingRepository) {
@@ -77,5 +78,10 @@ public class MySQLBookingDAO implements DAO<Booking>, SearchableDAO<Booking> {
                 bookingPage.getNumber(),
                 bookingPage.getTotalPages()
         );
+    }
+
+    @Override
+    public Iterable<Booking> search(SearchCriterion<Booking> criterion) {
+        return this.bookingRepository.findAll(new SearchSpecification<>(criterion));
     }
 }
