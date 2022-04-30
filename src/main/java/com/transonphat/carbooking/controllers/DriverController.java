@@ -6,6 +6,7 @@ import com.transonphat.carbooking.search.SearchCriteria;
 import com.transonphat.carbooking.search.SearchCriterion;
 import com.transonphat.carbooking.search.driver.DriverNameCriterion;
 import com.transonphat.carbooking.search.driver.DriverPhoneCriterion;
+import com.transonphat.carbooking.services.BookingService;
 import com.transonphat.carbooking.services.DriverService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +16,11 @@ import java.util.List;
 @RestController
 public class DriverController {
     private final DriverService driverService;
+    private final BookingService bookingService;
 
-    public DriverController(DriverService driverService) {
+    public DriverController(DriverService driverService, BookingService bookingService) {
         this.driverService = driverService;
+        this.bookingService = bookingService;
     }
 
     @GetMapping("/drivers/{driverId}")
@@ -62,8 +65,7 @@ public class DriverController {
 
     @DeleteMapping("/drivers/{driverId}")
     public Driver deleteDriverById(@PathVariable long driverId) {
-        //TODO: On delete driver -> Delete related bookings
-
+        this.bookingService.deleteRelatedBookingsWithDriver(driverId);
         return this.driverService.deleteDriver(driverId);
     }
 
@@ -83,7 +85,6 @@ public class DriverController {
         }
 
         //Combine into one criterion
-
         return this.driverService.searchDriver(
                 SearchCriteria.<Driver> and(driverCriterionList),
                 page,
