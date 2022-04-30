@@ -7,6 +7,7 @@ import com.transonphat.carbooking.search.SearchCriterion;
 import com.transonphat.carbooking.search.customer.CustomerAddressCriterion;
 import com.transonphat.carbooking.search.customer.CustomerNameCriterion;
 import com.transonphat.carbooking.search.customer.CustomerPhoneCriterion;
+import com.transonphat.carbooking.services.BookingService;
 import com.transonphat.carbooking.services.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +17,11 @@ import java.util.List;
 @RestController
 public class CustomerController {
     private final CustomerService customerService;
+    private final BookingService bookingService;
 
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerService customerService, BookingService bookingService) {
         this.customerService = customerService;
+        this.bookingService = bookingService;
     }
 
     @GetMapping("/customers/{customerId}")
@@ -63,6 +66,7 @@ public class CustomerController {
 
     @DeleteMapping("/customers/{customerId}")
     public Customer deleteCustomerById(@PathVariable long customerId) {
+        this.bookingService.deleteRelatedBookingsWithCustomer(customerId);
         return customerService.deleteCustomer(customerId);
     }
 
