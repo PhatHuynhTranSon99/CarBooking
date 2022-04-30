@@ -72,6 +72,11 @@ public class BookingController {
         );
     }
 
+    @DeleteMapping("/bookings/{bookingId}")
+    public Booking deleteBooking(@PathVariable long bookingId) {
+        return this.bookingService.deleteBooking(bookingId);
+    }
+
     @PostMapping("/customers/{customerId}/bookings")
     public Booking makeBooking(@RequestParam String startingLocation,
                                @RequestParam String destinationLocation,

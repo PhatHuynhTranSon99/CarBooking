@@ -67,4 +67,8 @@ public class BookingService {
     public PaginationResult<Booking> searchBookings(SearchCriterion<Booking> criterion, int currentPage, int pageSize) {
         return this.bookingSearchableDAO.search(criterion, currentPage, pageSize);
     }
+
+    public Booking deleteBooking(long bookingId) {
+        return this.bookingDao.delete(bookingId);
+    }
 }
