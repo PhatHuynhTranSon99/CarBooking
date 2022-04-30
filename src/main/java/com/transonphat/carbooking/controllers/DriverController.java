@@ -62,6 +62,8 @@ public class DriverController {
 
     @DeleteMapping("/drivers/{driverId}")
     public Driver deleteDriverById(@PathVariable long driverId) {
+        //TODO: On delete driver -> Delete related bookings
+
         return this.driverService.deleteDriver(driverId);
     }
 

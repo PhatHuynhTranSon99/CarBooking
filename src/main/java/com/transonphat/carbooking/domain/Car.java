@@ -36,6 +36,11 @@ public class Car extends Model {
     @JsonIgnore
     private Driver driver;
 
+    @PreRemove
+    private void updateDriver() {
+        driver.setCar(null);
+    }
+
     public Car() {
     }
 

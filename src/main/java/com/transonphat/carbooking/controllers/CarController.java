@@ -81,6 +81,10 @@ public class CarController {
 
     @DeleteMapping("/cars/{carId}")
     public Car deleteCarById(@PathVariable long carId) {
+        //TODO: On delete cars -> Delete related bookings
+
+        //TODO: On delete cars -> Driver set car to null
+
         return this.carService.deleteCar(carId);
     }
 
