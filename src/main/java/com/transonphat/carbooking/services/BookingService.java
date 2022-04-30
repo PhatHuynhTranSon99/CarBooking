@@ -8,15 +8,18 @@ import com.transonphat.carbooking.domain.Booking;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.pagination.PaginationResult;
+import com.transonphat.carbooking.search.SearchCriteria;
 import com.transonphat.carbooking.search.SearchCriterion;
 import com.transonphat.carbooking.search.booking.BookingWithCarCriterion;
 import com.transonphat.carbooking.search.booking.BookingWithCustomerCriterion;
 import com.transonphat.carbooking.search.booking.BookingWithDriverCriterion;
 import com.transonphat.carbooking.search.car.CarBookingExistCriterion;
 import com.transonphat.carbooking.search.car.CarFreeCriterion;
+import com.transonphat.carbooking.search.car.CarHasDriverCriterion;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Service
 public class BookingService {
@@ -43,7 +46,12 @@ public class BookingService {
                                                    int currentPage,
                                                    int pageSize) {
         return this.carSearchableDAO.search(
-                new CarFreeCriterion(startTime, endTime),
+                SearchCriteria.and(
+                        List.of(
+                            new CarFreeCriterion(startTime, endTime),
+                            new CarHasDriverCriterion()
+                        )
+                ),
                 currentPage,
                 pageSize
         );

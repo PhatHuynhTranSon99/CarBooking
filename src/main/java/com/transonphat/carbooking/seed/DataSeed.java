@@ -34,9 +34,12 @@ public class DataSeed implements CommandLineRunner {
     public void run(String... args) throws Exception {
         //Create some customers
         Customer[] customers = {
-                new Customer(1L, "Adam", "Cole", "Street", "0182019222", ZonedDateTime.now()),
-                new Customer(2L, "Kyle", "O'Reily", "Street", "0172172812", ZonedDateTime.now()),
-                new Customer(3L, "Osborn", "Norman", "Street", "2817283385", ZonedDateTime.now()),
+                new Customer(1L, "Adam", "Cole", "Street", "0182019222",
+                        ZonedDateTime.now()),
+                new Customer(2L, "Kyle", "O'Reily", "Street", "0172172812",
+                        ZonedDateTime.now()),
+                new Customer(3L, "Osborn", "Norman", "Street", "2817283385",
+                        ZonedDateTime.now()),
         };
 
         //Create some cars
@@ -76,7 +79,19 @@ public class DataSeed implements CommandLineRunner {
                 .setRate(15.4)
                 .build();
 
-        carRepository.saveAll(List.of(carOne, carTwo, carThree));
+        Car carFour = new CarBuilder()
+                .setId(4L)
+                .setMake("Honda")
+                .setModel("CRV")
+                .setColor("Space Gray")
+                .setConvertible(false)
+                .setIdentificationNumber("0914-188")
+                .setLicensePlate("G2-0174")
+                .setRating(5.0)
+                .setRate(10.1)
+                .build();
+
+        carRepository.saveAll(List.of(carOne, carTwo, carThree, carFour));
 
         //Create some drivers
         Driver driverOne = new Driver(1L, "Adam", "Levine",
