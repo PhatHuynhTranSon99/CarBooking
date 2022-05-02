@@ -52,7 +52,7 @@ public class MySQLInvoiceDAO implements InvoiceDAO, SearchableDAO<Invoice> {
 
     @Override
     public Invoice getOne(long id) {
-        return this.invoiceRepository.findById(id).orElseThrow(InvoiceNotFoundException::new);
+        return this.invoiceRepository.findById(id).orElseThrow(() -> new InvoiceNotFoundException("Invoice does not exist"));
     }
 
     @Override

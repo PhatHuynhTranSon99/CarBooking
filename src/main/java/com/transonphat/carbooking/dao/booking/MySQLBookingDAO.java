@@ -56,7 +56,9 @@ public class MySQLBookingDAO implements DAO<Booking>, SearchableDAO<Booking>, Ex
 
     @Override
     public Booking getOne(long id) {
-        return this.bookingRepository.findById(id).orElseThrow(BookingNotFoundException::new);
+        return this.bookingRepository.findById(id).orElseThrow(
+                () -> new BookingNotFoundException("Booking does not exist")
+        );
     }
 
     @Override
