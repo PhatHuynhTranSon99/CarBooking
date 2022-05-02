@@ -272,4 +272,9 @@ public class CarSearchableDAOTest {
                 )
         );
     }
+
+    @Test
+    public void searchByBookingDate() {
+        //TODO: Search by booking date
+    }
 }

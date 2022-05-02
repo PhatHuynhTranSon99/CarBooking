@@ -202,4 +202,9 @@ public class BookingSearchableDAOTest {
         );
         assertEquals(0, thirdPaginationResult.getTotalItems());
     }
+
+    @Test
+    public void searchBookingDate() {
+        //TODO: Search booking by date
+    }
 }

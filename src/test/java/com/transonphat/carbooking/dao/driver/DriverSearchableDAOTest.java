@@ -163,4 +163,9 @@ public class DriverSearchableDAOTest {
                 )
         );
     }
+
+    @Test
+    public void searchDriverBooking() {
+        //TODO: Search driver by booking date
+    }
 }

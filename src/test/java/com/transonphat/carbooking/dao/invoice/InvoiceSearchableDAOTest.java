@@ -166,4 +166,9 @@ public class InvoiceSearchableDAOTest {
         );
         assertEquals(0, thirdPaginationResult.getTotalItems());
     }
+
+    @Test
+    public void searchInvoiceByDate() {
+        //TODO: Search invoice by date
+    }
 }
