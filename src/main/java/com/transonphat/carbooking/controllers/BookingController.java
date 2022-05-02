@@ -85,24 +85,6 @@ public class BookingController {
                                @RequestParam Double distance,
                                @RequestParam Long carId,
                                @PathVariable Long customerId) {
-        //Get car and customer
-        Car car = this.carService.getCarById(carId);
-        Customer customer = this.customerService.getCustomerById(customerId);
-
-        //Check if car is allocated
-        if (!car.isAllocated())
-            throw new CarDoesNotHaveDriverException("Car does not have a driver yet.");
-
-        //Check if car is available for booking
-        if (!this.bookingService.checkIfCarIsAvailable(carId, startTime, endTime))
-            throw new CarNotAvailableException("Car is not available during the trip.");
-
-        //Check if start time is less than end time
-        if (startTime.isAfter(endTime))
-            throw new InvalidTimePeriodException("Starting time must come before ending time");
-
-        //Create new invoice
-        Invoice invoice = this.invoiceService.createInvoice(customer, car, distance);
 
         //Create new booking
         return bookingService.createBooking(
@@ -111,7 +93,8 @@ public class BookingController {
                 startTime,
                 endTime,
                 distance,
-                invoice
+                carId,
+                customerId
         );
     }
 }
