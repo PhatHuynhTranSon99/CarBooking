@@ -79,7 +79,19 @@ public class TestDataSeed implements CommandLineRunner {
                 .setRate(15.4)
                 .build();
 
-        carRepository.saveAll(List.of(carOne, carTwo, carThree));
+        Car carFour = new CarBuilder()
+                .setId(4L)
+                .setMake("Honda")
+                .setModel("CRV")
+                .setColor("Space Gray")
+                .setConvertible(false)
+                .setIdentificationNumber("0914-188")
+                .setLicensePlate("G2-0174")
+                .setRating(5.0)
+                .setRate(10.1)
+                .build();
+
+        carRepository.saveAll(List.of(carOne, carTwo, carThree, carFour));
 
         //Create some drivers
         Driver driverOne = new Driver(1L, "Adam", "Levine",
@@ -88,12 +100,14 @@ public class TestDataSeed implements CommandLineRunner {
                 "0978101929", 4.5, ZonedDateTime.now());
         Driver driverThree = new Driver(3L, "Jay", "Langdon",
                 "0192181921", 5.0, ZonedDateTime.now());
+        Driver driverFour = new Driver(4L, "Day", "Dream",
+                "02910192019", 4.9, ZonedDateTime.now());
 
         driverOne.setCar(carOne);
         driverTwo.setCar(carTwo);
         driverThree.setCar(carThree);
 
-        driverRepository.saveAll(List.of(driverOne, driverTwo, driverThree));
+        driverRepository.saveAll(List.of(driverOne, driverTwo, driverThree, driverFour));
 
         //Create some invoices and bookings
         Invoice invoiceOne = new Invoice();
