@@ -13,6 +13,9 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -104,5 +107,23 @@ public class BookingDAOTest {
         );
 
         assertEquals("Booking does not exist", exception.getMessage());
+    }
+
+    @Test
+    @Rollback
+    public void saveSuccessfully() {
+        Booking booking = new Booking();
+
+        booking.setStartLocation("Home");
+        booking.setEndLocation("School");
+        booking.setStartTime(ZonedDateTime.of(2020, 2, 1, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh")));
+        booking.setEndTime(ZonedDateTime.of(2020, 2, 5, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh")));
+
+        bookingDAO.save(booking);
+
+        assertNotNull(booking.getId());
+        assertNotNull(booking.getCreatedDate());
     }
 }
