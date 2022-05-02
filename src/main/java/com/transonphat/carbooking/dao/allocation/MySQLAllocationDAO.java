@@ -8,11 +8,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MySQLAllocationDAO implements AllocationDAO {
-    private final CarRepository carRepository;
     private final DriverRepository driverRepository;
 
-    public MySQLAllocationDAO(CarRepository carRepository, DriverRepository driverRepository) {
-        this.carRepository = carRepository;
+    public MySQLAllocationDAO(DriverRepository driverRepository) {
         this.driverRepository = driverRepository;
     }
 
