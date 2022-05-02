@@ -29,13 +29,13 @@ public class AllocationService {
         Car car = this.carDao.getOne(carId);
         Driver driver = this.driver.getOne(driverId);
 
-        if (isCarAllocated(carId)) {
-            throw new CarAllocationException("Car is already allocated.");
+        if (car.isAllocated()) {
+            throw new CarAllocationException("Car is already allocated");
         }
 
         //Check if driver has car yet
         if (driver.getCar() != null) {
-            throw new CarAllocationException("Driver is already allocated to a car.");
+            throw new CarAllocationException("Driver is already allocated to a car");
         }
 
         //Return updated car information
