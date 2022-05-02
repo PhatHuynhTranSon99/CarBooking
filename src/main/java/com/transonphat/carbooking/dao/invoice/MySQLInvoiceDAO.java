@@ -40,14 +40,12 @@ public class MySQLInvoiceDAO implements InvoiceDAO, SearchableDAO<Invoice> {
 
         Page<Invoice> invoicePage = this.invoiceRepository.findAll(pageable);
 
-        PaginationResult<Invoice> invoicePaginationResult = new PaginationResult<>(
+        return new PaginationResult<>(
                 invoicePage.getTotalElements(),
                 invoicePage.get().collect(Collectors.toList()),
                 invoicePage.getNumber(),
                 invoicePage.getTotalPages()
         );
-
-        return invoicePaginationResult;
     }
 
     @Override
