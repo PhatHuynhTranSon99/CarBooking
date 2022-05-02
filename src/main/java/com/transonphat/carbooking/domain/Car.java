@@ -3,34 +3,43 @@ package com.transonphat.carbooking.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Cars")
 @EntityListeners(AuditingEntityListener.class)
 public class Car extends Model {
     @Column
+    @NotNull
     private String identificationNumber;
 
     @Column
-    private String make;
+    @NotNull
+    private String make = "Unknown";
 
     @Column
-    private String model;
+    @NotNull
+    private String model = "Unknown";
 
     @Column
-    private String color;
+    @NotNull
+    private String color = "Unknown";
 
     @Column
-    private Boolean isConvertible;
+    @NotNull
+    private Boolean isConvertible = false;
 
     @Column
-    private Double rating;
+    @NotNull
+    private Double rating = 0.0;
 
     @Column
-    private String licensePlate;
+    @NotNull
+    private String licensePlate = "Unknown";
 
     @Column
-    private Double rate;
+    @NotNull
+    private Double rate = 0.0;
 
     @OneToOne(mappedBy = "car", fetch = FetchType.LAZY)
     @JsonIgnore

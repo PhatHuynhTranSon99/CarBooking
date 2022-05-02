@@ -3,6 +3,7 @@ package com.transonphat.carbooking.domain;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
@@ -11,16 +12,20 @@ import java.util.Set;
 @EntityListeners(AuditingEntityListener.class)
 public class Driver extends Model {
     @Column
+    @NotNull
     private String firstName;
 
     @Column
+    @NotNull
     private String lastName;
 
     @Column
+    @NotNull
     private String phoneNumber;
 
     @Column
-    private Double ratings;
+    @NotNull
+    private Double ratings = 0.0;
 
     @OneToOne
     @JoinColumn(name = "car_id")

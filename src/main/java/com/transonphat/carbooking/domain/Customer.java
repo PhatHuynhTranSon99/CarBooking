@@ -4,6 +4,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.Set;
@@ -12,17 +13,20 @@ import java.util.Set;
 @Table(name = "Customers")
 @EntityListeners(AuditingEntityListener.class)
 public class Customer extends Model {
-
     @Column
+    @NotNull
     private String firstName;
 
     @Column
+    @NotNull
     private String lastName;
 
     @Column
+    @NotNull
     private String address;
 
     @Column
+    @NotNull
     private String phoneNumber;
 
     @OneToMany(mappedBy = "customer")

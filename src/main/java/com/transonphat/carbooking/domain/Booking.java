@@ -3,6 +3,7 @@ package com.transonphat.carbooking.domain;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -10,18 +11,23 @@ import java.time.ZonedDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class Booking extends Model {
     @Column
+    @NotNull
     private ZonedDateTime startTime;
 
     @Column
+    @NotNull
     private ZonedDateTime endTime;
 
     @Column
+    @NotNull
     private String startLocation;
 
     @Column
+    @NotNull
     private String endLocation;
 
     @Column
+    @NotNull
     private Double distance;
 
     @OneToOne(cascade = CascadeType.REMOVE)

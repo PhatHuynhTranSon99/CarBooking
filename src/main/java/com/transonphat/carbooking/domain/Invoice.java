@@ -3,6 +3,7 @@ package com.transonphat.carbooking.domain;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Invoices")
@@ -17,6 +18,7 @@ public class Invoice extends Model {
     private Driver driver;
 
     @Column
+    @NotNull
     private Double totalCharge;
 
     @OneToOne(mappedBy = "invoice")
