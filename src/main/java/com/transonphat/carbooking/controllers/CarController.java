@@ -9,6 +9,7 @@ import com.transonphat.carbooking.services.BookingService;
 import com.transonphat.carbooking.services.CarService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class CarController {
     }
 
     @PostMapping("/cars")
-    public Car createNewCar(@RequestBody Car car) {
+    public Car createNewCar(@Valid @RequestBody Car car) {
         return this.carService.saveCar(car);
     }
 
@@ -63,7 +64,7 @@ public class CarController {
         }
 
         if (convertible != null) {
-            car.setConvertible(convertible);
+            car.setIsConvertible(convertible);
         }
 
         if (rating != null) {
