@@ -3,10 +3,7 @@ package com.transonphat.carbooking.search.customer;
 import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.search.SearchCriterion;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.Locale;
 
 public class CustomerNameCriterion implements SearchCriterion<Customer> {
@@ -18,14 +15,19 @@ public class CustomerNameCriterion implements SearchCriterion<Customer> {
 
     @Override
     public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        Predicate firstNameLike = criteriaBuilder.like(
+        Expression<String> stringExpression = criteriaBuilder.concat(
                 criteriaBuilder.lower(root.<String> get("firstName")),
+                " "
+        );
+
+        stringExpression = criteriaBuilder.concat(
+                stringExpression,
+                criteriaBuilder.lower(root.<String> get("lastName"))
+        );
+
+        return criteriaBuilder.like(
+                stringExpression,
                 "%" + name.toLowerCase(Locale.ROOT) + "%"
         );
-        Predicate lastNameLike = criteriaBuilder.like(
-                criteriaBuilder.lower(root.<String> get("lastName")),
-                "%" + name.toLowerCase(Locale.ROOT) + "%"
-        );
-        return criteriaBuilder.or(firstNameLike, lastNameLike);
     }
 }
