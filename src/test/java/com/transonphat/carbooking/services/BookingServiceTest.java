@@ -4,8 +4,10 @@ import com.transonphat.carbooking.dao.DAO;
 import com.transonphat.carbooking.dao.ExhaustiveSearchableDAO;
 import com.transonphat.carbooking.dao.ExistenceDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
-import com.transonphat.carbooking.domain.Booking;
-import com.transonphat.carbooking.domain.Car;
+import com.transonphat.carbooking.domain.*;
+import com.transonphat.carbooking.exceptions.CarDoesNotHaveDriverException;
+import com.transonphat.carbooking.exceptions.CarNotAvailableException;
+import com.transonphat.carbooking.exceptions.InvalidTimePeriodException;
 import com.transonphat.carbooking.search.SearchCriterion;
 import com.transonphat.carbooking.search.booking.BookingWithCarCriterion;
 import org.junit.jupiter.api.Test;
@@ -18,6 +20,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
@@ -42,6 +46,15 @@ public class BookingServiceTest {
 
     @MockBean
     private ExistenceDAO<Car> carExistenceDAO;
+
+    @MockBean
+    private InvoiceService invoiceService;
+
+    @MockBean
+    private CarService carService;
+
+    @MockBean
+    private CustomerService customerService;
 
     @Test
     public void searchAvailableCarsShouldCallDAOMethod() {
@@ -179,5 +192,215 @@ public class BookingServiceTest {
         //Assert method call
         verify(exhaustiveSearchableDAO).search(any());
         verify(bookingDao, times(3)).delete(anyLong());
+    }
+
+    @Test
+    public void shouldCreateBookingSuccessfully() {
+        //Establish parameters
+        String startLocation = "Home", endLocation = "House";
+        ZonedDateTime startTime = ZonedDateTime.of(2020, 2, 1, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh"));
+        ZonedDateTime endTime = ZonedDateTime.of(2020, 2, 5, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh"));
+        double distance = 100.0;
+        long carId = 1L;
+        long customerId = 1L;
+
+        //Set car and customer
+        Car car = new CarBuilder()
+                .setId(1L)
+                .setMake("Toyota")
+                .setModel("Vias")
+                .setColor("Green")
+                .setConvertible(true)
+                .setIdentificationNumber("0180-989")
+                .setLicensePlate("G1-0172")
+                .setRating(4.5)
+                .setRate(10.8)
+                .build();
+        car.setDriver(new Driver());
+
+        //Customer
+        Customer customer = new Customer(1L, "Adam", "Cole", "11 Street",
+                "0182019222", ZonedDateTime.now());
+
+        when(customerService.getCustomerById(1L)).thenReturn(customer);
+        when(carService.getCarById(1L)).thenReturn(car);
+
+        //Call
+        bookingService.createBooking(
+                startLocation,
+                endLocation,
+                startTime,
+                endTime,
+                distance,
+                carId,
+                customerId
+        );
+
+        //Assert calls
+        verify(invoiceService).createInvoice(customer, car, distance);
+        verify(bookingDao).save(any());
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenCarDoesNotHaveDriver() {
+        //Establish parameters
+        String startLocation = "Home", endLocation = "House";
+        ZonedDateTime startTime = ZonedDateTime.of(2020, 2, 1, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh"));
+        ZonedDateTime endTime = ZonedDateTime.of(2020, 2, 5, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh"));
+        double distance = 100.0;
+        long carId = 1L;
+        long customerId = 1L;
+
+        //Set car and customer
+        Car car = new CarBuilder()
+                .setId(1L)
+                .setMake("Toyota")
+                .setModel("Vias")
+                .setColor("Green")
+                .setConvertible(true)
+                .setIdentificationNumber("0180-989")
+                .setLicensePlate("G1-0172")
+                .setRating(4.5)
+                .setRate(10.8)
+                .build();
+        car.setDriver(null); //No driver
+
+        //Customer
+        Customer customer = new Customer(1L, "Adam", "Cole", "11 Street",
+                "0182019222", ZonedDateTime.now());
+
+        when(customerService.getCustomerById(1L)).thenReturn(customer);
+        when(carService.getCarById(1L)).thenReturn(car);
+
+        //Call
+        CarDoesNotHaveDriverException exception = assertThrows(
+                CarDoesNotHaveDriverException.class,
+                () -> {
+                    bookingService.createBooking(
+                            startLocation,
+                            endLocation,
+                            startTime,
+                            endTime,
+                            distance,
+                            carId,
+                            customerId
+                    );
+                }
+        );
+
+        assertEquals("Car does not have a driver yet", exception.getMessage());
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenCarIsNotAvailable() {
+        //Establish parameters
+        String startLocation = "Home", endLocation = "House";
+        ZonedDateTime startTime = ZonedDateTime.of(2020, 2, 1, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh"));
+        ZonedDateTime endTime = ZonedDateTime.of(2020, 2, 5, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh"));
+        double distance = 100.0;
+        long carId = 1L;
+        long customerId = 1L;
+
+        //Set car and customer
+        Car car = new CarBuilder()
+                .setId(1L)
+                .setMake("Toyota")
+                .setModel("Vias")
+                .setColor("Green")
+                .setConvertible(true)
+                .setIdentificationNumber("0180-989")
+                .setLicensePlate("G1-0172")
+                .setRating(4.5)
+                .setRate(10.8)
+                .build();
+        car.setDriver(new Driver());
+
+        //Customer
+        Customer customer = new Customer(1L, "Adam", "Cole", "11 Street",
+                "0182019222", ZonedDateTime.now());
+
+        when(customerService.getCustomerById(1L)).thenReturn(customer);
+        when(carService.getCarById(1L)).thenReturn(car);
+        when(carExistenceDAO.exists(any())).thenReturn(true); //This will set car to not be available
+
+        //Call
+        CarNotAvailableException exception = assertThrows(
+                CarNotAvailableException.class,
+                () -> {
+                    bookingService.createBooking(
+                            startLocation,
+                            endLocation,
+                            startTime,
+                            endTime,
+                            distance,
+                            carId,
+                            customerId
+                    );
+                }
+        );
+
+        //Assert exception message
+        assertEquals("Car is not available during the trip", exception.getMessage());
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenStartTimeIsGreaterThanEndTime() {
+        //Establish parameters
+        String startLocation = "Home", endLocation = "House";
+
+        //Start time comes after end time
+        ZonedDateTime startTime = ZonedDateTime.of(2020, 3, 1, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh"));
+        ZonedDateTime endTime = ZonedDateTime.of(2020, 2, 5, 0, 0, 0, 0,
+                ZoneId.of("Asia/Ho_Chi_Minh"));
+        double distance = 100.0;
+        long carId = 1L;
+        long customerId = 1L;
+
+        //Set car and customer
+        Car car = new CarBuilder()
+                .setId(1L)
+                .setMake("Toyota")
+                .setModel("Vias")
+                .setColor("Green")
+                .setConvertible(true)
+                .setIdentificationNumber("0180-989")
+                .setLicensePlate("G1-0172")
+                .setRating(4.5)
+                .setRate(10.8)
+                .build();
+        car.setDriver(new Driver());
+
+        //Customer
+        Customer customer = new Customer(1L, "Adam", "Cole", "11 Street",
+                "0182019222", ZonedDateTime.now());
+
+        when(customerService.getCustomerById(1L)).thenReturn(customer);
+        when(carService.getCarById(1L)).thenReturn(car);
+
+        //Call
+        InvalidTimePeriodException exception = assertThrows(
+                InvalidTimePeriodException.class,
+                () -> {
+                    bookingService.createBooking(
+                            startLocation,
+                            endLocation,
+                            startTime,
+                            endTime,
+                            distance,
+                            carId,
+                            customerId
+                    );
+                }
+        );
+
+        //Assert exception message
+        assertEquals("Starting time must come before ending time", exception.getMessage());
     }
 }
