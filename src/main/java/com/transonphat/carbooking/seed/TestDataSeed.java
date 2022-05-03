@@ -171,7 +171,7 @@ public class TestDataSeed implements CommandLineRunner {
         invoiceFour.setId(4L);
         invoiceFour.setDriver(driverThree);
         invoiceFour.setCustomer(customers[2]);
-        invoiceFour.setTotalCharges(100.1);
+        invoiceFour.setTotalCharges(300.0);
         invoiceFour.setCreatedDate(ZonedDateTime.now());
 
         Booking bookingFour = new Booking();
