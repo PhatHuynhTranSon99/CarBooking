@@ -135,41 +135,43 @@ public class PaginatedCarUsageQuery implements AggregationQuery<PaginationResult
 
         //Create sum expression
         Expression<Integer> dateSum = criteriaBuilder.sum(
-                criteriaBuilder.function(
-                        "DATEDIFF",
-                        Integer.class,
-                        criteriaBuilder.function(
-                                "LEAST",
-                                ZonedDateTime.class,
-                                bookingRoot.get(Booking_.endTime),
-                                criteriaBuilder.function(
-                                        "LAST_DAY",
-                                        ZonedDateTime.class,
-                                        criteriaBuilder.function(
-                                                "STR_TO_DATE",
-                                                ZonedDateTime.class,
-                                                criteriaBuilder.literal("01/" + month + "/" + year),
-                                                criteriaBuilder.literal("%d/%m/%y")
-                                        )
-                                )
-                        ),
-                        criteriaBuilder.function(
-                                "GREATEST",
-                                ZonedDateTime.class,
-                                bookingRoot.get(Booking_.startTime),
-                                criteriaBuilder.function(
-                                        "STR_TO_DATE",
-                                        ZonedDateTime.class,
-                                        criteriaBuilder.literal("01/" + month + "/" + year),
-                                        criteriaBuilder.literal("%d/%m/%y")
-                                )
-                        )
-                )
+                criteriaBuilder. <Integer> selectCase()
+                    .when(containMonth,
+                            criteriaBuilder.function(
+                                    "DATEDIFF",
+                                    Integer.class,
+                                    criteriaBuilder.function(
+                                            "LEAST",
+                                            ZonedDateTime.class,
+                                            bookingRoot.get(Booking_.endTime),
+                                            criteriaBuilder.function(
+                                                    "LAST_DAY",
+                                                    ZonedDateTime.class,
+                                                    criteriaBuilder.function(
+                                                            "STR_TO_DATE",
+                                                            ZonedDateTime.class,
+                                                            criteriaBuilder.literal("01/" + month + "/" + year),
+                                                            criteriaBuilder.literal("%d/%m/%y")
+                                                    )
+                                            )
+                                    ),
+                                    criteriaBuilder.function(
+                                            "GREATEST",
+                                            ZonedDateTime.class,
+                                            bookingRoot.get(Booking_.startTime),
+                                            criteriaBuilder.function(
+                                                    "STR_TO_DATE",
+                                                    ZonedDateTime.class,
+                                                    criteriaBuilder.literal("01/" + month + "/" + year),
+                                                    criteriaBuilder.literal("%d/%m/%y")
+                                            )
+                                    )
+                    ))
+                    .otherwise(0)
         );
 
         //Calculate
         dateSumQuery.multiselect(bookingRoot.get(Booking_.invoice).get(Invoice_.driver).get(Driver_.id), dateSum)
-                .where(matchDate)
                 .groupBy(bookingRoot.get(Booking_.invoice).get(Invoice_.driver).get(Driver_.id));
 
         //Map result
