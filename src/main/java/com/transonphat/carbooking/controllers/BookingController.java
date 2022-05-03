@@ -8,9 +8,6 @@ import com.transonphat.carbooking.search.SearchCriteria;
 import com.transonphat.carbooking.search.SearchCriterion;
 import com.transonphat.carbooking.search.booking.BookingDateCriterion;
 import com.transonphat.carbooking.services.BookingService;
-import com.transonphat.carbooking.services.CarService;
-import com.transonphat.carbooking.services.CustomerService;
-import com.transonphat.carbooking.services.InvoiceService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
