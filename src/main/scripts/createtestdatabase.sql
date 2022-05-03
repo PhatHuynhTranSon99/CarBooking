@@ -1,0 +1,10 @@
+DROP DATABASE IF EXISTS testcardb;
+DROP USER IF EXISTS `testcaradmin`@`%`;
+DROP USER IF EXISTS `testcaruser`@`%`;
+CREATE DATABASE IF NOT EXISTS testcardb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER IF NOT EXISTS `testcaradmin`@`%` IDENTIFIED WITH mysql_native_password BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, EXECUTE, CREATE VIEW, SHOW VIEW,
+    CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER ON `testcardb`.* TO `testcaradmin`@`%`;
+CREATE USER IF NOT EXISTS `testcaruser`@`%` IDENTIFIED WITH mysql_native_password BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, SHOW VIEW ON `testcardb`.* TO `testcaruser`@`%`;
+FLUSH PRIVILEGES;
