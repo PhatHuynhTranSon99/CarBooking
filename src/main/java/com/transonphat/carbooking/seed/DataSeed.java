@@ -141,7 +141,7 @@ public class DataSeed implements CommandLineRunner {
         bookingTwo.setEndLocation("School");
         bookingTwo.setStartTime(ZonedDateTime.of(2020, 1, 20, 0, 0, 0, 0,
                 ZoneId.of("Asia/Ho_Chi_Minh")));
-        bookingTwo.setEndTime(ZonedDateTime.of(2020, 3, 1, 0, 0, 0, 0,
+        bookingTwo.setEndTime(ZonedDateTime.of(2020, 3, 10, 0, 0, 0, 0,
                 ZoneId.of("Asia/Ho_Chi_Minh")));
         bookingTwo.setInvoice(invoiceTwo);
         bookingTwo.setCreatedDate(ZonedDateTime.now());
