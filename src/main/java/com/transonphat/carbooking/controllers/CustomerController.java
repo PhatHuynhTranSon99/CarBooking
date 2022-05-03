@@ -11,6 +11,7 @@ import com.transonphat.carbooking.services.BookingService;
 import com.transonphat.carbooking.services.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class CustomerController {
     }
 
     @PostMapping("/customers")
-    public Customer createNewCustomer(@RequestBody Customer customer) {
+    public Customer createNewCustomer(@Valid @RequestBody Customer customer) {
         return customerService.saveCustomer(customer);
     }
 
