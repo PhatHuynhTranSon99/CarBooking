@@ -2,11 +2,6 @@ package com.transonphat.carbooking.controllers;
 
 import com.transonphat.carbooking.domain.Booking;
 import com.transonphat.carbooking.domain.Car;
-import com.transonphat.carbooking.domain.Customer;
-import com.transonphat.carbooking.domain.Invoice;
-import com.transonphat.carbooking.exceptions.CarDoesNotHaveDriverException;
-import com.transonphat.carbooking.exceptions.CarNotAvailableException;
-import com.transonphat.carbooking.exceptions.InvalidTimePeriodException;
 import com.transonphat.carbooking.exceptions.MissingPeriodException;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriteria;
@@ -25,19 +20,10 @@ import java.util.List;
 
 @RestController
 public class BookingController {
-    private final CarService carService;
-    private final CustomerService customerService;
     private final BookingService bookingService;
-    private final InvoiceService invoiceService;
 
-    public BookingController(CarService carService,
-                             CustomerService customerService,
-                             BookingService bookingService,
-                             InvoiceService invoiceService) {
-        this.carService = carService;
-        this.customerService = customerService;
+    public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
-        this.invoiceService = invoiceService;
     }
 
     @GetMapping("/bookings/cars")
