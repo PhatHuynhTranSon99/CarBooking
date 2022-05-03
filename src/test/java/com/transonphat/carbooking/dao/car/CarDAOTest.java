@@ -29,7 +29,7 @@ class CarDAOTest {
         assertEquals("Toyota", car.getMake());
         assertEquals("Vias", car.getModel());
         assertEquals("Green", car.getColor());
-        assertTrue(car.getConvertible());
+        assertTrue(car.getIsConvertible());
         assertEquals("0180-989", car.getIdentificationNumber());
         assertEquals("G1-0172", car.getLicensePlate());
         assertEquals(4.5, car.getRating());
@@ -55,7 +55,7 @@ class CarDAOTest {
         assertEquals("Toyota", car.getMake());
         assertEquals("Vias", car.getModel());
         assertEquals("Green", car.getColor());
-        assertTrue(car.getConvertible());
+        assertTrue(car.getIsConvertible());
         assertEquals("0180-989", car.getIdentificationNumber());
         assertEquals("G1-0172", car.getLicensePlate());
         assertEquals(4.5, car.getRating());
@@ -88,7 +88,7 @@ class CarDAOTest {
         Car car = new Car();
         car.setRate(10.1);
         car.setLicensePlate("51H-6788");
-        car.setConvertible(false);
+        car.setIsConvertible(false);
         car.setMake("Toyota");
         car.setColor("Green");
         car.setIdentificationNumber("51H-6788");
