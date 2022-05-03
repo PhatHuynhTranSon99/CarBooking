@@ -73,7 +73,9 @@ public class BookingService {
     }
 
     public boolean checkIfCarIsAvailable(long carId, ZonedDateTime startTime, ZonedDateTime endTime) {
-        return !this.carExistenceDAO.exists(new CarBookingExistCriterion(carId, startTime, endTime));
+        return !this.carExistenceDAO.exists(
+                new CarBookingExistCriterion(carId, startTime, endTime)
+        );
     }
 
     public Booking createBooking(String startingLocation,
