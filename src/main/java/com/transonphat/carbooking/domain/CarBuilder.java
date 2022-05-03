@@ -67,7 +67,7 @@ public class CarBuilder {
         car.setMake(make);
         car.setModel(model);
         car.setColor(color);
-        car.setConvertible(isConvertible);
+        car.setIsConvertible(isConvertible);
         car.setRating(rating);
         car.setLicensePlate(licensePlate);
         car.setRate(rate);

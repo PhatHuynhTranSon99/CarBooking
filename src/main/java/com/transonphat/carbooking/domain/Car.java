@@ -3,6 +3,7 @@ package com.transonphat.carbooking.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -10,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @EntityListeners(AuditingEntityListener.class)
 public class Car extends Model {
     @Column
-    @NotNull
+    @NotBlank(message = "Identification number is mandatory")
     private String identificationNumber;
 
     @Column
@@ -34,8 +35,8 @@ public class Car extends Model {
     private Double rating = 0.0;
 
     @Column
-    @NotNull
-    private String licensePlate = "Unknown";
+    @NotBlank(message = "License plate is mandatory")
+    private String licensePlate;
 
     @Column
     @NotNull
@@ -85,11 +86,11 @@ public class Car extends Model {
         this.color = color;
     }
 
-    public Boolean getConvertible() {
+    public Boolean getIsConvertible() {
         return isConvertible;
     }
 
-    public void setConvertible(Boolean convertible) {
+    public void setIsConvertible(Boolean convertible) {
         isConvertible = convertible;
     }
 
