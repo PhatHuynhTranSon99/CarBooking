@@ -89,11 +89,11 @@ public class BookingService {
 
         //Check if car is allocated
         if (!car.isAllocated())
-            throw new CarDoesNotHaveDriverException("Car does not have a driver yet.");
+            throw new CarDoesNotHaveDriverException("Car does not have a driver yet");
 
         //Check if car is available for booking
         if (!checkIfCarIsAvailable(carId, startTime, endTime))
-            throw new CarNotAvailableException("Car is not available during the trip.");
+            throw new CarNotAvailableException("Car is not available during the trip");
 
         //Check if start time is less than end time
         if (startTime.isAfter(endTime))
