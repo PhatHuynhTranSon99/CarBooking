@@ -10,6 +10,7 @@ import com.transonphat.carbooking.services.BookingService;
 import com.transonphat.carbooking.services.DriverService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class DriverController {
     }
 
     @PostMapping("/drivers")
-    public Driver createNewDriver(@RequestBody Driver driver) {
+    public Driver createNewDriver(@Valid @RequestBody Driver driver) {
         return this.driverService.saveDriver(driver);
     }
 
