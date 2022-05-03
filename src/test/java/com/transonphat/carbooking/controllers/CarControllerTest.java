@@ -270,10 +270,8 @@ public class CarControllerTest {
         requestParams.add("color", "Blue");
 
         //Assert that search car is called
-        mockMvc.perform(
-                get("/cars")
-                        .params(requestParams)
-        );
+        mockMvc.perform(get("/cars").params(requestParams))
+                .andExpect(status().isOk());
 
         verify(carService).searchCar(any(), anyInt(), anyInt());
     }
