@@ -100,7 +100,15 @@ public class CarControllerTest {
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(objectMapper.writeValueAsString(car))
                 )
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.make").value(car.getMake()))
+                .andExpect(jsonPath("$.model").value(car.getModel()))
+                .andExpect(jsonPath("$.color").value(car.getColor()))
+                .andExpect(jsonPath("$.isConvertible").value(car.getIsConvertible()))
+                .andExpect(jsonPath("$.identificationNumber").value(car.getIdentificationNumber()))
+                .andExpect(jsonPath("$.licensePlate").value(car.getLicensePlate()))
+                .andExpect(jsonPath("$.rating").value(car.getRating()))
+                .andExpect(jsonPath("$.rate").value(car.getRate()));
 
         //Assert call
         verify(carService).saveCar(car);
