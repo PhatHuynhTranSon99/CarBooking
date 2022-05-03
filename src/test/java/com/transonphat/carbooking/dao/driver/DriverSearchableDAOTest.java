@@ -32,13 +32,14 @@ public class DriverSearchableDAOTest {
                 10
         );
 
-        assertEquals(3L, driverPaginationResult.getTotalItems());
+        assertEquals(4L, driverPaginationResult.getTotalItems());
         assertThat(
                 driverPaginationResult.getItems(),
                 contains(
                         hasProperty("id", is(1L)),
                         hasProperty("id", is(2L)),
-                        hasProperty("id", is(3L))
+                        hasProperty("id", is(3L)),
+                        hasProperty("id", is(4L))
                 )
         );
     }

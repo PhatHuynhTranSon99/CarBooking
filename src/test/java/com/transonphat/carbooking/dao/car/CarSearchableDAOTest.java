@@ -36,7 +36,7 @@ public class CarSearchableDAOTest {
                 10
         );
 
-        assertEquals(3, carPaginationResult.getTotalItems());
+        assertEquals(4, carPaginationResult.getTotalItems());
     }
 
     @Test
@@ -186,12 +186,13 @@ public class CarSearchableDAOTest {
                 0,
                 10
         );
-        assertEquals(2, nonConvertibleSearchResult.getTotalItems());
+        assertEquals(3, nonConvertibleSearchResult.getTotalItems());
         assertThat(
                 nonConvertibleSearchResult.getItems(),
                 contains(
                         hasProperty("id", is(2L)),
-                        hasProperty("id", is(3L))
+                        hasProperty("id", is(3L)),
+                        hasProperty("id", is(4L))
                 )
         );
     }
@@ -222,13 +223,14 @@ public class CarSearchableDAOTest {
                 0,
                 10
         );
-        assertEquals(3, allCarResult.getTotalItems());
+        assertEquals(4, allCarResult.getTotalItems());
         assertThat(
                 allCarResult.getItems(),
                 contains(
                         hasProperty("id", is(1L)),
                         hasProperty("id", is(2L)),
-                        hasProperty("id", is(3L))
+                        hasProperty("id", is(3L)),
+                        hasProperty("id", is(4L))
                 )
         );
 
@@ -252,7 +254,13 @@ public class CarSearchableDAOTest {
                 0,
                 10
         );
-        assertEquals(0, emptyCarResult.getTotalItems());
+        assertEquals(1, emptyCarResult.getTotalItems());
+        assertThat(
+                emptyCarResult.getItems(),
+                contains(
+                        hasProperty("id", is(4L))
+                )
+        );
 
         //Two result
         PaginationResult<Car> twoCarResult = carSearchableDAO.search(
@@ -263,12 +271,13 @@ public class CarSearchableDAOTest {
                 0,
                 10
         );
-        assertEquals(2, twoCarResult.getTotalItems());
+        assertEquals(3, twoCarResult.getTotalItems());
         assertThat(
                 twoCarResult.getItems(),
                 contains(
                         hasProperty("id", is(2L)),
-                        hasProperty("id", is(3L))
+                        hasProperty("id", is(3L)),
+                        hasProperty("id", is(4L))
                 )
         );
     }
