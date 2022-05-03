@@ -57,6 +57,8 @@ public class RevenueByCustomerQuery implements AggregationQuery<Double> {
                 .where(datePredicate);
 
         TypedQuery<Double> typedQuery = entityManager.createQuery(revenueSumQuery);
-        return typedQuery.getSingleResult();
+        Double result = typedQuery.getSingleResult();
+
+        return result == null ? 0 : result;
     }
 }
