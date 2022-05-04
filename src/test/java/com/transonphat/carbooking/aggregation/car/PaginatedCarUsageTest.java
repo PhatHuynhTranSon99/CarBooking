@@ -1,7 +1,7 @@
 package com.transonphat.carbooking.aggregation.car;
 
 import com.transonphat.carbooking.aggregation.AggregationExecutor;
-import com.transonphat.carbooking.dao.aggregation.Usage;
+import com.transonphat.carbooking.domain.Usage;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

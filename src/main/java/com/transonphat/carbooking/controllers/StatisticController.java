@@ -1,11 +1,7 @@
 package com.transonphat.carbooking.controllers;
 
-import com.transonphat.carbooking.aggregation.AggregationExecutor;
-import com.transonphat.carbooking.aggregation.car.PaginatedCarUsageQuery;
-import com.transonphat.carbooking.aggregation.customer.RevenueByCustomerQuery;
-import com.transonphat.carbooking.aggregation.driver.RevenueByDriverQuery;
-import com.transonphat.carbooking.dao.aggregation.Revenue;
-import com.transonphat.carbooking.dao.aggregation.Usage;
+import com.transonphat.carbooking.domain.Revenue;
+import com.transonphat.carbooking.domain.Usage;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.services.StatisticService;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -1,7 +1,7 @@
 package com.transonphat.carbooking.aggregation.car;
 
 import com.transonphat.carbooking.aggregation.AggregationQuery;
-import com.transonphat.carbooking.dao.aggregation.Usage;
+import com.transonphat.carbooking.domain.Usage;
 import com.transonphat.carbooking.domain.*;
 import com.transonphat.carbooking.pagination.PaginationResult;
 
