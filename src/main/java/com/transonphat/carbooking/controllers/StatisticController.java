@@ -20,20 +20,20 @@ public class StatisticController {
     }
 
     @GetMapping("/statistics/revenue/customer")
-    public Revenue getRevenueByCustomer(@RequestParam(value = "from", required = false)
+    public Revenue getRevenueByCustomer(@RequestParam(value = "from")
                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime from,
-                                       @RequestParam(value = "to", required = false)
+                                       @RequestParam(value = "to")
                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime to,
-                                       @RequestParam(value = "customer", required = false) Long customerId) {
+                                       @RequestParam(value = "customer") Long customerId) {
         return statisticService.getRevenueByCustomer(from, to, customerId);
     }
 
     @GetMapping("/statistics/revenue/driver")
-    public Revenue getRevenueByDriver(@RequestParam(value = "from", required = false)
+    public Revenue getRevenueByDriver(@RequestParam(value = "from")
                                           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime from,
-                                      @RequestParam(value = "to", required = false)
+                                      @RequestParam(value = "to")
                                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime to,
-                                      @RequestParam(value = "driver", required = false) Long driverId) {
+                                      @RequestParam(value = "driver") Long driverId) {
         return statisticService.getRevenueByDriver(from, to, driverId);
     }
 
