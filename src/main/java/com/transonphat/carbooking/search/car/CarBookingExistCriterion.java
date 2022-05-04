@@ -6,6 +6,9 @@ import com.transonphat.carbooking.search.SearchCriterion;
 import javax.persistence.criteria.*;
 import java.time.ZonedDateTime;
 
+/*
+Check if a car booking with car id coincide with start time and endtime
+ */
 public class CarBookingExistCriterion implements SearchCriterion<Car> {
     private final Long carId;
     private final ZonedDateTime startTime;
