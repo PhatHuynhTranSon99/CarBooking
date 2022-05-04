@@ -42,7 +42,6 @@ public class Car extends Model {
     private String licensePlate;
 
     @Column
-    @NotNull
     private Double rate = 0.0;
 
     @OneToOne(mappedBy = "car", fetch = FetchType.LAZY)
