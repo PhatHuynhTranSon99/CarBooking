@@ -23,7 +23,7 @@ public class Customer extends Model {
     private String lastName;
 
     @Column
-    @NotNull
+    @NotBlank(message = "Address is mandatory")
     private String address;
 
     @Column

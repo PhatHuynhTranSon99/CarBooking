@@ -3,6 +3,8 @@ package com.transonphat.carbooking.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -31,7 +33,8 @@ public class Car extends Model {
     private Boolean isConvertible = false;
 
     @Column
-    @NotNull
+    @DecimalMin(value = "0.0", message = "Rating should not be below 0.0")
+    @DecimalMax(value = "5.0", message = "Rating should not be higher than 5.0")
     private Double rating = 0.0;
 
     @Column

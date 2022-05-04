@@ -3,6 +3,8 @@ package com.transonphat.carbooking.domain;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
@@ -11,23 +13,24 @@ import java.time.ZonedDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class Booking extends Model {
     @Column
-    @NotNull
+    @NotNull(message = "Start time is mandatory")
     private ZonedDateTime startTime;
 
     @Column
-    @NotNull
+    @NotNull(message = "End time is mandatory")
     private ZonedDateTime endTime;
 
     @Column
-    @NotNull
+    @NotBlank(message = "Start location is mandatory")
     private String startLocation;
 
     @Column
-    @NotNull
+    @NotBlank(message = "Destination is mandatory")
     private String endLocation;
 
     @Column
     @NotNull
+    @DecimalMin(value = "0.0", message = "Distance must be greater than 0")
     private Double distance;
 
     @OneToOne(cascade = CascadeType.REMOVE)
