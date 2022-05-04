@@ -1,9 +1,12 @@
 package com.transonphat.carbooking.exceptions.handlers;
 
 import com.transonphat.carbooking.exceptions.BadRequestException;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -65,6 +68,18 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         ExceptionResponse exceptionResponse = new ExceptionResponse(
                 new Date(),
                 message,
+                request.getDescription(false)
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    protected ResponseEntity<Object> handleUniquenessViolation(DataIntegrityViolationException exception,
+                                                               WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                exception.getMostSpecificCause().getMessage(),
                 request.getDescription(false)
         );
 

@@ -9,7 +9,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Cars")
+@Table(name = "Cars", uniqueConstraints = {
+        @UniqueConstraint(name = "identificationNumber", columnNames = "identificationNumber"),
+        @UniqueConstraint(name = "licensePlate", columnNames = "licensePlate")
+})
 @EntityListeners(AuditingEntityListener.class)
 public class Car extends Model {
     @Column
