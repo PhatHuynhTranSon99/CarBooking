@@ -1,16 +1,8 @@
 package com.transonphat.carbooking.search.invoice;
 
 import com.transonphat.carbooking.dao.SearchableDAO;
-import com.transonphat.carbooking.domain.Booking;
 import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.pagination.PaginationResult;
-import com.transonphat.carbooking.search.booking.BookingDateCriterion;
-import com.transonphat.carbooking.search.booking.BookingWithCarCriterion;
-import com.transonphat.carbooking.search.booking.BookingWithCustomerCriterion;
-import com.transonphat.carbooking.search.booking.BookingWithDriverCriterion;
-import com.transonphat.carbooking.search.invoice.InvoiceByCustomerCriterion;
-import com.transonphat.carbooking.search.invoice.InvoiceByDriverCriterion;
-import com.transonphat.carbooking.search.invoice.InvoiceDateCriterion;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
