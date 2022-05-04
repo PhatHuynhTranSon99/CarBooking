@@ -335,7 +335,7 @@ Parameters:
 ## How to run the local version
 
 ### Step 1: Install and run MySQL service on your machine
-### Step 2: Create database 
+### Step 2.1: Create root database 
 Firstly, you need to connect to MySQL Server on your machine and run this following script
 ```sql
 DROP DATABASE IF EXISTS cardb;
@@ -350,5 +350,19 @@ GRANT SELECT, INSERT, UPDATE, DELETE, SHOW VIEW ON `cardb`.* TO `caruser`@`%`;
 FLUSH PRIVILEGES;
 ```
 This will create the database and also two users, caradmin, caruser with special privileges.
+###Step 2.2: Create test database
+Secondly, if you want to run the unit tests, you should also run the following scripts before running the tests.
+```sql
+DROP DATABASE IF EXISTS testcardb;
+DROP USER IF EXISTS `testcaradmin`@`%`;
+DROP USER IF EXISTS `testcaruser`@`%`;
+CREATE DATABASE IF NOT EXISTS testcardb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER IF NOT EXISTS `testcaradmin`@`%` IDENTIFIED WITH mysql_native_password BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, EXECUTE, CREATE VIEW, SHOW VIEW,
+    CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER ON `testcardb`.* TO `testcaradmin`@`%`;
+CREATE USER IF NOT EXISTS `testcaruser`@`%` IDENTIFIED WITH mysql_native_password BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, SHOW VIEW ON `testcardb`.* TO `testcaruser`@`%`;
+FLUSH PRIVILEGES;
+```
 ### Step 3: Open the repository using IntelliJ
 ### Step 4: Run the project
