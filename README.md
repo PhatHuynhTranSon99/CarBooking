@@ -24,6 +24,12 @@ This is date 01/12/2019 0 hours, 0 minutes, 0 seconds, 0 milliseconds, UTC+7 (Vi
 
 **NOTE**: Use %2B to signify '+' in the query parameter or it won't work.
 
+### Interactive GUI
+All endpoints can be accessed and experimented with using the GUI available at
+```
+GET /swagger-ui/index.html
+```
+
 ### Cars
 
 #### Find all cars
