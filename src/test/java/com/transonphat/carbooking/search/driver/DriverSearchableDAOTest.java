@@ -1,14 +1,18 @@
 package com.transonphat.carbooking.search.driver;
 
 import com.transonphat.carbooking.dao.SearchableDAO;
+import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.Driver;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriteria;
+import com.transonphat.carbooking.search.car.CarBookingExistCriterion;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -160,10 +164,5 @@ public class DriverSearchableDAOTest {
                         hasProperty("id", is(3L))
                 )
         );
-    }
-
-    @Test
-    public void searchDriverByIdAndBooking() {
-        //TODO: Search driver by booking date
     }
 }
