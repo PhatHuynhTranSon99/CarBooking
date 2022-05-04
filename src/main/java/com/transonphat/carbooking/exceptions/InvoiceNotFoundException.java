@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.exceptions;
 
-public class InvoiceNotFoundException extends RuntimeException {
+public class InvoiceNotFoundException extends BadRequestException {
     public InvoiceNotFoundException() {
     }
 

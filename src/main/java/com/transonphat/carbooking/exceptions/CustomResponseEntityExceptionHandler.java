@@ -22,15 +22,15 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exceptionResponse);
     }
 
-    @ExceptionHandler(CustomerNotFoundException.class)
-    protected ResponseEntity<ExceptionResponse> handleCustomerNotFoundException(CustomerNotFoundException exception,
+    @ExceptionHandler(BadRequestException.class)
+    protected ResponseEntity<ExceptionResponse> handleCustomerNotFoundException(BadRequestException exception,
                                                                                 WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
                 new Date(),
-                "Customer with specific ID can not be found",
+                exception.getMessage(),
                 request.getDescription(false)
         );
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exceptionResponse);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
     }
 }

@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.exceptions;
 
-public class CarAllocationException extends RuntimeException {
+public class CarAllocationException extends BadRequestException {
     public CarAllocationException() {
     }
 

@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.exceptions;
 
-public class BookingNotFoundException extends RuntimeException {
+public class BookingNotFoundException extends BadRequestException {
     public BookingNotFoundException() {
     }
 

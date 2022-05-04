@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.exceptions;
 
-public class CarNotAvailableException extends RuntimeException {
+public class CarNotAvailableException extends BadRequestException {
     public CarNotAvailableException() {
     }
 

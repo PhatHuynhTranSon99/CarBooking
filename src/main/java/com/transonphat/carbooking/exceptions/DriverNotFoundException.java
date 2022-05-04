@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.exceptions;
 
-public class DriverNotFoundException extends RuntimeException {
+public class DriverNotFoundException extends BadRequestException {
     public DriverNotFoundException() {
     }
 

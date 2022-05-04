@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.exceptions;
 
-public class InvalidTimePeriodException extends RuntimeException {
+public class InvalidTimePeriodException extends BadRequestException {
     public InvalidTimePeriodException() {
     }
 
