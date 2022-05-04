@@ -1,4 +1,4 @@
-package com.transonphat.carbooking.dao.car;
+package com.transonphat.carbooking.search.car;
 
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Car;
