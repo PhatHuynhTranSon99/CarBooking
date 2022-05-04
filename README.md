@@ -16,6 +16,14 @@ This project is a simple REST api which simulates a car booking agency and has t
 
 ## Endpoints
 
+**IMPORTANT NOTE**: The Date time format of this API follows ISO standards, for example:
+```
+2019-12-01T00:00:00.000%2B07:00
+```
+This is date 01/12/2019 0 hours, 0 minutes, 0 seconds, 0 milliseconds, UTC+7 (Vietnam) time.
+
+**NOTE**: Use %2B to signify '+' in the query parameter or it won't work.
+
 ### Cars
 
 #### Find all cars
@@ -48,6 +56,8 @@ DELETE /cars/{carId}
 ```
 Path variables:
 - carId: Integer, the id of the car
+
+**NOTE**: Deleting a car also deletes related bookings.
 
 #### Create a car
 ```
@@ -138,6 +148,8 @@ DELETE /drivers/{driverId}
 Path variables:
 - driverId: Integer, the name of the driver
 
+**NOTE**: Deleting a driver also deletes any related bookings
+
 ### Customer
 
 #### View all customers
@@ -181,6 +193,8 @@ DELETE /customers/{customerId}
 Path variable:
 - customerId: Integer, the id of the customer
 
+**NOTE**: Deleting a customer also deletes any related bookings.
+
 #### Update a customer
 ```
 PUT /customers/{customerId}
@@ -210,6 +224,8 @@ DELETE /cars/{carId}/driver
 ```
 Path variables:
 - carId: Integer, the id of the car
+
+**NOTE**: Remove car from driver also remove any related bookings. 
 
 ### Booking
 
@@ -243,6 +259,15 @@ Parameters:
 - endTime: String, in ISO Date time format
 - distance: Double (kilometers)
 - carId: Integer, the id of the car
+
+#### Delete car booking
+```
+DELETE /bookings/{bookingId}
+```
+Path variables:
+- bookingId: Integer, the id of the booking
+
+**NOTE**: Deleting a booking also deletes its associated invoice.
 
 #### Filter bookings by start and end date
 Find all bookings that have start and end time contained in a period
