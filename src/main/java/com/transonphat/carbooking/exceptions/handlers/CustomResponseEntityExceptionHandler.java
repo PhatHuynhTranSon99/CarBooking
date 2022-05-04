@@ -4,6 +4,7 @@ import com.transonphat.carbooking.exceptions.BadRequestException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,6 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.Date;
+import java.util.List;
 
 @ControllerAdvice
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
@@ -51,9 +53,18 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        //Get the field errors
+        List<FieldError> fieldErrorList = ex.getBindingResult().getFieldErrors();
+
+        //If there are any field errors -> Display the first one
+        //Else display generic message
+        String message = fieldErrorList.size() > 0 ?
+                            fieldErrorList.get(0).getDefaultMessage() :
+                            ex.getParameter().getParameterName() + "is not valid";
+
         ExceptionResponse exceptionResponse = new ExceptionResponse(
                 new Date(),
-                ex.getParameter() + " is not valid",
+                message,
                 request.getDescription(false)
         );
 
