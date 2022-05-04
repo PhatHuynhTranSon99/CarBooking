@@ -1,14 +1,18 @@
 package com.transonphat.carbooking.search.customer;
 
 import com.transonphat.carbooking.dao.SearchableDAO;
+import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriteria;
+import com.transonphat.carbooking.search.car.CarBookingExistCriterion;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -22,7 +26,7 @@ public class CustomerSearchableDAOTest {
     private SearchableDAO<Customer> customerSearchableDAO;
 
     @Test
-    public void searchWithNoCriteria() {
+    public void searchWithNoCriteriaShouldReturnCorrectResult() {
         PaginationResult<Customer> customerPaginationResult = customerSearchableDAO.search(
                 SearchCriteria.and(new ArrayList<>()),
                 0,
@@ -41,7 +45,7 @@ public class CustomerSearchableDAOTest {
     }
 
     @Test
-    public void searchWithFirstNameCriteria() {
+    public void searchWithFirstNameShouldReturnCorrectResult() {
         PaginationResult<Customer> fullNameResult = customerSearchableDAO.search(
                 new CustomerNameCriterion("Cole"),
                 0,
@@ -84,7 +88,7 @@ public class CustomerSearchableDAOTest {
     }
 
     @Test
-    public void searchWithLastNameCriteria() {
+    public void searchWithLastNameShouldReturnCorrectResult() {
         PaginationResult<Customer> fullNameResult = customerSearchableDAO.search(
                 new CustomerNameCriterion("Adam"),
                 0,
@@ -127,7 +131,7 @@ public class CustomerSearchableDAOTest {
     }
 
     @Test
-    public void searchAddressCriteria() {
+    public void searchAddressShouldReturnCorrectResult() {
         //Full result
         PaginationResult<Customer> fullAddressResult = customerSearchableDAO.search(
                 new CustomerAddressCriterion("11 Street"),
@@ -179,8 +183,9 @@ public class CustomerSearchableDAOTest {
         );
         assertEquals(0, emptyAddressResult.getTotalItems());
     }
+
     @Test
-    public void searchPhoneCriteria() {
+    public void searchPhoneShouldReturnCorrectResult() {
         //Full phone
         PaginationResult<Customer> fullPhoneResult = customerSearchableDAO.search(
                 new CustomerPhoneCriterion("0182019222"),
@@ -208,5 +213,125 @@ public class CustomerSearchableDAOTest {
                         hasProperty("id", is(2L))
                 )
         );
+    }
+
+    @Test
+    public void searchByIdAndBookingShouldReturnCorrectResult() {
+        //Should coincide
+        PaginationResult<Customer> coincidedResultOne = customerSearchableDAO.search(
+                new CustomerBookingExistCriterion(
+                        1L,
+                        ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 1, 5, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(1L, coincidedResultOne.getTotalItems());
+        assertThat(
+                coincidedResultOne.getItems(),
+                contains(
+                        hasProperty("id", is(1L))
+                )
+        );
+
+        PaginationResult<Customer> coincidedResultTwo = customerSearchableDAO.search(
+                new CustomerBookingExistCriterion(
+                        2L,
+                        ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 1, 5, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(1L, coincidedResultTwo.getTotalItems());
+        assertThat(
+                coincidedResultTwo.getItems(),
+                contains(
+                        hasProperty("id", is(2L))
+                )
+        );
+
+        PaginationResult<Customer> coincidedResultThree = customerSearchableDAO.search(
+                new CustomerBookingExistCriterion(
+                        3L,
+                        ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 1, 5, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(1L, coincidedResultThree.getTotalItems());
+        assertThat(
+                coincidedResultThree.getItems(),
+                contains(
+                        hasProperty("id", is(3L))
+                )
+        );
+
+        PaginationResult<Customer> coincidedResultFour = customerSearchableDAO.search(
+                new CustomerBookingExistCriterion(
+                        2L,
+                        ZonedDateTime.of(2020, 1, 20, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 2, 1, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(1L, coincidedResultFour.getTotalItems());
+        assertThat(
+                coincidedResultThree.getItems(),
+                contains(
+                        hasProperty("id", is(2L))
+                )
+        );
+
+        //Should not coincide
+        PaginationResult<Customer> noCoincideResultOne = customerSearchableDAO.search(
+                new CustomerBookingExistCriterion(
+                        1L,
+                        ZonedDateTime.of(2020, 1, 6, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 1, 9, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(0L, noCoincideResultOne.getTotalItems());
+
+        PaginationResult<Customer> noCoincideResultTwo = customerSearchableDAO.search(
+                new CustomerBookingExistCriterion(
+                        2L,
+                        ZonedDateTime.of(2020, 1, 6, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 1, 9, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(0L, noCoincideResultTwo.getTotalItems());
+
+        PaginationResult<Customer> noCoincideResultThree = customerSearchableDAO.search(
+                new CustomerBookingExistCriterion(
+                        3L,
+                        ZonedDateTime.of(2020, 1, 6, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 1, 9, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(0L, noCoincideResultThree.getTotalItems());
     }
 }
