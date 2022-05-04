@@ -3,7 +3,7 @@ package com.transonphat.carbooking.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.CarBuilder;
-import com.transonphat.carbooking.exceptions.CarNotFoundException;
+import com.transonphat.carbooking.exceptions.types.CarNotFoundException;
 import com.transonphat.carbooking.services.BookingService;
 import com.transonphat.carbooking.services.CarService;
 import org.junit.jupiter.api.Test;

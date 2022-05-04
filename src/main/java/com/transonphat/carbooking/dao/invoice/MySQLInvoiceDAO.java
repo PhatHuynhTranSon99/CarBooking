@@ -2,7 +2,7 @@ package com.transonphat.carbooking.dao.invoice;
 
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Invoice;
-import com.transonphat.carbooking.exceptions.InvoiceNotFoundException;
+import com.transonphat.carbooking.exceptions.types.InvoiceNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.repositories.InvoiceRepository;
 import com.transonphat.carbooking.search.SearchCriterion;

@@ -2,7 +2,7 @@ package com.transonphat.carbooking.services;
 
 import com.transonphat.carbooking.aggregation.AggregationExecutor;
 import com.transonphat.carbooking.domain.Revenue;
-import com.transonphat.carbooking.exceptions.InvalidTimePeriodException;
+import com.transonphat.carbooking.exceptions.types.InvalidTimePeriodException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

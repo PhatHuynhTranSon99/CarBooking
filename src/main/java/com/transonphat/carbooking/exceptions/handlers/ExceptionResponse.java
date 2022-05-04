@@ -1,4 +1,4 @@
-package com.transonphat.carbooking.exceptions;
+package com.transonphat.carbooking.exceptions.handlers;
 
 import java.util.Date;
 

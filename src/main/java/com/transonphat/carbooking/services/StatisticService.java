@@ -6,7 +6,7 @@ import com.transonphat.carbooking.aggregation.customer.RevenueByCustomerQuery;
 import com.transonphat.carbooking.aggregation.driver.RevenueByDriverQuery;
 import com.transonphat.carbooking.domain.Revenue;
 import com.transonphat.carbooking.domain.Usage;
-import com.transonphat.carbooking.exceptions.InvalidTimePeriodException;
+import com.transonphat.carbooking.exceptions.types.InvalidTimePeriodException;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import org.springframework.stereotype.Service;
 

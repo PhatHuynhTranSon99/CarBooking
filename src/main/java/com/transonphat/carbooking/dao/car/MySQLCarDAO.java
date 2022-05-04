@@ -4,7 +4,7 @@ import com.transonphat.carbooking.dao.DAO;
 import com.transonphat.carbooking.dao.ExistenceDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Car;
-import com.transonphat.carbooking.exceptions.CarNotFoundException;
+import com.transonphat.carbooking.exceptions.types.CarNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.repositories.CarRepository;
 import com.transonphat.carbooking.search.SearchCriterion;

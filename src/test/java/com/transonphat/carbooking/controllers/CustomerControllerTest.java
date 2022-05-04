@@ -2,7 +2,7 @@ package com.transonphat.carbooking.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.transonphat.carbooking.domain.Customer;
-import com.transonphat.carbooking.exceptions.CustomerNotFoundException;
+import com.transonphat.carbooking.exceptions.types.CustomerNotFoundException;
 import com.transonphat.carbooking.services.BookingService;
 import com.transonphat.carbooking.services.CustomerService;
 import org.junit.jupiter.api.Test;

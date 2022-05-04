@@ -5,7 +5,7 @@ import com.transonphat.carbooking.dao.allocation.AllocationDAO;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.CarBuilder;
 import com.transonphat.carbooking.domain.Driver;
-import com.transonphat.carbooking.exceptions.CarAllocationException;
+import com.transonphat.carbooking.exceptions.types.CarAllocationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,7 +1,7 @@
 package com.transonphat.carbooking.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.transonphat.carbooking.exceptions.MissingPeriodException;
+import com.transonphat.carbooking.exceptions.types.MissingPeriodException;
 import com.transonphat.carbooking.services.BookingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.transonphat.carbooking.controllers;
 
 import com.transonphat.carbooking.domain.Invoice;
-import com.transonphat.carbooking.exceptions.MissingPeriodException;
+import com.transonphat.carbooking.exceptions.types.MissingPeriodException;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriteria;
 import com.transonphat.carbooking.search.SearchCriterion;

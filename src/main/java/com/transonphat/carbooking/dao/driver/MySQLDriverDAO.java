@@ -3,7 +3,7 @@ package com.transonphat.carbooking.dao.driver;
 import com.transonphat.carbooking.dao.DAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Driver;
-import com.transonphat.carbooking.exceptions.DriverNotFoundException;
+import com.transonphat.carbooking.exceptions.types.DriverNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.repositories.DriverRepository;
 import com.transonphat.carbooking.search.SearchCriterion;

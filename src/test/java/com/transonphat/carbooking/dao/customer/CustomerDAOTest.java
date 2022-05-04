@@ -2,7 +2,7 @@ package com.transonphat.carbooking.dao.customer;
 
 import com.transonphat.carbooking.dao.DAO;
 import com.transonphat.carbooking.domain.Customer;
-import com.transonphat.carbooking.exceptions.CustomerNotFoundException;
+import com.transonphat.carbooking.exceptions.types.CustomerNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,7 @@ package com.transonphat.carbooking.dao.driver;
 
 import com.transonphat.carbooking.dao.DAO;
 import com.transonphat.carbooking.domain.Driver;
-import com.transonphat.carbooking.exceptions.DriverNotFoundException;
+import com.transonphat.carbooking.exceptions.types.DriverNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

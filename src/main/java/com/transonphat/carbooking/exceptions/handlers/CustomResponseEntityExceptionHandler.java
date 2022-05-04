@@ -1,5 +1,6 @@
-package com.transonphat.carbooking.exceptions;
+package com.transonphat.carbooking.exceptions.handlers;
 
+import com.transonphat.carbooking.exceptions.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
