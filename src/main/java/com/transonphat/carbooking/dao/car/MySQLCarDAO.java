@@ -71,7 +71,6 @@ public class MySQLCarDAO implements DAO<Car>, SearchableDAO<Car>, ExistenceDAO<C
         );
 
         //Map page to pagination result
-
         return new PaginationResult<>(
                 carPage.getTotalElements(),
                 carPage.get().collect(Collectors.toList()),

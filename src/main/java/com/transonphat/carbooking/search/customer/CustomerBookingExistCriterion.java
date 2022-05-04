@@ -7,9 +7,9 @@ import javax.persistence.criteria.*;
 import java.time.ZonedDateTime;
 
 public class CustomerBookingExistCriterion implements SearchCriterion<Customer> {
-    private long customerId;
-    private ZonedDateTime startTime;
-    private ZonedDateTime endTime;
+    private final long customerId;
+    private final ZonedDateTime startTime;
+    private final ZonedDateTime endTime;
 
     public CustomerBookingExistCriterion(long customerId, ZonedDateTime startTime, ZonedDateTime endTime) {
         this.customerId = customerId;
