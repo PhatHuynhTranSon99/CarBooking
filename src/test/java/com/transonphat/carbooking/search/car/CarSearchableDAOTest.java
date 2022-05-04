@@ -284,7 +284,7 @@ public class CarSearchableDAOTest {
     }
 
     @Test
-    public void searchByIdAndDateShouldReturnCorrectResult() {
+    public void searchByIdAndBookingShouldReturnCorrectResult() {
         //TODO: Search by booking date
         PaginationResult<Car> coincidedResultOne = carSearchableDAO.search(
                 new CarBookingExistCriterion(
