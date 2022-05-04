@@ -163,7 +163,7 @@ public class DriverSearchableDAOTest {
     }
 
     @Test
-    public void searchDriverBooking() {
+    public void searchDriverByIdAndBooking() {
         //TODO: Search driver by booking date
     }
 }
