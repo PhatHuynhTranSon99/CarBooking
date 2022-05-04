@@ -58,7 +58,7 @@ public class DriverControllerTest {
         when(driverService.getDriverById(1L)).thenThrow(new DriverNotFoundException("Driver does not exist"));
 
         mockMvc.perform(get("/drivers/1"))
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof DriverNotFoundException));
     }
 
@@ -133,7 +133,7 @@ public class DriverControllerTest {
         when(driverService.getDriverById(1L)).thenThrow(new DriverNotFoundException("Driver does not exist"));
 
         mockMvc.perform(put("/drivers/1"))
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof DriverNotFoundException));
     }
 

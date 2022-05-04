@@ -21,9 +21,6 @@ public class BookingControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @MockBean
     private BookingService bookingService;
 
@@ -95,7 +92,7 @@ public class BookingControllerTest {
                         get("/bookings")
                                 .params(requestParams)
                 )
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof MissingPeriodException));
     }
 
@@ -116,7 +113,7 @@ public class BookingControllerTest {
                         get("/bookings")
                                 .params(requestParams)
                 )
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof MissingPeriodException));
     }
 

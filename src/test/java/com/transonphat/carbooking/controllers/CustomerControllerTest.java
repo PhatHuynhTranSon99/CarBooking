@@ -56,7 +56,7 @@ public class CustomerControllerTest {
         when(customerService.getCustomerById(1L)).thenThrow(new CustomerNotFoundException("Customer does not exist"));
 
         mockMvc.perform(get("/customers/1"))
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof CustomerNotFoundException));
     }
 
@@ -129,7 +129,7 @@ public class CustomerControllerTest {
         when(customerService.getCustomerById(1L)).thenThrow(new CustomerNotFoundException("Customer does not exist"));
 
         mockMvc.perform(put("/customers/1"))
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof CustomerNotFoundException));
     }
 

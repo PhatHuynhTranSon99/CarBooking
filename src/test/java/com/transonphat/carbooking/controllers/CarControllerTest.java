@@ -74,7 +74,7 @@ public class CarControllerTest {
 
         //Call
         mockMvc.perform(get("/cars/1"))
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof CarNotFoundException));
     }
 
@@ -235,7 +235,7 @@ public class CarControllerTest {
         mockMvc.perform(
                 put("/cars/1").params(requestParams)
         )
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof CarNotFoundException));
     }
 
