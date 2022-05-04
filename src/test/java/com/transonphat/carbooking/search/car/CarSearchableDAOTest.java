@@ -264,8 +264,10 @@ public class CarSearchableDAOTest {
         //Two result
         PaginationResult<Car> twoCarResult = carSearchableDAO.search(
                 new CarFreeCriterion(
-                        ZonedDateTime.of(2020, 1, 20, 0, 0, 0, 0, ZoneId.of("Asia/Ho_Chi_Minh")),
-                        ZonedDateTime.of(2020, 1, 27, 0, 0, 0, 0, ZoneId.of("Asia/Ho_Chi_Minh"))
+                        ZonedDateTime.of(2020, 1, 20, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 1, 27, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
                 ),
                 0,
                 10
@@ -282,7 +284,134 @@ public class CarSearchableDAOTest {
     }
 
     @Test
-    public void searchByIdAndDate() {
+    public void searchByIdAndDateShouldReturnCorrectResult() {
         //TODO: Search by booking date
+        PaginationResult<Car> coincidedResultOne = carSearchableDAO.search(
+                new CarBookingExistCriterion(
+                        1L,
+                        ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 1, 5, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(1L, coincidedResultOne.getTotalItems());
+        assertThat(
+                coincidedResultOne.getItems(),
+                contains(
+                        hasProperty("id", is(1L))
+                )
+        );
+
+        PaginationResult<Car> coincidedResultTwo = carSearchableDAO.search(
+                new CarBookingExistCriterion(
+                        2L,
+                        ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 1, 5, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(1L, coincidedResultTwo.getTotalItems());
+        assertThat(
+                coincidedResultTwo.getItems(),
+                contains(
+                        hasProperty("id", is(2L))
+                )
+        );
+
+        PaginationResult<Car> coincidedResultThree = carSearchableDAO.search(
+                new CarBookingExistCriterion(
+                        3L,
+                        ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 1, 5, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(1L, coincidedResultThree.getTotalItems());
+        assertThat(
+                coincidedResultThree.getItems(),
+                contains(
+                        hasProperty("id", is(3L))
+                )
+        );
+
+        PaginationResult<Car> coincidedResultFour = carSearchableDAO.search(
+                new CarBookingExistCriterion(
+                        1L,
+                        ZonedDateTime.of(2020, 1, 20, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 2, 1, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(1L, coincidedResultFour.getTotalItems());
+        assertThat(
+                coincidedResultFour.getItems(),
+                contains(
+                        hasProperty("id", is(1L))
+                )
+        );
+
+        PaginationResult<Car> noCoincideResultOne = carSearchableDAO.search(
+                new CarBookingExistCriterion(
+                        2L,
+                        ZonedDateTime.of(2020, 1, 6, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 1, 9, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(0L, noCoincideResultOne.getTotalItems());
+
+        PaginationResult<Car> noCoincideResultTwo = carSearchableDAO.search(
+                new CarBookingExistCriterion(
+                        2L,
+                        ZonedDateTime.of(2020, 1, 20, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 2, 1, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(0L, noCoincideResultTwo.getTotalItems());
+
+        PaginationResult<Car> noCoincideResultThree = carSearchableDAO.search(
+                new CarBookingExistCriterion(
+                        2L,
+                        ZonedDateTime.of(2020, 1, 20, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 2, 1, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(0L, noCoincideResultThree.getTotalItems());
+
+        PaginationResult<Car> noCoincideResultFour = carSearchableDAO.search(
+                new CarBookingExistCriterion(
+                        4L,
+                        ZonedDateTime.of(2020, 1, 1, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh")),
+                        ZonedDateTime.of(2020, 5, 1, 0, 0, 0, 0,
+                                ZoneId.of("Asia/Ho_Chi_Minh"))
+                ),
+                0,
+                10
+        );
+        assertEquals(0L, noCoincideResultFour.getTotalItems());
     }
 }
