@@ -10,6 +10,7 @@ import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.exceptions.types.CarDoesNotHaveDriverException;
 import com.transonphat.carbooking.exceptions.types.CarNotAvailableException;
+import com.transonphat.carbooking.exceptions.types.CustomerNotAvailableException;
 import com.transonphat.carbooking.exceptions.types.InvalidTimePeriodException;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriteria;
@@ -20,6 +21,7 @@ import com.transonphat.carbooking.search.booking.BookingWithDriverCriterion;
 import com.transonphat.carbooking.search.car.CarBookingExistCriterion;
 import com.transonphat.carbooking.search.car.CarFreeCriterion;
 import com.transonphat.carbooking.search.car.CarHasDriverCriterion;
+import com.transonphat.carbooking.search.customer.CustomerBookingExistCriterion;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
@@ -30,8 +32,10 @@ public class BookingService {
     private final DAO<Booking> bookingDao;
     private final SearchableDAO<Booking> bookingSearchableDAO;
     private final ExhaustiveSearchableDAO<Booking> exhaustiveSearchableDAO;
+
     private final SearchableDAO<Car> carSearchableDAO;
     private final ExistenceDAO<Car> carExistenceDAO;
+    private final ExistenceDAO<Customer> customerExistenceDAO;
 
     //Creating a booking
     private final InvoiceService invoiceService;
@@ -43,7 +47,7 @@ public class BookingService {
                           ExhaustiveSearchableDAO<Booking> exhaustiveSearchableDAO,
                           SearchableDAO<Car> carSearchableDAO,
                           ExistenceDAO<Car> carExistenceDAO,
-                          InvoiceService invoiceService,
+                          ExistenceDAO<Customer> customerExistenceDAO, InvoiceService invoiceService,
                           CarService carService,
                           CustomerService customerService) {
         this.bookingDao = bookingDao;
@@ -51,6 +55,7 @@ public class BookingService {
         this.exhaustiveSearchableDAO = exhaustiveSearchableDAO;
         this.carSearchableDAO = carSearchableDAO;
         this.carExistenceDAO = carExistenceDAO;
+        this.customerExistenceDAO = customerExistenceDAO;
         this.invoiceService = invoiceService;
         this.carService = carService;
         this.customerService = customerService;
@@ -78,6 +83,12 @@ public class BookingService {
         );
     }
 
+    public boolean checkIfCustomerAvailable(long customerId, ZonedDateTime startTime, ZonedDateTime endTime) {
+        return !this.customerExistenceDAO.exists(
+                new CustomerBookingExistCriterion(customerId, startTime, endTime)
+        );
+    }
+
     public Booking createBooking(String startingLocation,
                                  String destinationLocation,
                                  ZonedDateTime startTime,
@@ -85,6 +96,10 @@ public class BookingService {
                                  double distance,
                                  long carId,
                                  long customerId) {
+        //Check if start time is less than end time
+        if (startTime.isAfter(endTime))
+            throw new InvalidTimePeriodException("Starting time must come before ending time");
+
         //Get car and customer
         Car car = this.carService.getCarById(carId);
         Customer customer = this.customerService.getCustomerById(customerId);
@@ -97,9 +112,9 @@ public class BookingService {
         if (!checkIfCarIsAvailable(carId, startTime, endTime))
             throw new CarNotAvailableException("Car is not available during the trip");
 
-        //Check if start time is less than end time
-        if (startTime.isAfter(endTime))
-            throw new InvalidTimePeriodException("Starting time must come before ending time");
+        //Check if customer is available for the trip (has not made another booking that overlaps this)
+        if (!checkIfCustomerAvailable(customerId, startTime, endTime))
+            throw new CustomerNotAvailableException("Customer has made another booking that overlap this booking");
 
         //Create new invoice
         Invoice invoice = this.invoiceService.createInvoice(customer, car, distance);
