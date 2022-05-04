@@ -350,7 +350,8 @@ GRANT SELECT, INSERT, UPDATE, DELETE, SHOW VIEW ON `cardb`.* TO `caruser`@`%`;
 FLUSH PRIVILEGES;
 ```
 This will create the database and also two users, caradmin, caruser with special privileges.
-###Step 2.2: Create test database
+
+### Step 2.2: Create test database
 Secondly, if you want to run the unit tests, you should also run the following scripts before running the tests.
 ```sql
 DROP DATABASE IF EXISTS testcardb;
