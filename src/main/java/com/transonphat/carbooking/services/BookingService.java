@@ -161,12 +161,14 @@ public class BookingService {
 
         if (distance != null) {
             //Remove existing invoice
-            this.invoiceService.deleteInvoice(booking.getInvoice().getId());
+            Invoice oldInvoice = booking.getInvoice();
+            booking.setInvoice(null);
+            this.invoiceService.deleteInvoice(oldInvoice.getId());
 
             //Create new invoice
             Invoice invoice = this.invoiceService.createInvoice(
-                    booking.getInvoice().getCustomer(),
-                    booking.getInvoice().getDriver().getCar(),
+                    oldInvoice.getCustomer(),
+                    oldInvoice.getDriver().getCar(),
                     distance
             );
 
