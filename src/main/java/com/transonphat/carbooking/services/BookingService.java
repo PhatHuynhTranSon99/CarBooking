@@ -8,10 +8,7 @@ import com.transonphat.carbooking.domain.Booking;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.domain.Invoice;
-import com.transonphat.carbooking.exceptions.types.CarDoesNotHaveDriverException;
-import com.transonphat.carbooking.exceptions.types.CarNotAvailableException;
-import com.transonphat.carbooking.exceptions.types.CustomerNotAvailableException;
-import com.transonphat.carbooking.exceptions.types.InvalidTimePeriodException;
+import com.transonphat.carbooking.exceptions.types.*;
 import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriteria;
 import com.transonphat.carbooking.search.SearchCriterion;
@@ -130,6 +127,54 @@ public class BookingService {
         booking.setInvoice(invoice);
 
         return this.bookingCrudDao.save(booking);
+    }
+
+    public Booking updateBooking(long bookingId,
+                                 String startingLocation,
+                                 String destinationLocation,
+                                 ZonedDateTime startTime,
+                                 ZonedDateTime endTime,
+                                 Double distance) {
+        //Get booking
+        Booking booking = this.bookingCrudDao.getOne(bookingId);
+
+        //Both start and end time must be visible
+        if ((startTime == null && endTime != null) || (startTime != null && endTime == null))
+            throw new InvalidTimePeriodException("Starting time must come before ending time");
+
+        if (startTime != null && startTime.isAfter(endTime))
+            throw new MissingPeriodException("Start and end time must both be present");
+
+        //Create new booking
+        if (startingLocation != null) {
+            booking.setStartLocation(startingLocation);
+        }
+
+        if (destinationLocation != null) {
+            booking.setEndLocation(destinationLocation);
+        }
+
+        if (startTime != null) {
+            booking.setStartTime(startTime);
+            booking.setEndTime(endTime);
+        }
+
+        if (distance != null) {
+            //Remove existing invoice
+            this.invoiceService.deleteInvoice(booking.getInvoice().getId());
+
+            //Create new invoice
+            Invoice invoice = this.invoiceService.createInvoice(
+                    booking.getInvoice().getCustomer(),
+                    booking.getInvoice().getDriver().getCar(),
+                    distance
+            );
+
+            booking.setDistance(distance);
+            booking.setInvoice(invoice);
+        }
+
+        return bookingCrudDao.save(booking);
     }
 
     public PaginationResult<Booking> searchBookings(SearchCriterion<Booking> criterion, int currentPage, int pageSize) {

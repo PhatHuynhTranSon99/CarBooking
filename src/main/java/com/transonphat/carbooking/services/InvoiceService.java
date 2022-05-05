@@ -39,4 +39,8 @@ public class InvoiceService {
                                                    int pageSize) {
         return invoiceSearchableDAO.search(invoiceSearchCriterion, currentPage, pageSize);
     }
+
+    public Invoice deleteInvoice(long invoiceId) {
+        return this.invoiceCrudDAO.delete(invoiceId);
+    }
 }

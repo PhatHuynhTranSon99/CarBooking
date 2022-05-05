@@ -80,4 +80,21 @@ public class BookingController {
                 customerId
         );
     }
+
+    @PutMapping("/bookings/{bookingId}")
+    public Booking updateBooking(@PathVariable long bookingId,
+                                 @RequestParam(required = false) String startingLocation,
+                                 @RequestParam(required = false) String destinationLocation,
+                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime startTime,
+                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime endTime,
+                                 @RequestParam(required = false) Double distance) {
+        return bookingService.updateBooking(
+                bookingId,
+                startingLocation,
+                destinationLocation,
+                startTime,
+                endTime,
+                distance
+        );
+    }
 }
