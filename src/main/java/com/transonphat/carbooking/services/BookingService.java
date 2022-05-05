@@ -44,7 +44,8 @@ public class BookingService {
                           ExhaustiveSearchableDAO<Booking> exhaustiveSearchableDAO,
                           SearchableDAO<Car> carSearchableDAO,
                           ExistenceDAO<Car> carExistenceDAO,
-                          ExistenceDAO<Customer> customerExistenceDAO, InvoiceService invoiceService,
+                          ExistenceDAO<Customer> customerExistenceDAO,
+                          InvoiceService invoiceService,
                           CarService carService,
                           CustomerService customerService) {
         this.bookingCrudDao = bookingCrudDao;
@@ -140,10 +141,9 @@ public class BookingService {
 
         //Both start and end time must be visible
         if ((startTime == null && endTime != null) || (startTime != null && endTime == null))
-            throw new InvalidTimePeriodException("Starting time must come before ending time");
-
-        if (startTime != null && startTime.isAfter(endTime))
             throw new MissingPeriodException("Start and end time must both be present");
+        if (startTime != null && startTime.isAfter(endTime))
+            throw new InvalidTimePeriodException("Starting time must come before ending time");
 
         //Create new booking
         if (startingLocation != null) {
