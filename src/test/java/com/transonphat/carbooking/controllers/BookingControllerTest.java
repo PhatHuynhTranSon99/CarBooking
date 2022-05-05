@@ -153,4 +153,27 @@ public class BookingControllerTest {
                 eq(1L)
         );
     }
+
+    @Test
+    public void updateBookingShouldCallServiceMethod() throws Exception {
+        //Parameters
+        LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
+        requestParams.add("startingLocation", "New Home");
+        requestParams.add("destinationLocation", "New Day");
+        requestParams.add("distance", "100.0");
+
+        //Call endpoints
+        mockMvc.perform(put("/bookings/1").params(requestParams))
+                .andExpect(status().isOk());
+
+        //Assert call to service
+        verify(bookingService).updateBooking(
+                eq(1L),
+                eq("New Home"),
+                eq("New Day"),
+                any(),
+                any(),
+                eq(100.0)
+        );
+    }
 }
