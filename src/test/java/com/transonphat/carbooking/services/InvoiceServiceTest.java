@@ -17,8 +17,10 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.time.ZonedDateTime;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = {InvoiceService.class})
 @ActiveProfiles(profiles = {"test"})
@@ -71,5 +73,20 @@ public class InvoiceServiceTest {
         //Assert call
         invoiceService.searchInvoice(invoiceSearchCriterion, 0, 10);
         verify(invoiceSearchableDAO).search(invoiceSearchCriterion, 0, 10);
+    }
+
+    @Test
+    public void deleteInvoiceShouldCallDAOMethod() {
+        //Return invoice when called
+        Invoice invoice = new Invoice();
+        invoice.setId(1L);
+        invoice.setTotalCharges(100.0);
+        invoice.setCreatedDate(ZonedDateTime.now());
+
+        when(invoiceCrudDAO.delete(1L)).thenReturn(invoice);
+
+        //Assert call
+        Invoice removedInvoice = invoiceService.deleteInvoice(1L);
+        assertEquals(invoice, removedInvoice);
     }
 }
