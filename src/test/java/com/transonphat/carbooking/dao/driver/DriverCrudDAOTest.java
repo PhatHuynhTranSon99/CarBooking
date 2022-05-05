@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.dao.driver;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.domain.Driver;
 import com.transonphat.carbooking.exceptions.types.DriverNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -17,13 +17,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 @Transactional
-public class DriverDAOTest {
+public class DriverCrudDAOTest {
     @Autowired
-    private DAO<Driver> driverDAO;
+    private CrudDAO<Driver> driverCrudDAO;
 
     @Test
     public void getOneReturnCorrectResult() {
-        Driver driver = driverDAO.getOne(1L);
+        Driver driver = driverCrudDAO.getOne(1L);
 
         assertEquals("Adam", driver.getFirstName());
         assertEquals("Levine", driver.getLastName());
@@ -36,7 +36,7 @@ public class DriverDAOTest {
         DriverNotFoundException exception = assertThrows(
                 DriverNotFoundException.class,
                 () -> {
-                    driverDAO.getOne(100L);
+                    driverCrudDAO.getOne(100L);
                 }
         );
 
@@ -46,7 +46,7 @@ public class DriverDAOTest {
     @Test
     @Transactional
     public void deleteDriverSuccessfully() {
-        Driver driver = driverDAO.delete(1L);
+        Driver driver = driverCrudDAO.delete(1L);
 
         assertEquals("Adam", driver.getFirstName());
         assertEquals("Levine", driver.getLastName());
@@ -59,7 +59,7 @@ public class DriverDAOTest {
         DriverNotFoundException exception = assertThrows(
                 DriverNotFoundException.class,
                 () -> {
-                    driverDAO.getOne(200L);
+                    driverCrudDAO.getOne(200L);
                 }
         );
 
@@ -68,7 +68,7 @@ public class DriverDAOTest {
 
     @Test
     public void findAllDriversSuccessfully() {
-        PaginationResult<Driver> driverPaginationResult = driverDAO.getAll(0, 10);
+        PaginationResult<Driver> driverPaginationResult = driverCrudDAO.getAll(0, 10);
 
         assertEquals(3, driverPaginationResult.getTotalItems());
         assertThat(
@@ -89,7 +89,7 @@ public class DriverDAOTest {
         driver.setLastName("Kind");
         driver.setPhoneNumber("0909191919");
         driver.setRatings(5.0);
-        driver = driverDAO.save(driver);
+        driver = driverCrudDAO.save(driver);
 
         assertNotNull(driver.getId());
         assertEquals("Man", driver.getFirstName());

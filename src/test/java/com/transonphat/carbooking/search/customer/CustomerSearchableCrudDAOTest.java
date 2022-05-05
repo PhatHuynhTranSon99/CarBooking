@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @ActiveProfiles(profiles = { "test" })
-public class CustomerSearchableDAOTest {
+public class CustomerSearchableCrudDAOTest {
     @Autowired
     private SearchableDAO<Customer> customerSearchableDAO;
 

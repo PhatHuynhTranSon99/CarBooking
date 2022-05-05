@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.services;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.dao.ExhaustiveSearchableDAO;
 import com.transonphat.carbooking.dao.ExistenceDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
@@ -33,7 +33,7 @@ public class BookingServiceTest {
     private BookingService bookingService;
 
     @MockBean
-    private DAO<Booking> bookingDao;
+    private CrudDAO<Booking> bookingCrudDao;
 
     @MockBean
     private SearchableDAO<Booking> bookingSearchableDAO;
@@ -110,7 +110,7 @@ public class BookingServiceTest {
         bookingService.deleteBooking(bookingId);
 
         //Assert method call
-        verify(bookingDao).delete(bookingId);
+        verify(bookingCrudDao).delete(bookingId);
     }
 
     @Test
@@ -137,7 +137,7 @@ public class BookingServiceTest {
 
         //Assert method call
         verify(exhaustiveSearchableDAO).search(any());
-        verify(bookingDao, times(3)).delete(anyLong());
+        verify(bookingCrudDao, times(3)).delete(anyLong());
     }
 
     @Test
@@ -164,7 +164,7 @@ public class BookingServiceTest {
 
         //Assert method call
         verify(exhaustiveSearchableDAO).search(any());
-        verify(bookingDao, times(3)).delete(anyLong());
+        verify(bookingCrudDao, times(3)).delete(anyLong());
     }
 
     @Test
@@ -191,7 +191,7 @@ public class BookingServiceTest {
 
         //Assert method call
         verify(exhaustiveSearchableDAO).search(any());
-        verify(bookingDao, times(3)).delete(anyLong());
+        verify(bookingCrudDao, times(3)).delete(anyLong());
     }
 
     @Test
@@ -240,7 +240,7 @@ public class BookingServiceTest {
 
         //Assert calls
         verify(invoiceService).createInvoice(customer, car, distance);
-        verify(bookingDao).save(any());
+        verify(bookingCrudDao).save(any());
     }
 
     @Test

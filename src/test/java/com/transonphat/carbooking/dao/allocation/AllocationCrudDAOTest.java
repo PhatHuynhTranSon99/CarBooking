@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.dao.allocation;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.Driver;
 import org.junit.jupiter.api.Test;
@@ -16,36 +16,36 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 @Transactional
-public class AllocationDAOTest {
+public class AllocationCrudDAOTest {
     @Autowired
     private AllocationDAO allocationDAO;
 
     @Autowired
-    private DAO<Car> carDAO;
+    private CrudDAO<Car> carCrudDAO;
 
     @Autowired
-    private DAO<Driver> driverDAO;
+    private CrudDAO<Driver> driverCrudDAO;
 
     @Test
     @Rollback
     public void shouldAllocateCarToDriverSuccessfully() {
         //Add car to driver
-        Driver driver = driverDAO.getOne(4L);
-        Car car = carDAO.getOne(4L);
+        Driver driver = driverCrudDAO.getOne(4L);
+        Car car = carCrudDAO.getOne(4L);
         allocationDAO.addCarToDriver(car, driver);
 
         //Check driver and car has changed
-        driver = driverDAO.getOne(4L);
+        driver = driverCrudDAO.getOne(4L);
         assertEquals(car, driver.getCar());
     }
 
     @Test
     public void shouldRemoveCarFromDriverSuccessfully() {
-        Driver driver = driverDAO.getOne(4L);
+        Driver driver = driverCrudDAO.getOne(4L);
         allocationDAO.removeCarFromDriver(driver);
 
         //Check driver and car has changed
-        driver = driverDAO.getOne(4L);
+        driver = driverCrudDAO.getOne(4L);
         assertNull(driver.getCar());
     }
 }

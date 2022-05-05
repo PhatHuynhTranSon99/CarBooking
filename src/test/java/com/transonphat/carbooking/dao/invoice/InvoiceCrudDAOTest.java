@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.dao.invoice;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.exceptions.types.InvoiceNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 @Transactional
-public class InvoiceDAOTest {
+public class InvoiceCrudDAOTest {
     @Autowired
-    private DAO<Invoice> invoiceDAO;
+    private CrudDAO<Invoice> invoiceCrudDAO;
 
     @Test
     public void getOneReturnCorrectResult() {
-        Invoice invoice = invoiceDAO.getOne(1L);
+        Invoice invoice = invoiceCrudDAO.getOne(1L);
 
         assertEquals(1, invoice.getId());
         assertEquals(100.0, invoice.getTotalCharges());
@@ -38,7 +38,7 @@ public class InvoiceDAOTest {
         InvoiceNotFoundException exception = assertThrows(
                 InvoiceNotFoundException.class,
                 () -> {
-                    invoiceDAO.getOne(100L);
+                    invoiceCrudDAO.getOne(100L);
                 }
         );
 
@@ -47,7 +47,7 @@ public class InvoiceDAOTest {
 
     @Test
     public void getAllReturnCorrectResult() {
-        PaginationResult<Invoice> invoicePaginationResult = invoiceDAO.getAll(0, 10);
+        PaginationResult<Invoice> invoicePaginationResult = invoiceCrudDAO.getAll(0, 10);
         assertEquals(4, invoicePaginationResult.getTotalItems());
         assertThat(
                 invoicePaginationResult.getItems(),
@@ -62,7 +62,7 @@ public class InvoiceDAOTest {
 
     @Test
     public void deleteSuccessfully() {
-        Invoice invoice = invoiceDAO.delete(1L);
+        Invoice invoice = invoiceCrudDAO.delete(1L);
 
         assertEquals(1, invoice.getId());
         assertEquals(100.0, invoice.getTotalCharges());
@@ -76,7 +76,7 @@ public class InvoiceDAOTest {
         InvoiceNotFoundException exception = assertThrows(
                 InvoiceNotFoundException.class,
                 () -> {
-                    invoiceDAO.delete(100L);
+                    invoiceCrudDAO.delete(100L);
                 }
         );
 
@@ -88,7 +88,7 @@ public class InvoiceDAOTest {
         Invoice invoice = new Invoice();
         invoice.setTotalCharges(100.0);
 
-        invoiceDAO.save(invoice);
+        invoiceCrudDAO.save(invoice);
 
         assertNotNull(invoice.getId());
         assertNotNull(invoice.getCreatedDate());

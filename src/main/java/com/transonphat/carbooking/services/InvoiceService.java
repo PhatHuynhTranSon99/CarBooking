@@ -1,7 +1,7 @@
 package com.transonphat.carbooking.services;
 
 import com.transonphat.carbooking.charge.ChargeCalculator;
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.Customer;
@@ -12,14 +12,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class InvoiceService {
-    private final DAO<Invoice> invoiceDAO;
+    private final CrudDAO<Invoice> invoiceCrudDAO;
     private final SearchableDAO<Invoice> invoiceSearchableDAO;
     private final ChargeCalculator chargeCalculator;
 
-    public InvoiceService(DAO<Invoice> invoiceDAO,
+    public InvoiceService(CrudDAO<Invoice> invoiceCrudDAO,
                           SearchableDAO<Invoice> invoiceSearchableDAO,
                           ChargeCalculator chargeCalculator) {
-        this.invoiceDAO = invoiceDAO;
+        this.invoiceCrudDAO = invoiceCrudDAO;
         this.invoiceSearchableDAO = invoiceSearchableDAO;
         this.chargeCalculator = chargeCalculator;
     }
@@ -31,7 +31,7 @@ public class InvoiceService {
         invoice.setDriver(car.getDriver());
         invoice.setTotalCharges(chargeCalculator.calculateTotalCharge(distance, car.getRate()));
 
-        return this.invoiceDAO.save(invoice);
+        return this.invoiceCrudDAO.save(invoice);
     }
 
     public PaginationResult<Invoice> searchInvoice(SearchCriterion<Invoice> invoiceSearchCriterion,

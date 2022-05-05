@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.services;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.dao.allocation.AllocationDAO;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.CarBuilder;
@@ -25,10 +25,10 @@ public class AllocationServiceTest {
     private AllocationService allocationService;
 
     @MockBean
-    private DAO<Car> carDAO;
+    private CrudDAO<Car> carCrudDAO;
 
     @MockBean
-    private DAO<Driver> driverDAO;
+    private CrudDAO<Driver> driverCrudDAO;
 
     @MockBean
     private AllocationDAO allocationDAO;
@@ -60,15 +60,15 @@ public class AllocationServiceTest {
         car.setDriver(null);
         driver.setCar(null);
 
-        when(carDAO.getOne(1L)).thenReturn(car);
-        when(driverDAO.getOne(1L)).thenReturn(driver);
+        when(carCrudDAO.getOne(1L)).thenReturn(car);
+        when(driverCrudDAO.getOne(1L)).thenReturn(driver);
 
         //Call allocate service
         allocationService.allocateDriverToCar(1L, 1L);
 
         //One for check car allocated, one for get one
-        verify(carDAO).getOne(1L);
-        verify(driverDAO).getOne(1L);
+        verify(carCrudDAO).getOne(1L);
+        verify(driverCrudDAO).getOne(1L);
         verify(allocationDAO).addCarToDriver(car, driver);
     }
 
@@ -99,8 +99,8 @@ public class AllocationServiceTest {
         car.setDriver(new Driver());
         driver.setCar(null);
 
-        when(carDAO.getOne(1L)).thenReturn(car);
-        when(driverDAO.getOne(1L)).thenReturn(driver);
+        when(carCrudDAO.getOne(1L)).thenReturn(car);
+        when(driverCrudDAO.getOne(1L)).thenReturn(driver);
 
         //Call allocate service
         CarAllocationException exception = assertThrows(
@@ -140,8 +140,8 @@ public class AllocationServiceTest {
         car.setDriver(null);
         driver.setCar(new Car());
 
-        when(carDAO.getOne(1L)).thenReturn(car);
-        when(driverDAO.getOne(1L)).thenReturn(driver);
+        when(carCrudDAO.getOne(1L)).thenReturn(car);
+        when(driverCrudDAO.getOne(1L)).thenReturn(driver);
 
         //Call allocate service
         CarAllocationException exception = assertThrows(
@@ -170,10 +170,10 @@ public class AllocationServiceTest {
                 .build();
         car.setDriver(new Driver());
 
-        when(carDAO.getOne(1L)).thenReturn(car);
+        when(carCrudDAO.getOne(1L)).thenReturn(car);
 
         allocationService.removeDriverFromCar(1L);
-        verify(carDAO, atLeast(1)).getOne(1L);
+        verify(carCrudDAO, atLeast(1)).getOne(1L);
         verify(allocationDAO).removeCarFromDriver(car.getDriver());
     }
 
@@ -193,7 +193,7 @@ public class AllocationServiceTest {
                 .build();
         car.setDriver(null);
 
-        when(carDAO.getOne(1L)).thenReturn(car);
+        when(carCrudDAO.getOne(1L)).thenReturn(car);
 
         CarAllocationException exception = assertThrows(
                 CarAllocationException.class,

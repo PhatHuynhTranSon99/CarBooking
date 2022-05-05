@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.dao.booking;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.domain.Booking;
 import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.exceptions.types.BookingNotFoundException;
@@ -23,16 +23,16 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 @Transactional
-public class BookingDAOTest {
+public class BookingCrudDAOTest {
     @Autowired
-    private DAO<Booking> bookingDAO;
+    private CrudDAO<Booking> bookingCrudDAO;
 
     @Autowired
-    private DAO<Invoice> invoiceDAO;
+    private CrudDAO<Invoice> invoiceCrudDAO;
 
     @Test
     public void getOneReturnCorrectResult() {
-        Booking booking = bookingDAO.getOne(1L);
+        Booking booking = bookingCrudDAO.getOne(1L);
 
         assertEquals(1, booking.getId());
         assertEquals(100.0, booking.getDistance());
@@ -46,7 +46,7 @@ public class BookingDAOTest {
         BookingNotFoundException exception = assertThrows(
                 BookingNotFoundException.class,
                 () -> {
-                    bookingDAO.getOne(100L);
+                    bookingCrudDAO.getOne(100L);
                 }
         );
 
@@ -55,7 +55,7 @@ public class BookingDAOTest {
 
     @Test
     public void getAllReturnCorrectResult() {
-        PaginationResult<Booking> bookingPaginationResult = bookingDAO.getAll(0, 10);
+        PaginationResult<Booking> bookingPaginationResult = bookingCrudDAO.getAll(0, 10);
 
         assertEquals(4, bookingPaginationResult.getTotalItems());
         assertThat(
@@ -72,7 +72,7 @@ public class BookingDAOTest {
     @Test
     @Rollback
     public void deleteSuccessfully() {
-        Booking booking = bookingDAO.delete(1L);
+        Booking booking = bookingCrudDAO.delete(1L);
 
         assertEquals(1, booking.getId());
         assertEquals(100.0, booking.getDistance());
@@ -85,12 +85,12 @@ public class BookingDAOTest {
     @Rollback
     public void deleteBookingShouldDeleteInvoice() {
         //Deleted booking -> Invoice  not found
-        Booking booking = bookingDAO.delete(1L);
+        Booking booking = bookingCrudDAO.delete(1L);
 
         InvoiceNotFoundException exception = assertThrows(
                 InvoiceNotFoundException.class,
                 () -> {
-                    invoiceDAO.getOne(booking.getInvoice().getId());
+                    invoiceCrudDAO.getOne(booking.getInvoice().getId());
                 }
         );
 
@@ -102,7 +102,7 @@ public class BookingDAOTest {
         BookingNotFoundException exception = assertThrows(
                 BookingNotFoundException.class,
                 () -> {
-                    bookingDAO.delete(100L);
+                    bookingCrudDAO.delete(100L);
                 }
         );
 
@@ -121,7 +121,7 @@ public class BookingDAOTest {
         booking.setEndTime(ZonedDateTime.of(2020, 2, 5, 0, 0, 0, 0,
                 ZoneId.of("Asia/Ho_Chi_Minh")));
 
-        bookingDAO.save(booking);
+        bookingCrudDAO.save(booking);
 
         assertNotNull(booking.getId());
         assertNotNull(booking.getCreatedDate());

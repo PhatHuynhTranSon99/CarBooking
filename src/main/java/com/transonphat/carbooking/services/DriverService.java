@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.services;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Driver;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -10,24 +10,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class DriverService {
     private final SearchableDAO<Driver> driverSearchableDAO;
-    private final DAO<Driver> driverDAO;
+    private final CrudDAO<Driver> driverCrudDAO;
 
-    public DriverService(SearchableDAO<Driver> driverSearchableDAO, DAO<Driver> driverDAO) {
+    public DriverService(SearchableDAO<Driver> driverSearchableDAO, CrudDAO<Driver> driverCrudDAO) {
         this.driverSearchableDAO = driverSearchableDAO;
-        this.driverDAO = driverDAO;
+        this.driverCrudDAO = driverCrudDAO;
     }
 
 
     public Driver saveDriver(Driver driver) {
-        return this.driverDAO.save(driver);
+        return this.driverCrudDAO.save(driver);
     }
 
     public Driver deleteDriver(long id) {
-        return this.driverDAO.delete(id);
+        return this.driverCrudDAO.delete(id);
     }
 
     public Driver getDriverById(long id) {
-        return this.driverDAO.getOne(id);
+        return this.driverCrudDAO.getOne(id);
     }
 
     public PaginationResult<Driver> searchDriver(SearchCriterion<Driver> searchCriterion,

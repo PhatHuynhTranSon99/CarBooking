@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.services;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.dao.ExhaustiveSearchableDAO;
 import com.transonphat.carbooking.dao.ExistenceDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
@@ -29,7 +29,7 @@ import java.util.List;
 
 @Service
 public class BookingService {
-    private final DAO<Booking> bookingDao;
+    private final CrudDAO<Booking> bookingCrudDao;
     private final SearchableDAO<Booking> bookingSearchableDAO;
     private final ExhaustiveSearchableDAO<Booking> exhaustiveSearchableDAO;
 
@@ -42,7 +42,7 @@ public class BookingService {
     private final CarService carService;
     private final CustomerService customerService;
 
-    public BookingService(DAO<Booking> bookingDao,
+    public BookingService(CrudDAO<Booking> bookingCrudDao,
                           SearchableDAO<Booking> bookingSearchableDAO,
                           ExhaustiveSearchableDAO<Booking> exhaustiveSearchableDAO,
                           SearchableDAO<Car> carSearchableDAO,
@@ -50,7 +50,7 @@ public class BookingService {
                           ExistenceDAO<Customer> customerExistenceDAO, InvoiceService invoiceService,
                           CarService carService,
                           CustomerService customerService) {
-        this.bookingDao = bookingDao;
+        this.bookingCrudDao = bookingCrudDao;
         this.bookingSearchableDAO = bookingSearchableDAO;
         this.exhaustiveSearchableDAO = exhaustiveSearchableDAO;
         this.carSearchableDAO = carSearchableDAO;
@@ -129,7 +129,7 @@ public class BookingService {
         booking.setDistance(distance);
         booking.setInvoice(invoice);
 
-        return this.bookingDao.save(booking);
+        return this.bookingCrudDao.save(booking);
     }
 
     public PaginationResult<Booking> searchBookings(SearchCriterion<Booking> criterion, int currentPage, int pageSize) {
@@ -137,7 +137,7 @@ public class BookingService {
     }
 
     public Booking deleteBooking(long bookingId) {
-        return this.bookingDao.delete(bookingId);
+        return this.bookingCrudDao.delete(bookingId);
     }
 
     public void deleteRelatedBookingsWithCar(long carId) {
@@ -148,7 +148,7 @@ public class BookingService {
 
         //Remove all
         for (Booking booking : relevantBookings) {
-            this.bookingDao.delete(booking.getId());
+            this.bookingCrudDao.delete(booking.getId());
         }
     }
 
@@ -160,7 +160,7 @@ public class BookingService {
 
         //Remove all
         for (Booking booking : relevantBookings) {
-            this.bookingDao.delete(booking.getId());
+            this.bookingCrudDao.delete(booking.getId());
         }
     }
 
@@ -172,7 +172,7 @@ public class BookingService {
 
         //Remove all
         for (Booking booking : relevantBookings) {
-            this.bookingDao.delete(booking.getId());
+            this.bookingCrudDao.delete(booking.getId());
         }
     }
 }

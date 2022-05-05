@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.services;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.search.SearchCriterion;
@@ -19,7 +19,7 @@ public class CarServiceTest {
     private CarService carService;
 
     @MockBean
-    private DAO<Car> carDAO;
+    private CrudDAO<Car> carCrudDAO;
 
     @MockBean
     private SearchableDAO<Car> carSearchableDAO;
@@ -29,20 +29,20 @@ public class CarServiceTest {
         //Assert carDAO save method is called
         Car newCar = new Car();
         carService.saveCar(newCar);
-        Mockito.verify(carDAO).save(newCar);
+        Mockito.verify(carCrudDAO).save(newCar);
     }
 
     @Test
     public void deleteCarShouldCallDAOMethod() {
         //Assert carDAO delete method is called
         carService.deleteCar(1);
-        Mockito.verify(carDAO).delete(1);
+        Mockito.verify(carCrudDAO).delete(1);
     }
 
     @Test
     public void getCarByIdShouldCallDAOMethod() {
         carService.getCarById(1L);
-        Mockito.verify(carDAO).getOne(1L);
+        Mockito.verify(carCrudDAO).getOne(1L);
     }
 
     @Test

@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.dao.booking;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.dao.ExhaustiveSearchableDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Booking;
@@ -17,10 +17,10 @@ import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
 @Component
-public class MySQLBookingDAO implements DAO<Booking>, SearchableDAO<Booking>, ExhaustiveSearchableDAO<Booking> {
+public class MySQLBookingCrudDAO implements CrudDAO<Booking>, SearchableDAO<Booking>, ExhaustiveSearchableDAO<Booking> {
     private final BookingRepository bookingRepository;
 
-    public MySQLBookingDAO(BookingRepository bookingRepository) {
+    public MySQLBookingCrudDAO(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
     }
 

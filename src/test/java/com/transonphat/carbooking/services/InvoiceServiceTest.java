@@ -1,7 +1,7 @@
 package com.transonphat.carbooking.services;
 
 import com.transonphat.carbooking.charge.ChargeCalculator;
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.domain.CarBuilder;
@@ -27,7 +27,7 @@ public class InvoiceServiceTest {
     private InvoiceService invoiceService;
 
     @MockBean
-    private DAO<Invoice> invoiceDAO;
+    private CrudDAO<Invoice> invoiceCrudDAO;
 
     @MockBean
     private SearchableDAO<Invoice> invoiceSearchableDAO;
@@ -60,7 +60,7 @@ public class InvoiceServiceTest {
 
         //Assert method calls
         verify(chargeCalculator).calculateTotalCharge(distance, car.getRate());
-        verify(invoiceDAO).save(any());
+        verify(invoiceCrudDAO).save(any());
     }
 
     @Test

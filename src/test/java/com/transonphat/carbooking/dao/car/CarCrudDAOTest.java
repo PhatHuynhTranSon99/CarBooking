@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.dao.car;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.domain.Car;
 import com.transonphat.carbooking.exceptions.types.CarNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -16,14 +16,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles(profiles = { "test" })
 @Transactional
-class CarDAOTest {
+class CarCrudDAOTest {
     @Autowired
-    private DAO<Car> carDAO;
+    private CrudDAO<Car> carCrudDAO;
 
     @Test
     @Rollback
     public void shouldReturnCorrectEntity() {
-        Car car = this.carDAO.getOne(1L);
+        Car car = this.carCrudDAO.getOne(1L);
 
         assertEquals(1L, car.getId());
         assertEquals("Toyota", car.getMake());
@@ -40,7 +40,7 @@ class CarDAOTest {
     @Rollback
     public void shouldThrowExceptionWhenCarDoesNotExist() {
         CarNotFoundException exception = assertThrows(CarNotFoundException.class, () -> {
-            Car car = this.carDAO.getOne(100);
+            Car car = this.carCrudDAO.getOne(100);
         });
 
         assertEquals("Car does not exist", exception.getMessage());
@@ -49,7 +49,7 @@ class CarDAOTest {
     @Test
     @Rollback
     public void shouldDeleteCarSuccessfully() {
-        Car car = this.carDAO.delete(1L);
+        Car car = this.carCrudDAO.delete(1L);
 
         assertEquals(1L, car.getId());
         assertEquals("Toyota", car.getMake());
@@ -66,7 +66,7 @@ class CarDAOTest {
     @Rollback
     public void deleteCarNotFound() {
         CarNotFoundException exception = assertThrows(CarNotFoundException.class, () -> {
-            Car car = this.carDAO.delete(100L);
+            Car car = this.carCrudDAO.delete(100L);
         });
 
         assertEquals("Car does not exist", exception.getMessage());
@@ -75,7 +75,7 @@ class CarDAOTest {
     @Test
     @Rollback
     public void shouldReturnAllCars() {
-        PaginationResult<Car> carPaginationResult = this.carDAO.getAll(0, 5);
+        PaginationResult<Car> carPaginationResult = this.carCrudDAO.getAll(0, 5);
 
         assertEquals(3, carPaginationResult.getTotalItems());
         assertEquals(1, carPaginationResult.getTotalPages());
@@ -94,14 +94,14 @@ class CarDAOTest {
         car.setIdentificationNumber("51H-6788");
         car.setModel("Vios");
         car.setRating(5.0);
-        carDAO.save(car);
+        carCrudDAO.save(car);
 
         //Check the id and create date
         assertNotNull(car.getId());
         assertNotNull(car.getCreatedDate());
 
         //Check the size of pagination result
-        PaginationResult<Car> carPaginationResult = carDAO.getAll(0, 10);
+        PaginationResult<Car> carPaginationResult = carCrudDAO.getAll(0, 10);
         assertEquals(4, carPaginationResult.getTotalItems());
         assertEquals(1, carPaginationResult.getTotalPages());
     }

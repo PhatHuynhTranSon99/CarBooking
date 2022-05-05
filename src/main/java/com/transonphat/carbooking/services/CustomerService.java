@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.services;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -10,23 +10,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerService {
     private final SearchableDAO<Customer> customerSearchableDAO;
-    private final DAO<Customer> customerDAO;
+    private final CrudDAO<Customer> customerCrudDAO;
 
-    public CustomerService(SearchableDAO<Customer> customerSearchableDAO, DAO<Customer> customerDAO) {
+    public CustomerService(SearchableDAO<Customer> customerSearchableDAO, CrudDAO<Customer> customerCrudDAO) {
         this.customerSearchableDAO = customerSearchableDAO;
-        this.customerDAO = customerDAO;
+        this.customerCrudDAO = customerCrudDAO;
     }
 
     public Customer saveCustomer(Customer customer) {
-        return customerDAO.save(customer);
+        return customerCrudDAO.save(customer);
     }
 
     public Customer deleteCustomer(long id) {
-        return customerDAO.delete(id);
+        return customerCrudDAO.delete(id);
     }
 
     public Customer getCustomerById(long id) {
-        return customerDAO.getOne(id);
+        return customerCrudDAO.getOne(id);
     }
 
     public PaginationResult<Customer> searchCustomer(SearchCriterion<Customer> customerSearchCriterion,

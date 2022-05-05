@@ -1,6 +1,6 @@
 package com.transonphat.carbooking.dao.customer;
 
-import com.transonphat.carbooking.dao.DAO;
+import com.transonphat.carbooking.dao.CrudDAO;
 import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.exceptions.types.CustomerNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 @Transactional
-class CustomerDAOTest {
+class CustomerCrudDAOTest {
     @Autowired
-    private DAO<Customer> customerDAO;
+    private CrudDAO<Customer> customerCrudDAO;
 
     @Test
     public void findByIdReturnCorrectResult() {
-        Customer customer = customerDAO.getOne(1L);
+        Customer customer = customerCrudDAO.getOne(1L);
 
         assertEquals(1L, customer.getId());
         assertEquals("Adam", customer.getFirstName());
@@ -36,7 +36,7 @@ class CustomerDAOTest {
     @Test
     public void findByIdNotFound() {
         CustomerNotFoundException exception = assertThrows(CustomerNotFoundException.class, () -> {
-            customerDAO.getOne(100L);
+            customerCrudDAO.getOne(100L);
         });
 
         assertEquals("Customer does not exist", exception.getMessage());
@@ -45,7 +45,7 @@ class CustomerDAOTest {
     @Test
     @Rollback
     public void deleteCustomerSuccessfully() {
-        Customer customer = customerDAO.delete(1L);
+        Customer customer = customerCrudDAO.delete(1L);
 
         assertEquals(1L, customer.getId());
         assertEquals("Adam", customer.getFirstName());
@@ -57,7 +57,7 @@ class CustomerDAOTest {
     @Test
     public void deleteCustomerNotFound() {
         CustomerNotFoundException exception = assertThrows(CustomerNotFoundException.class, () -> {
-           customerDAO.delete(100L);
+           customerCrudDAO.delete(100L);
         });
 
         assertEquals("Customer does not exist", exception.getMessage());
@@ -65,7 +65,7 @@ class CustomerDAOTest {
 
     @Test
     public void findAllCCustomersReturnCorrectResult() {
-        PaginationResult<Customer> customerPaginationResult = customerDAO.getAll(0, 10);
+        PaginationResult<Customer> customerPaginationResult = customerCrudDAO.getAll(0, 10);
         assertEquals(3, customerPaginationResult.getTotalItems());
 
         assertThat(
@@ -86,7 +86,7 @@ class CustomerDAOTest {
         customer.setLastName("Kind");
         customer.setAddress("Street");
         customer.setPhoneNumber("0123456789");
-        customer = customerDAO.save(customer);
+        customer = customerCrudDAO.save(customer);
 
         assertNotNull(customer.getId());
         assertEquals("Man", customer.getFirstName());

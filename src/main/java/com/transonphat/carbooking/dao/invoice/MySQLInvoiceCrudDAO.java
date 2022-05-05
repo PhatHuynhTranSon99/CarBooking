@@ -15,10 +15,10 @@ import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
 @Component
-public class MySQLInvoiceDAO implements InvoiceDAO, SearchableDAO<Invoice> {
+public class MySQLInvoiceCrudDAO implements InvoiceCrudDAO, SearchableDAO<Invoice> {
     private InvoiceRepository invoiceRepository;
 
-    public MySQLInvoiceDAO(InvoiceRepository invoiceRepository) {
+    public MySQLInvoiceCrudDAO(InvoiceRepository invoiceRepository) {
         this.invoiceRepository = invoiceRepository;
     }
 
