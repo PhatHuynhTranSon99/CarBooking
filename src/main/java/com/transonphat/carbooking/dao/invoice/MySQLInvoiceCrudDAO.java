@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class MySQLInvoiceCrudDAO implements InvoiceCrudDAO, SearchableDAO<Invoice> {
-    private InvoiceRepository invoiceRepository;
+    private final InvoiceRepository invoiceRepository;
 
     public MySQLInvoiceCrudDAO(InvoiceRepository invoiceRepository) {
         this.invoiceRepository = invoiceRepository;

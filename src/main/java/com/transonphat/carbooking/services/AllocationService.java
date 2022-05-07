@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class AllocationService {
     private final CrudDAO<Car> carCrudDao;
-    private final CrudDAO<Driver> driver;
+    private final CrudDAO<Driver> driverCrudDao;
     private final AllocationDAO allocationDao;
 
     public AllocationService(CrudDAO<Car> carCrudDao, CrudDAO<Driver> driver, AllocationDAO allocationDao) {
         this.carCrudDao = carCrudDao;
-        this.driver = driver;
+        this.driverCrudDao = driver;
         this.allocationDao = allocationDao;
     }
 
@@ -27,7 +27,7 @@ public class AllocationService {
     public Driver allocateDriverToCar(long carId, long driverId) {
         //Get car and driver
         Car car = this.carCrudDao.getOne(carId);
-        Driver driver = this.driver.getOne(driverId);
+        Driver driver = this.driverCrudDao.getOne(driverId);
 
         if (car.isAllocated()) {
             throw new CarAllocationException("Car is already allocated");
