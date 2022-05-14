@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Author: Tran Son Phat
+ * AllocationController contains all endpoints to perform car allocation
+ */
 @RestController
 public class AllocationController {
     private final AllocationService allocationService;

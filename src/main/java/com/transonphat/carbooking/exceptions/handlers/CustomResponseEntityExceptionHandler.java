@@ -18,6 +18,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Author: Tran Son Phat
+ * This class handles all the runtime exception raised by the application
+ * and returns their message to the client through ExceptionResponse object
+ */
 @ControllerAdvice
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
@@ -75,7 +80,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    protected ResponseEntity<Object> handleUniquenessViolation(DataIntegrityViolationException exception,
+    protected ResponseEntity<ExceptionResponse> handleUniquenessViolation(DataIntegrityViolationException exception,
                                                                WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
                 new Date(),

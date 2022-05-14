@@ -7,6 +7,11 @@ import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriterion;
 import org.springframework.stereotype.Service;
 
+/**
+ * Author: Tran Son Phat
+ * BookingController contains all methods to perform booking management
+ * Use in BookingController
+ */
 @Service
 public class CarService {
     private final SearchableDAO<Car> carSearchableDao;

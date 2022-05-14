@@ -9,6 +9,10 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.Locale;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all customers that has a matching address
+ */
 public class CustomerAddressCriterion implements SearchCriterion<Customer> {
     private final String address;
 

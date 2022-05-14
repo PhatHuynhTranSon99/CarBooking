@@ -10,6 +10,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all invoices that belong to a customer
+ */
 public class InvoiceByCustomerCriterion implements SearchCriterion<Invoice> {
     private final long customerId;
 

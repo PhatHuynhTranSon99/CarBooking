@@ -14,6 +14,10 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.time.ZonedDateTime;
 
+/**
+ * Author: Tran Son Phat
+ * MySQL Query to get revenue by customer given their id
+ */
 public class RevenueByCustomerQuery implements AggregationQuery<Double> {
     private final long customerId;
     private final ZonedDateTime startTime;
@@ -53,7 +57,8 @@ public class RevenueByCustomerQuery implements AggregationQuery<Double> {
         );
 
         //Create TypedQuery and get result
-        revenueSumQuery.select(criteriaBuilder.sum(bookingRoot.get(Booking_.invoice).get(Invoice_.totalCharge)))
+        revenueSumQuery.select(
+                criteriaBuilder.sum(bookingRoot.get(Booking_.invoice).get(Invoice_.totalCharge)))
                 .where(datePredicate);
 
         TypedQuery<Double> typedQuery = entityManager.createQuery(revenueSumQuery);

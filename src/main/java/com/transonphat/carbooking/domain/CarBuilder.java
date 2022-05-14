@@ -3,6 +3,10 @@ package com.transonphat.carbooking.domain;
 
 import java.time.ZonedDateTime;
 
+/**
+ * Author: Tran Son Phat
+ * Apply the Builder design pattern to create complex car object
+ */
 public class CarBuilder {
     private Long id;
     private String identificationNumber;

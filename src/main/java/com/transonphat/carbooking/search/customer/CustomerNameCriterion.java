@@ -6,6 +6,10 @@ import com.transonphat.carbooking.search.SearchCriterion;
 import javax.persistence.criteria.*;
 import java.util.Locale;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all customers that has a matching name
+ */
 public class CustomerNameCriterion implements SearchCriterion<Customer> {
     private final String name;
 

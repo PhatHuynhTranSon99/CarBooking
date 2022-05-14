@@ -1,15 +1,16 @@
 package com.transonphat.carbooking.domain;
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
-import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Author: Tran Son Phat
+ * Represent the Customer object
+ * Properties: first name, last name, address and phone number
+ */
 @Entity
 @Table(name = "Customers")
 @EntityListeners(AuditingEntityListener.class)

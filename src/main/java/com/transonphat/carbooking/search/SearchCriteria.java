@@ -9,6 +9,10 @@ import javax.persistence.criteria.Root;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Author: Tran Son Phat
+ * Auxiliary class to combine two criteria (AND clause)
+ */
 public class SearchCriteria {
     public static <T extends Model> SearchCriterion<T> and(List<SearchCriterion<T>> criteria) {
         return (root, query, criteriaBuilder) -> {

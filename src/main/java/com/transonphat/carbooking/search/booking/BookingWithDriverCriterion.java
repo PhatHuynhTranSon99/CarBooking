@@ -11,6 +11,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all bookings made with a driver (with driverId)
+ */
 public class BookingWithDriverCriterion implements SearchCriterion<Booking> {
     private final long driverId;
 

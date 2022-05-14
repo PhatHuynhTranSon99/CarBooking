@@ -8,6 +8,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all bookings with a specific car (with carId)
+ */
 public class BookingWithCarCriterion implements SearchCriterion<Booking> {
     private final long carId;
 

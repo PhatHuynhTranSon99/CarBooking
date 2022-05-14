@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.ZonedDateTime;
 
+/**
+ * Author: Tran Son Phat
+ * StatisticController contains all endpoints to get relevant statistics
+ */
 @RestController
 public class StatisticController {
     private final StatisticService statisticService;

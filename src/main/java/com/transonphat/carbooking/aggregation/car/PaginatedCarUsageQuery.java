@@ -13,6 +13,10 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Author: Tran Son Phat
+ * MySQL Query to get the paginated car usage result
+ */
 public class PaginatedCarUsageQuery implements AggregationQuery<PaginationResult<Usage>> {
     private final int month;
     private final int year;

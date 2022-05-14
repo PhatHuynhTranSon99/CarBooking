@@ -2,6 +2,11 @@ package com.transonphat.carbooking.domain;
 
 import java.util.Objects;
 
+/**
+ * Author: Tran Son Phat
+ * Represent an entry in the car usage query
+ * Has car id field and number of days field
+ */
 public class Usage {
     private Long carId;
     private Long days;

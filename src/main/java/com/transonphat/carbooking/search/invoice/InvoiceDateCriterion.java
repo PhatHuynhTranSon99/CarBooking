@@ -11,6 +11,10 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.time.ZonedDateTime;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all invoices that were made within a period
+ */
 public class InvoiceDateCriterion implements SearchCriterion<Invoice> {
     private final ZonedDateTime fromDate;
     private final ZonedDateTime toDate;

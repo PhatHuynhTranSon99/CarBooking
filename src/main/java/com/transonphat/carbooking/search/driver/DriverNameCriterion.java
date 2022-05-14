@@ -6,6 +6,10 @@ import com.transonphat.carbooking.search.SearchCriterion;
 import javax.persistence.criteria.*;
 import java.util.Locale;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all drivers with a matching name
+ */
 public class DriverNameCriterion implements SearchCriterion<Driver> {
     private final String name;
 

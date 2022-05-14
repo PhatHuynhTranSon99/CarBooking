@@ -7,6 +7,11 @@ import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriterion;
 import org.springframework.stereotype.Service;
 
+/**
+ * Author: Tran Son Phat
+ * DriverController contains all methods to perform driver management
+ * Use in DriverController
+ */
 @Service
 public class DriverService {
     private final SearchableDAO<Driver> driverSearchableDAO;

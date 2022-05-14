@@ -6,6 +6,10 @@ import com.transonphat.carbooking.search.SearchCriterion;
 import javax.persistence.criteria.*;
 import java.time.ZonedDateTime;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all cars that are available for booking (has no bookings within a period)
+ */
 public class CarFreeCriterion implements SearchCriterion<Car> {
     private final ZonedDateTime startTime;
     private final ZonedDateTime endTime;

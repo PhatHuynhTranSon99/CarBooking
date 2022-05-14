@@ -1,8 +1,5 @@
 package com.transonphat.carbooking.dao.customer;
 
-import com.transonphat.carbooking.dao.CrudDAO;
-import com.transonphat.carbooking.dao.ExistenceDAO;
-import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Customer;
 import com.transonphat.carbooking.exceptions.types.CustomerNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -15,8 +12,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
 
+/**
+ * Author: Tran Son Phat
+ * Data Access Object implementation to manage customer
+ * Has functionalities such as CRUD, search by attribute (paginated) and
+ * check if a customer exists.
+ */
 @Component
-public class MySQLCustomerCrudDao implements CrudDAO<Customer>, SearchableDAO<Customer>, ExistenceDAO<Customer> {
+public class MySQLCustomerCrudDao implements CustomerDAO {
     private final CustomerRepository customerRepository;
 
     public MySQLCustomerCrudDao(CustomerRepository customerRepository) {

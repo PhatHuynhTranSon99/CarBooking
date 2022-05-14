@@ -15,6 +15,10 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Author: Tran Son Phat
+ * CustomerController contains all endpoints to perform customer management
+ */
 @RestController
 public class CustomerController {
     private final CustomerService customerService;
@@ -92,7 +96,7 @@ public class CustomerController {
 
         //Combine into one criterion
         return this.customerService.searchCustomer(
-                SearchCriteria.<Customer> and(searchCriterionList),
+                SearchCriteria.and(searchCriterionList),
                 page,
                 size
         );

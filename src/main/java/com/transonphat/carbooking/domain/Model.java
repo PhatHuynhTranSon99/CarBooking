@@ -6,6 +6,11 @@ import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
+/**
+ * Author: Tran Son Phat
+ * Base class of all entities
+ * Has an id field and created date field
+ */
 @MappedSuperclass
 public class Model {
     @Id

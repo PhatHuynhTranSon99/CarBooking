@@ -11,6 +11,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all bookings made within a specific customer (with customerId)
+ */
 public class BookingWithCustomerCriterion implements SearchCriterion<Booking> {
     private final long customerId;
 

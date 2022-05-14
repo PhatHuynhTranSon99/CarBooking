@@ -2,6 +2,10 @@ package com.transonphat.carbooking.exceptions.handlers;
 
 import java.util.Date;
 
+/**
+ * Response to return if an exception is raised
+ * Contains: The time the exception is raised, its message and the details of this exception
+ */
 public class ExceptionResponse {
     private Date timestamp;
     private String message;

@@ -1,6 +1,5 @@
 package com.transonphat.carbooking.dao.invoice;
 
-import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Invoice;
 import com.transonphat.carbooking.exceptions.types.InvoiceNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -14,8 +13,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
+/**
+ * Author: Tran Son Phat
+ * Data Access Object implementation to manage invoices
+ * Has functionalities such as CRUD, search by attribute (paginated)
+ */
 @Component
-public class MySQLInvoiceCrudDAO implements InvoiceCrudDAO, SearchableDAO<Invoice> {
+public class MySQLInvoiceCrudDAO implements InvoiceDAO {
     private final InvoiceRepository invoiceRepository;
 
     public MySQLInvoiceCrudDAO(InvoiceRepository invoiceRepository) {

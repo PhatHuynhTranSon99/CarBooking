@@ -13,6 +13,10 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Author: Tran Son Phat
+ * CarController contains all endpoints to perform car management
+ */
 @RestController
 public class CarController {
     private final CarService carService;

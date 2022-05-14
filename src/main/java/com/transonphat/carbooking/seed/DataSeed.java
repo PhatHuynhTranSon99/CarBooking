@@ -11,6 +11,10 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+/**
+ * Author: Tran Son Phat
+ * Populating the database with sample data
+ */
 @Component
 @Profile("!test")
 public class DataSeed implements CommandLineRunner {

@@ -24,6 +24,11 @@ import org.springframework.stereotype.Service;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+/**
+ * Author: Tran Son Phat
+ * BookingController contains all methods to perform booking management
+ * Use in BookingController
+ */
 @Service
 public class BookingService {
     private final CrudDAO<Booking> bookingCrudDao;

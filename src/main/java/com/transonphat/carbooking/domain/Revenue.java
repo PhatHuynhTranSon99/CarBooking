@@ -2,6 +2,10 @@ package com.transonphat.carbooking.domain;
 
 import java.util.Objects;
 
+/**
+ * Author: Tran Son Phat
+ * Represent the revenue from a driver or a customer, used in controller to wrap double value
+ */
 public class Revenue {
     private Double revenue;
 

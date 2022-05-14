@@ -8,6 +8,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+/**
+ * Author: Tran Son Phat
+ * Specification class to wrap our criterion to Spring JPA Specification
+ * (Like an adapter pattern)
+ * @param <T>: The type of the entity (must extend the Model base class)
+ */
 public class SearchSpecification<T extends Model> implements Specification<T> {
     private final SearchCriterion<T> searchCriterion;
 

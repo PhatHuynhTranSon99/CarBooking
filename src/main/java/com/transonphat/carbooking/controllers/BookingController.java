@@ -15,6 +15,10 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Author: Tran Son Phat
+ * BookingController contains all endpoints to perform booking management
+ */
 @RestController
 public class BookingController {
     private final BookingService bookingService;

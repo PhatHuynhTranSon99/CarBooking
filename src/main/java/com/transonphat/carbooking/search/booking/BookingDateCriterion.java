@@ -10,6 +10,10 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.time.ZonedDateTime;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all bookings made within a period (from fromDate to toDate)
+ */
 public class BookingDateCriterion implements SearchCriterion<Booking> {
     private final ZonedDateTime fromDate;
     private final ZonedDateTime toDate;

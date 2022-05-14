@@ -1,5 +1,9 @@
 package com.transonphat.carbooking.exceptions;
 
+/**
+ * Author: Tran Son Phat
+ * Bad request base class for all runtime exception
+ */
 public class BadRequestException extends RuntimeException {
     public BadRequestException() {
     }

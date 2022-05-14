@@ -10,9 +10,10 @@ import org.springframework.test.context.ActiveProfiles;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
-/*
-This is for loading in the test data
-USE FOR TESTING ONLY
+
+/**
+ * Author: Tran Son Phat
+ * Populating the TEST database with sample data
  */
 @Component
 @Profile("!local")

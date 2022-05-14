@@ -8,6 +8,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all drivers with a matching phone number
+ */
 public class DriverPhoneCriterion implements SearchCriterion<Driver> {
     private final String phoneNumber;
 

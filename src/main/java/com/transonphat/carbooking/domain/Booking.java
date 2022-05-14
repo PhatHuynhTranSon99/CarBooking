@@ -8,6 +8,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
+/**
+ * Author: Tran Son Phat
+ * Represent the booking object
+ * Properties: start-time and end-time, start-location and end-location
+ * distance of the trip, and invoice of the trip
+ */
 @Entity
 @Table(name = "Bookings")
 @EntityListeners(AuditingEntityListener.class)

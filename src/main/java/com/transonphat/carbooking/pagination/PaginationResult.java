@@ -1,5 +1,15 @@
 package com.transonphat.carbooking.pagination;
 
+/**
+ * Author: Tran Son Phat
+ * Wrap the pagination
+ * Contains:
+ * - totalItems: The total number of items found
+ * - items: Iterable containing items on the current page
+ * - currentPage: current page
+ * - totalPages: the total number of page found
+ * @param <T>
+ */
 public class PaginationResult<T> {
     private long totalItems;
     private Iterable<T> items;

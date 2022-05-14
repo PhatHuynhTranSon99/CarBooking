@@ -9,6 +9,10 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.Locale;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all cars that have a make
+ */
 public class CarMakeCriterion implements SearchCriterion<Car> {
     private final String make;
 

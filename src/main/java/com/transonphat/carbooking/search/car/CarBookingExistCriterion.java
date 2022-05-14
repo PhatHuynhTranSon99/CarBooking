@@ -6,8 +6,10 @@ import com.transonphat.carbooking.search.SearchCriterion;
 import javax.persistence.criteria.*;
 import java.time.ZonedDateTime;
 
-/*
-Check if a car booking with car id coincide with start time and endtime
+/**
+ * Author: Tran Son Phat
+ * Criterion to check if a car booking with car id coincide with start time and end time
+ * [USE WITH ExistenceDAO to find overlapping bookings]
  */
 public class CarBookingExistCriterion implements SearchCriterion<Car> {
     private final Long carId;

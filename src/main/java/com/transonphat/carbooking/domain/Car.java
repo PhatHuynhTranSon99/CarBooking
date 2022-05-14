@@ -8,6 +8,12 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Author: Tran Son Phat
+ * Represent the car object
+ * Properties: VIN (must be unique), licensePlate: (must be unique), make, model, color
+ * is convertible or not, ratings, rate per kilometer and a driver object
+ */
 @Entity
 @Table(name = "Cars", uniqueConstraints = {
         @UniqueConstraint(name = "identificationNumber", columnNames = "identificationNumber"),

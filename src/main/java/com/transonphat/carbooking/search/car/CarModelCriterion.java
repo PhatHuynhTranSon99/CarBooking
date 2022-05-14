@@ -9,8 +9,12 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.Locale;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all cars that have a model
+ */
 public class CarModelCriterion implements SearchCriterion<Car> {
-    private String model;
+    private final String model;
 
     public CarModelCriterion(String model) {
         this.model = model;

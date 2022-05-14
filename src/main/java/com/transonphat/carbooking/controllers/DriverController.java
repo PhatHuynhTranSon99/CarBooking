@@ -14,6 +14,10 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Author: Tran Son Phat
+ * DriverController contains all endpoints to perform driver management
+ */
 @RestController
 public class DriverController {
     private final DriverService driverService;
@@ -87,7 +91,7 @@ public class DriverController {
 
         //Combine into one criterion
         return this.driverService.searchDriver(
-                SearchCriteria.<Driver> and(driverCriterionList),
+                SearchCriteria.and(driverCriterionList),
                 page,
                 size
         );

@@ -18,6 +18,10 @@ import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Author: Tran Son Phat
+ * InvoiceController contains all endpoints to perform invoice management
+ */
 @RestController
 public class InvoiceController {
     private final InvoiceService invoiceService;

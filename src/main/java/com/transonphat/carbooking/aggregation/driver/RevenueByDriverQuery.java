@@ -11,6 +11,10 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.time.ZonedDateTime;
 
+/**
+ * Author: Tran Son Phat
+ * MySQL query to get revenue by a driver given their id
+ */
 public class RevenueByDriverQuery implements AggregationQuery<Double> {
     private final long driverId;
     private final ZonedDateTime startTime;

@@ -1,8 +1,5 @@
 package com.transonphat.carbooking.dao.booking;
 
-import com.transonphat.carbooking.dao.CrudDAO;
-import com.transonphat.carbooking.dao.ExhaustiveSearchableDAO;
-import com.transonphat.carbooking.dao.SearchableDAO;
 import com.transonphat.carbooking.domain.Booking;
 import com.transonphat.carbooking.exceptions.types.BookingNotFoundException;
 import com.transonphat.carbooking.pagination.PaginationResult;
@@ -16,8 +13,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
+/**
+ * Author: Tran Son Phat
+ * Data Access Object implementation to manage booking
+ * Has functionalities such as CRUD, search by attributes (paginated and un-paginated)
+ */
 @Component
-public class MySQLBookingCrudDAO implements CrudDAO<Booking>, SearchableDAO<Booking>, ExhaustiveSearchableDAO<Booking> {
+public class MySQLBookingCrudDAO implements BookingDAO {
     private final BookingRepository bookingRepository;
 
     public MySQLBookingCrudDAO(BookingRepository bookingRepository) {

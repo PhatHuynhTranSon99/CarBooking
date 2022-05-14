@@ -10,6 +10,11 @@ import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriterion;
 import org.springframework.stereotype.Service;
 
+/**
+ * Author: Tran Son Phat
+ * InvoiceController contains all methods to perform invoice management
+ * Use in InvoiceController
+ */
 @Service
 public class InvoiceService {
     private final CrudDAO<Invoice> invoiceCrudDAO;

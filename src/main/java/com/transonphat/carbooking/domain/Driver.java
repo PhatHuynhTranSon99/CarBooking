@@ -10,6 +10,13 @@ import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
+
+/**
+ * Author: Tran Son Phat
+ * Represent the driver object
+ * Properties: first name and  last name, phone number,
+ * ratings and a car object
+ */
 @Entity
 @Table(name = "Drivers")
 @EntityListeners(AuditingEntityListener.class)

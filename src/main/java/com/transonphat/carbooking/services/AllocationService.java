@@ -7,6 +7,11 @@ import com.transonphat.carbooking.domain.Driver;
 import com.transonphat.carbooking.exceptions.types.CarAllocationException;
 import org.springframework.stereotype.Service;
 
+/**
+ * Author: Tran Son Phat
+ * AllocationController contains all methods to perform car allocation
+ * Use in AllocationController
+ */
 @Service
 public class AllocationService {
     private final CrudDAO<Car> carCrudDao;

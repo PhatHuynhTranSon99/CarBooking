@@ -6,6 +6,11 @@ import com.transonphat.carbooking.search.SearchCriterion;
 import javax.persistence.criteria.*;
 import java.time.ZonedDateTime;
 
+/**
+ * Author: Tran Son Phat
+ * Criterion to search all customers that has a booking within a period
+ * [USE WITH ExistenceDAO to check availability of a customer]
+ */
 public class CustomerBookingExistCriterion implements SearchCriterion<Customer> {
     private final long customerId;
     private final ZonedDateTime startTime;

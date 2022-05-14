@@ -5,6 +5,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Author: Tran Son Phat
+ * Represent the invoice object
+ * Properties: customer, driver, total charge of the trip and the related booking object
+ */
 @Entity
 @Table(name = "Invoices")
 @EntityListeners(AuditingEntityListener.class)

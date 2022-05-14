@@ -7,6 +7,11 @@ import com.transonphat.carbooking.pagination.PaginationResult;
 import com.transonphat.carbooking.search.SearchCriterion;
 import org.springframework.stereotype.Service;
 
+/**
+ * Author: Tran Son Phat
+ * CustomerController contains all methods to perform customer management
+ * Use in CustomerController
+ */
 @Service
 public class CustomerService {
     private final SearchableDAO<Customer> customerSearchableDAO;

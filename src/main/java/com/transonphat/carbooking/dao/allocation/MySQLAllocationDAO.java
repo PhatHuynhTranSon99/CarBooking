@@ -6,6 +6,10 @@ import com.transonphat.carbooking.repositories.CarRepository;
 import com.transonphat.carbooking.repositories.DriverRepository;
 import org.springframework.stereotype.Component;
 
+/**
+ * Author: Tran Son Phat
+ * Data Access Object implementation to manage car allocation
+ */
 @Component
 public class MySQLAllocationDAO implements AllocationDAO {
     private final DriverRepository driverRepository;

@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
 
+/**
+ * Author: Tran Son Phat
+ * StatisticController contains all methods to get relevant statistics
+ * Use in StatisticController
+ */
 @Service
 public class StatisticService {
     private final AggregationExecutor aggregationExecutor;
