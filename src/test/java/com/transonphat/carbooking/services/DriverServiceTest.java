@@ -12,6 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for driver service
+ */
 @SpringBootTest(classes = {DriverService.class})
 @ActiveProfiles(profiles = {"test"})
 public class DriverServiceTest {

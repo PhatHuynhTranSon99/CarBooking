@@ -11,6 +11,10 @@ import org.springframework.test.context.ActiveProfiles;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for car usage query
+ */
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 public class PaginatedCarUsageTest {

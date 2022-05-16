@@ -15,6 +15,10 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Author: Tran Son Phat
+ * MockMVC tests for BookingController
+ */
 @WebMvcTest(BookingController.class)
 public class BookingControllerTest {
     @Autowired

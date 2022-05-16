@@ -13,6 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for Crud<DAO> for car
+ */
 @SpringBootTest
 @ActiveProfiles(profiles = { "test" })
 @Transactional
@@ -77,7 +81,7 @@ class CarCrudDAOTest {
     public void shouldReturnAllCars() {
         PaginationResult<Car> carPaginationResult = this.carCrudDAO.getAll(0, 5);
 
-        assertEquals(3, carPaginationResult.getTotalItems());
+        assertEquals(4, carPaginationResult.getTotalItems());
         assertEquals(1, carPaginationResult.getTotalPages());
     }
 
@@ -102,7 +106,7 @@ class CarCrudDAOTest {
 
         //Check the size of pagination result
         PaginationResult<Car> carPaginationResult = carCrudDAO.getAll(0, 10);
-        assertEquals(4, carPaginationResult.getTotalItems());
+        assertEquals(5, carPaginationResult.getTotalItems());
         assertEquals(1, carPaginationResult.getTotalPages());
     }
 }

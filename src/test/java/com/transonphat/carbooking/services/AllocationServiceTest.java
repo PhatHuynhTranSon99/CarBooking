@@ -18,6 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for allocation service
+ */
 @SpringBootTest(classes = {AllocationService.class})
 @ActiveProfiles(profiles = {"test"})
 public class AllocationServiceTest {

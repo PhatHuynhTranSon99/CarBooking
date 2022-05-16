@@ -23,6 +23,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for booking service
+ */
 @SpringBootTest(classes = {BookingService.class})
 @ActiveProfiles(profiles = {"test"})
 public class BookingServiceTest {

@@ -11,6 +11,10 @@ import java.time.ZonedDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for revenue by customer query
+ */
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 public class RevenueByCustomerTest {
@@ -70,7 +74,7 @@ public class RevenueByCustomerTest {
                                 ZoneId.of("Asia/Ho_Chi_Minh"))
                 )
         );
-        assertEquals(250.0, revenueTwo);
+        assertEquals(100.0, revenueTwo);
 
         //From 3/1 to 21/1
         Double revenueThree = aggregationExecutor.execute(

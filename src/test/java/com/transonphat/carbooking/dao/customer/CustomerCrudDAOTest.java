@@ -15,6 +15,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for Crud<DAO> for customer
+ */
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 @Transactional
@@ -29,7 +33,7 @@ class CustomerCrudDAOTest {
         assertEquals(1L, customer.getId());
         assertEquals("Adam", customer.getFirstName());
         assertEquals("Cole", customer.getLastName());
-        assertEquals("Street", customer.getAddress());
+        assertEquals("11 Street", customer.getAddress());
         assertEquals("0182019222", customer.getPhoneNumber());
     }
 
@@ -50,7 +54,7 @@ class CustomerCrudDAOTest {
         assertEquals(1L, customer.getId());
         assertEquals("Adam", customer.getFirstName());
         assertEquals("Cole", customer.getLastName());
-        assertEquals("Street", customer.getAddress());
+        assertEquals("11 Street", customer.getAddress());
         assertEquals("0182019222", customer.getPhoneNumber());
     }
 

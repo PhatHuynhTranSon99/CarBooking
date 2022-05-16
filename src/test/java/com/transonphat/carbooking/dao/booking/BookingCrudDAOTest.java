@@ -20,6 +20,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for Crud<DAO> for booking
+ */
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 @Transactional
@@ -120,6 +124,7 @@ public class BookingCrudDAOTest {
                 ZoneId.of("Asia/Ho_Chi_Minh")));
         booking.setEndTime(ZonedDateTime.of(2020, 2, 5, 0, 0, 0, 0,
                 ZoneId.of("Asia/Ho_Chi_Minh")));
+        booking.setDistance(100.0);
 
         bookingCrudDAO.save(booking);
 

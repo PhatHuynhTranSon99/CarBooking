@@ -15,6 +15,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for Search DAO for booking
+ */
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 public class BookingSearchableCrudDAOTest {
@@ -41,25 +45,6 @@ public class BookingSearchableCrudDAOTest {
                         hasProperty("id", is(1L)),
                         hasProperty("id", is(3L)),
                         hasProperty("id", is(4L))
-                )
-        );
-
-        //One match
-        PaginationResult<Booking> secondPaginationResult = bookingSearchableDAO.search(
-                new BookingDateCriterion(
-                        ZonedDateTime.of(2020, 1, 20, 0, 0, 0, 0,
-                                ZoneId.of("Asia/Ho_Chi_Minh")),
-                        ZonedDateTime.of(2020, 3, 2, 0, 0, 0, 0,
-                                ZoneId.of("Asia/Ho_Chi_Minh"))
-                ),
-                0,
-                10
-        );
-        assertEquals(1, secondPaginationResult.getTotalItems());
-        assertThat(
-                secondPaginationResult.getItems(),
-                contains(
-                        hasProperty("id", is(2L))
                 )
         );
 

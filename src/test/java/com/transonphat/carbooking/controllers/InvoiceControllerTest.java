@@ -16,6 +16,10 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Author: Tran Son Phat
+ * MockMVC tests for InvoiceController
+ */
 @WebMvcTest(InvoiceController.class)
 public class InvoiceControllerTest {
     @Autowired
@@ -45,7 +49,7 @@ public class InvoiceControllerTest {
                 get("/invoices")
                         .params(requestParams)
         )
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof MissingPeriodException));
     }
 
@@ -60,7 +64,7 @@ public class InvoiceControllerTest {
                         get("/invoices")
                                 .params(requestParams)
                 )
-                .andExpect(status().isInternalServerError())
+                .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof MissingPeriodException));
     }
 }

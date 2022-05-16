@@ -14,6 +14,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for Crud<DAO> for driver
+ */
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 @Transactional
@@ -70,13 +74,14 @@ public class DriverCrudDAOTest {
     public void findAllDriversSuccessfully() {
         PaginationResult<Driver> driverPaginationResult = driverCrudDAO.getAll(0, 10);
 
-        assertEquals(3, driverPaginationResult.getTotalItems());
+        assertEquals(4, driverPaginationResult.getTotalItems());
         assertThat(
                 driverPaginationResult.getItems(),
                 contains(
                         hasProperty("id", is(1L)),
                         hasProperty("id", is(2L)),
-                        hasProperty("id", is(3L))
+                        hasProperty("id", is(3L)),
+                        hasProperty("id", is(4L))
                 )
         );
     }

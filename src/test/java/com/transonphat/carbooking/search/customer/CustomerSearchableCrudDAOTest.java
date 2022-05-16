@@ -17,6 +17,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for Search DAO for customer
+ */
 @SpringBootTest
 @ActiveProfiles(profiles = { "test" })
 public class CustomerSearchableCrudDAOTest {
@@ -288,7 +292,7 @@ public class CustomerSearchableCrudDAOTest {
         assertThat(
                 coincidedResultThree.getItems(),
                 contains(
-                        hasProperty("id", is(2L))
+                        hasProperty("id", is(3L))
                 )
         );
 

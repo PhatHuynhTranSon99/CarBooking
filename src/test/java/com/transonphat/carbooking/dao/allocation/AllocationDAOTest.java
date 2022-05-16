@@ -13,10 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for AllocationDAO implementation
+ */
 @SpringBootTest
 @ActiveProfiles(profiles = {"test"})
 @Transactional
-public class AllocationCrudDAOTest {
+public class AllocationDAOTest {
     @Autowired
     private AllocationDAO allocationDAO;
 

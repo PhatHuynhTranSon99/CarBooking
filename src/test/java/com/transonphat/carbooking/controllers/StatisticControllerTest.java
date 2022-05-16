@@ -14,6 +14,10 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Author: Tran Son Phat
+ * MockMVC tests for StatisticController
+ */
 @WebMvcTest(StatisticController.class)
 public class StatisticControllerTest {
     @Autowired

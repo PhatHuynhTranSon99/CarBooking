@@ -7,6 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for standard charge calculation
+ */
 @SpringBootTest
 public class StandardChargeCalculatorTest {
     @Autowired

@@ -18,6 +18,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * Author: Tran Son Phat
+ * Unit tests for statistics service
+ */
 @SpringBootTest(classes = {StatisticService.class})
 @ActiveProfiles(profiles = {"test"})
 public class StatisticServiceTest {
