@@ -14,6 +14,10 @@ This project is a simple REST api which simulates a car booking agency and has t
 - Statistics: Find revenue from a driver in a period
 - Statistics: Find usage of all cars (number of days used) in a month
 
+## API specification
+The Postman API specification is provided at the root of the repo (api_specs.json). You can import this file to Postman
+to test the service.
+
 ## Endpoints
 
 **IMPORTANT NOTE**: The Date time format of this API follows ISO standards, for example:
