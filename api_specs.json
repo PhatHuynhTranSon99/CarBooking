@@ -1,0 +1,888 @@
+{
+	"info": {
+		"_postman_id": "9de3c8b5-c06b-4017-b2df-05bc79519d6d",
+		"name": "Car Booking API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Find all cars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all cars with pagination",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars?size=1&page=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all cars with criteria",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars?model=vias&color=green&convertible=true&identification=018&make=toyota",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars"
+					],
+					"query": [
+						{
+							"key": "model",
+							"value": "vias"
+						},
+						{
+							"key": "color",
+							"value": "green"
+						},
+						{
+							"key": "convertible",
+							"value": "true"
+						},
+						{
+							"key": "identification",
+							"value": "018"
+						},
+						{
+							"key": "make",
+							"value": "toyota"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find car by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car by Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update car",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars/1?color=Blue&identification=51H-91928&make=Toyota&model=Bias&convertible=false&rating=4.84&licensePlate=51H-91928&rate=12.5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars",
+						"1"
+					],
+					"query": [
+						{
+							"key": "color",
+							"value": "Blue"
+						},
+						{
+							"key": "identification",
+							"value": "51H-91928"
+						},
+						{
+							"key": "make",
+							"value": "Toyota"
+						},
+						{
+							"key": "model",
+							"value": "Bias"
+						},
+						{
+							"key": "convertible",
+							"value": "false"
+						},
+						{
+							"key": "rating",
+							"value": "4.84"
+						},
+						{
+							"key": "licensePlate",
+							"value": "51H-91928"
+						},
+						{
+							"key": "rate",
+							"value": "12.5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all drivers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/drivers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drivers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all drivers with pagination",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/drivers?size=1&page=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drivers"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all drivers with criteria",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/drivers?name=adam levine&phone=0",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drivers"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "adam levine"
+						},
+						{
+							"key": "phone",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a driver",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Driver\",\r\n    \"phoneNumber\": \"0111019121\",\r\n    \"ratings\": 5.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/drivers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drivers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Driver",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/drivers/4?firstName=Johny&lastName=Driver&phone=0121718191&ratings=4.99",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drivers",
+						"4"
+					],
+					"query": [
+						{
+							"key": "firstName",
+							"value": "Johny"
+						},
+						{
+							"key": "lastName",
+							"value": "Driver"
+						},
+						{
+							"key": "phone",
+							"value": "0121718191"
+						},
+						{
+							"key": "ratings",
+							"value": "4.99"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a driver",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/drivers/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drivers",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all customers with pagination",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customers?size=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all customers with criteria",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customers?name=adam cole&phone=01&address=Str",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "adam cole"
+						},
+						{
+							"key": "phone",
+							"value": "01"
+						},
+						{
+							"key": "address",
+							"value": "Str"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find a customer by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customers/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Finn\",\r\n    \"lastName\":  \"Balor\",\r\n    \"address\": \"19 of 17 Street\",\r\n    \"phoneNumber\": \"0917281291\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/customers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a customer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customers/4?firstName=The&lastName=Balor&phone=0909879819&address=18 of 18 Street",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"4"
+					],
+					"query": [
+						{
+							"key": "firstName",
+							"value": "The"
+						},
+						{
+							"key": "lastName",
+							"value": "Balor"
+						},
+						{
+							"key": "phone",
+							"value": "0909879819"
+						},
+						{
+							"key": "address",
+							"value": "18 of 18 Street"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a customer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customers/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Allocate car to driver",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars/1/driver/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars",
+						"1",
+						"driver",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove driver from car",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cars/1/driver",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars",
+						"1",
+						"driver"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find available cars in a period",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bookings/cars?start=2020-01-20T00:00:00.000%2B07:00&end=2020-03-01T00:00:00.000%2B07:00",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookings",
+						"cars"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2020-01-20T00:00:00.000%2B07:00"
+						},
+						{
+							"key": "end",
+							"value": "2020-03-01T00:00:00.000%2B07:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customers/1/bookings?startingLocation=HCM&destinationLocation=DatLat&startTime=2020-01-20T07:30:00.000%2B07:00&endTime=2020-02-01T17:30:00.000%2B07:00&distance=256.0&carId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"1",
+						"bookings"
+					],
+					"query": [
+						{
+							"key": "startingLocation",
+							"value": "HCM"
+						},
+						{
+							"key": "destinationLocation",
+							"value": "DatLat"
+						},
+						{
+							"key": "startTime",
+							"value": "2020-01-20T07:30:00.000%2B07:00"
+						},
+						{
+							"key": "endTime",
+							"value": "2020-02-01T17:30:00.000%2B07:00"
+						},
+						{
+							"key": "distance",
+							"value": "256.0"
+						},
+						{
+							"key": "carId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all bookings within time period",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bookings?from=2019-12-01T00:00:00.000%2B07:00&to=2020-04-01T00:00:00.000%2B07:00&size=5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookings"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "2019-12-01T00:00:00.000%2B07:00"
+						},
+						{
+							"key": "to",
+							"value": "2020-04-01T00:00:00.000%2B07:00"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all bookings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bookings",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all invoices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/invoices",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invoices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all invoices with criteria",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/invoices?customer=1&driver=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invoices"
+					],
+					"query": [
+						{
+							"key": "customer",
+							"value": "1"
+						},
+						{
+							"key": "driver",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find revenue by a customer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/statistics/revenue/customer?customer=1&from=2020-01-01T00:00:00.000%2B07:00&to=2020-03-01T17:30:00.000%2B07:00",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"statistics",
+						"revenue",
+						"customer"
+					],
+					"query": [
+						{
+							"key": "customer",
+							"value": "1"
+						},
+						{
+							"key": "from",
+							"value": "2020-01-01T00:00:00.000%2B07:00"
+						},
+						{
+							"key": "to",
+							"value": "2020-03-01T17:30:00.000%2B07:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find revenue by driver",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/statistics/revenue/driver?driver=1&from=2020-01-01T00:00:00.000%2B07:00&to=2020-03-01T17:30:00.000%2B07:00",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"statistics",
+						"revenue",
+						"driver"
+					],
+					"query": [
+						{
+							"key": "driver",
+							"value": "1"
+						},
+						{
+							"key": "from",
+							"value": "2020-01-01T00:00:00.000%2B07:00"
+						},
+						{
+							"key": "to",
+							"value": "2020-03-01T17:30:00.000%2B07:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find car usage statistics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/statistics/usage?month=1&year=2020",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"statistics",
+						"usage"
+					],
+					"query": [
+						{
+							"key": "month",
+							"value": "1"
+						},
+						{
+							"key": "year",
+							"value": "2020"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a car",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"make\": \"Toyota\",\r\n    \"model\": \"Vios\",\r\n    \"color\": \"Red\",\r\n    \"isConvertible\": false,\r\n    \"identificationNumber\": \"59H-91989\",\r\n    \"licensePlate\": \"59H-91989\",\r\n    \"allocated\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/cars",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a booking",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bookings/1?startingLocation=New House&destinationLocation=New School&distance=300.0",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookings",
+						"1"
+					],
+					"query": [
+						{
+							"key": "startingLocation",
+							"value": "New House"
+						},
+						{
+							"key": "destinationLocation",
+							"value": "New School"
+						},
+						{
+							"key": "distance",
+							"value": "300.0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
